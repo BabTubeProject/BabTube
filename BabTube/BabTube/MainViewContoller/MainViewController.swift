@@ -7,29 +7,52 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController {
     
-    var MainTableView: UITableView!
+    var MainTableView: UITableView = {
+        let MainTableView = UITableView()
+        MainTableView.translatesAutoresizingMaskIntoConstraints = false
+        MainTableView.register(MainTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
+        return MainTableView
+    }()
+    
     var list: [String] = ["1", "2", "3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MainTableView = UITableView()
+        MainTVAddSubView()
+        MainTVAutoLayout()
+        
         MainTableView.delegate = self
         MainTableView.dataSource = self
+
+
+    }
+}
+
+extension MainViewController {
+    
+    //View에 TableView 추가
+    private func MainTVAddSubView() {
         view.addSubview(MainTableView)
-        MainTableView.register(MainTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
-        
-        //레이아웃
-        MainTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        MainTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        MainTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        MainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        MainTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
     }
     
+    //TableView 오토레이아웃
+    private func MainTVAutoLayout() {
+        NSLayoutConstraint.activate([
+            MainTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            MainTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            MainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            MainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+        ])
+        
+    }
+}
+
+
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
@@ -40,13 +63,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.lbl.text = list[indexPath.row]
         return cell
     }
-
-    
-//    NSLayoutConstraint.activate([
-//    ])
-//
 }
-
-
 
 
