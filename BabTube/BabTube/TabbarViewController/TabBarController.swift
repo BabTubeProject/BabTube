@@ -11,8 +11,8 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tabBarSetting()
-//        viewControllerSetting()
+        tabBarSetting()
+        viewControllerSetting()
     }
     
     private func tabBarSetting() {
@@ -21,25 +21,25 @@ class TabBarController: UITabBarController {
         self.tabBar.unselectedItemTintColor = .systemGray
         self.tabBar.tintColor = UIColor.mainColor
     }
-//
-//    private func viewControllerSetting() {
-//        let vc1 = UINavigationController(rootViewController: )
-//        let vc2 = UINavigationController(rootViewController: MyRoutineListViewController())
-//        let vc3 = UINavigationController(rootViewController: SettingViewController())
-//
-//        vc1.title = "목록"
-//        vc2.tabBarItem.title = "나의 루틴"
-//        vc3.title = "설정"
-//
-//        self.setViewControllers([vc1, vc2, vc3], animated: false)
-//
-//        guard let items = self.tabBar.items else { return }
-//
-//        let images = ["list.bullet", "person.fill", "gearshape.fill"]
-//
-//        for index in 0..<items.count {
-//            items[index].image = UIImage(systemName: images[index])
-//        }
-//    }
+
+    private func viewControllerSetting() {
+        let vc1 = UINavigationController(rootViewController: MainViewController())
+        let vc2 = UINavigationController(rootViewController: LikeViewController())
+        let vc3 = UINavigationController(rootViewController: MyPageViewController())
+
+        vc1.title = "홈"
+        vc2.tabBarItem.title = "좋아요"
+        vc3.title = "마이페이지"
+
+        self.setViewControllers([vc1, vc2, vc3], animated: false)
+
+        guard let items = self.tabBar.items else { return }
+
+        let images = ["house", "heart", "person"]
+
+        for index in 0..<items.count {
+            items[index].image = UIImage(systemName: images[index])
+        }
+    }
 }
 
