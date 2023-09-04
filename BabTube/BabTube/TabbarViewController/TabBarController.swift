@@ -40,6 +40,14 @@ class TabBarController: UITabBarController {
         for index in 0..<items.count {
             items[index].image = UIImage(systemName: images[index])
         }
+        
+        // 선택된 아이템의 이미지와 색상 설정
+        if let items = self.tabBar.items {
+            for index in 0..<items.count {
+                let selectedImageName = images[index] + ".fill"
+                items[index].selectedImage = UIImage(systemName: selectedImageName)
+            }
+        }
     }
 }
 
