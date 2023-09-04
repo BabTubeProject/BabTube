@@ -1,0 +1,457 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18D659092AA5B5FA000468D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659082AA5B5FA000468D9 /* AppDelegate.swift */; };
+		18D6590B2AA5B5FA000468D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6590A2AA5B5FA000468D9 /* SceneDelegate.swift */; };
+		18D6590D2AA5B5FA000468D9 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6590C2AA5B5FA000468D9 /* TabBarController.swift */; };
+		18D659122AA5B5FC000468D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D659112AA5B5FC000468D9 /* Assets.xcassets */; };
+		18D659152AA5B5FC000468D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D659132AA5B5FC000468D9 /* LaunchScreen.storyboard */; };
+		18D659252AA5B8EC000468D9 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659242AA5B8EC000468D9 /* MyPageViewController.swift */; };
+		18D659272AA5B8F8000468D9 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659262AA5B8F8000468D9 /* LikeViewController.swift */; };
+		18D659292AA5B903000468D9 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659282AA5B903000468D9 /* VideoDetailViewController.swift */; };
+		18D6592B2AA5B917000468D9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6592A2AA5B917000468D9 /* SignUpViewController.swift */; };
+		18D6592D2AA5B920000468D9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6592C2AA5B920000468D9 /* LoginViewController.swift */; };
+		18D659302AA5B95A000468D9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6592F2AA5B95A000468D9 /* ProfileViewController.swift */; };
+		18D659322AA5B971000468D9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659312AA5B971000468D9 /* MainViewController.swift */; };
+		18D659362AA5B9A9000468D9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659352AA5B9A9000468D9 /* Font.swift */; };
+		18D659382AA5BA9E000468D9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659372AA5BA9E000468D9 /* Color.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		18D659052AA5B5FA000468D9 /* BabTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D659082AA5B5FA000468D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		18D6590A2AA5B5FA000468D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		18D6590C2AA5B5FA000468D9 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		18D659112AA5B5FC000468D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18D659142AA5B5FC000468D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		18D659162AA5B5FC000468D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D659242AA5B8EC000468D9 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		18D659262AA5B8F8000468D9 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		18D659282AA5B903000468D9 /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
+		18D6592A2AA5B917000468D9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		18D6592C2AA5B920000468D9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		18D6592F2AA5B95A000468D9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		18D659312AA5B971000468D9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		18D659352AA5B9A9000468D9 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		18D659372AA5BA9E000468D9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18D659022AA5B5FA000468D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18D658FC2AA5B5FA000468D9 = {
+			isa = PBXGroup;
+			children = (
+				18D659072AA5B5FA000468D9 /* BabTube */,
+				18D659062AA5B5FA000468D9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18D659062AA5B5FA000468D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18D659052AA5B5FA000468D9 /* BabTube.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18D659072AA5B5FA000468D9 /* BabTube */ = {
+			isa = PBXGroup;
+			children = (
+				18D659342AA5B99C000468D9 /* Util */,
+				18D659332AA5B976000468D9 /* TabbarViewController */,
+				18D6592E2AA5B944000468D9 /* ProfileViewController */,
+				18D659212AA5B8B6000468D9 /* MyPageViewController */,
+				18D659202AA5B8AD000468D9 /* LikeViewController */,
+				18D6591F2AA5B86D000468D9 /* VideoDetailViewController */,
+				18D6591E2AA5B827000468D9 /* SignUpViewController */,
+				18D6591D2AA5B7F9000468D9 /* LoginViewController */,
+				18D6591C2AA5B7B9000468D9 /* MainViewContoller */,
+				18D659082AA5B5FA000468D9 /* AppDelegate.swift */,
+				18D6590A2AA5B5FA000468D9 /* SceneDelegate.swift */,
+				18D659112AA5B5FC000468D9 /* Assets.xcassets */,
+				18D659132AA5B5FC000468D9 /* LaunchScreen.storyboard */,
+				18D659162AA5B5FC000468D9 /* Info.plist */,
+			);
+			path = BabTube;
+			sourceTree = "<group>";
+		};
+		18D6591C2AA5B7B9000468D9 /* MainViewContoller */ = {
+			isa = PBXGroup;
+			children = (
+				18D659312AA5B971000468D9 /* MainViewController.swift */,
+			);
+			path = MainViewContoller;
+			sourceTree = "<group>";
+		};
+		18D6591D2AA5B7F9000468D9 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D6592C2AA5B920000468D9 /* LoginViewController.swift */,
+			);
+			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		18D6591E2AA5B827000468D9 /* SignUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D6592A2AA5B917000468D9 /* SignUpViewController.swift */,
+			);
+			path = SignUpViewController;
+			sourceTree = "<group>";
+		};
+		18D6591F2AA5B86D000468D9 /* VideoDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D659282AA5B903000468D9 /* VideoDetailViewController.swift */,
+			);
+			path = VideoDetailViewController;
+			sourceTree = "<group>";
+		};
+		18D659202AA5B8AD000468D9 /* LikeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D659262AA5B8F8000468D9 /* LikeViewController.swift */,
+			);
+			path = LikeViewController;
+			sourceTree = "<group>";
+		};
+		18D659212AA5B8B6000468D9 /* MyPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D659242AA5B8EC000468D9 /* MyPageViewController.swift */,
+			);
+			path = MyPageViewController;
+			sourceTree = "<group>";
+		};
+		18D6592E2AA5B944000468D9 /* ProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D6592F2AA5B95A000468D9 /* ProfileViewController.swift */,
+			);
+			path = ProfileViewController;
+			sourceTree = "<group>";
+		};
+		18D659332AA5B976000468D9 /* TabbarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D6590C2AA5B5FA000468D9 /* TabBarController.swift */,
+			);
+			path = TabbarViewController;
+			sourceTree = "<group>";
+		};
+		18D659342AA5B99C000468D9 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				18D659352AA5B9A9000468D9 /* Font.swift */,
+				18D659372AA5BA9E000468D9 /* Color.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18D659042AA5B5FA000468D9 /* BabTube */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18D659192AA5B5FC000468D9 /* Build configuration list for PBXNativeTarget "BabTube" */;
+			buildPhases = (
+				18D659012AA5B5FA000468D9 /* Sources */,
+				18D659022AA5B5FA000468D9 /* Frameworks */,
+				18D659032AA5B5FA000468D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BabTube;
+			productName = BabTube;
+			productReference = 18D659052AA5B5FA000468D9 /* BabTube.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18D658FD2AA5B5FA000468D9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					18D659042AA5B5FA000468D9 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 18D659002AA5B5FA000468D9 /* Build configuration list for PBXProject "BabTube" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18D658FC2AA5B5FA000468D9;
+			productRefGroup = 18D659062AA5B5FA000468D9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18D659042AA5B5FA000468D9 /* BabTube */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18D659032AA5B5FA000468D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18D659152AA5B5FC000468D9 /* LaunchScreen.storyboard in Resources */,
+				18D659122AA5B5FC000468D9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18D659012AA5B5FA000468D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18D6590D2AA5B5FA000468D9 /* TabBarController.swift in Sources */,
+				18D659362AA5B9A9000468D9 /* Font.swift in Sources */,
+				18D6592B2AA5B917000468D9 /* SignUpViewController.swift in Sources */,
+				18D659292AA5B903000468D9 /* VideoDetailViewController.swift in Sources */,
+				18D659092AA5B5FA000468D9 /* AppDelegate.swift in Sources */,
+				18D659382AA5BA9E000468D9 /* Color.swift in Sources */,
+				18D6592D2AA5B920000468D9 /* LoginViewController.swift in Sources */,
+				18D6590B2AA5B5FA000468D9 /* SceneDelegate.swift in Sources */,
+				18D659302AA5B95A000468D9 /* ProfileViewController.swift in Sources */,
+				18D659252AA5B8EC000468D9 /* MyPageViewController.swift in Sources */,
+				18D659272AA5B8F8000468D9 /* LikeViewController.swift in Sources */,
+				18D659322AA5B971000468D9 /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18D659132AA5B5FC000468D9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18D659142AA5B5FC000468D9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18D659172AA5B5FC000468D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		18D659182AA5B5FC000468D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18D6591A2AA5B5FC000468D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BabTube/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = KD.BabTube;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		18D6591B2AA5B5FC000468D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BabTube/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = KD.BabTube;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18D659002AA5B5FA000468D9 /* Build configuration list for PBXProject "BabTube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D659172AA5B5FC000468D9 /* Debug */,
+				18D659182AA5B5FC000468D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18D659192AA5B5FC000468D9 /* Build configuration list for PBXNativeTarget "BabTube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D6591A2AA5B5FC000468D9 /* Debug */,
+				18D6591B2AA5B5FC000468D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18D658FD2AA5B5FA000468D9 /* Project object */;
+}
