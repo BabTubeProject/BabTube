@@ -11,13 +11,14 @@ class MainTableViewCell: UITableViewCell {
     
     public var lbl: UILabel!
     
+    static let cellHeight = 300.0
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
         
         contentView.addSubview(lbl)
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        
         lbl.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
     }
     

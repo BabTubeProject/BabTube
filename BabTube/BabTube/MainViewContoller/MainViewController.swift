@@ -26,8 +26,6 @@ class MainViewController: UIViewController {
         
         MainTableView.delegate = self
         MainTableView.dataSource = self
-
-
     }
 }
 
@@ -50,16 +48,18 @@ extension MainViewController {
     }
 }
 
-
-
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return MainTableViewCell.cellHeight
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! MainTableViewCell
-
         cell.lbl.text = list[indexPath.row]
         return cell
     }
