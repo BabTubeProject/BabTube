@@ -45,8 +45,6 @@ extension RecordCollectionViewCell {
             thumbnailImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             thumbnailImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             thumbnailImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            thumbnailImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            thumbnailImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             thumbnailImageView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
             thumbnailImageView.heightAnchor.constraint(equalToConstant: contentView.frame.height)
         ])

@@ -65,14 +65,15 @@ extension ProfileTableViewCell {
     }
     
     private func autoLayout() {
+        let imageSize: CGFloat = 80
         NSLayoutConstraint.activate([
-            profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
             profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 80),
-            profileImageView.heightAnchor.constraint(equalToConstant: 80),
+            profileImageView.widthAnchor.constraint(equalToConstant: imageSize),
+            profileImageView.heightAnchor.constraint(equalToConstant: imageSize),
             
-            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: margin),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
             nameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }

@@ -17,7 +17,6 @@ class MyPageViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
         tableView.register(RecordTableViewCell.self, forCellReuseIdentifier: RecordTableViewCell.identifier)
-        tableView.register(LikeVideoTableViewCell.self, forCellReuseIdentifier: LikeVideoTableViewCell.identifier)
         tableView.register(LogoutTableViewCell.self, forCellReuseIdentifier: LogoutTableViewCell.identifier)
         
         // 경계선 없애기
@@ -73,9 +72,7 @@ extension MyPageViewController {
             myPageTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             myPageTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             myPageTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            myPageTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            myPageTableView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            myPageTableView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            myPageTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
     
@@ -108,14 +105,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             return recordTableViewCell
         }
 
-//        else if indexPath.row == 2 {
-//            guard let likeVideoTableViewCell = tableView.dequeueReusableCell(withIdentifier: LikeVideoTableViewCell.identifier, for: indexPath) as? LikeVideoTableViewCell else {
-//                return UITableViewCell()
-//            }
-//            likeVideoTableViewCell.selectionStyle = .none
-//            return likeVideoTableViewCell
-//        }
-
         else {
             guard let logoutTableViewCell = tableView.dequeueReusableCell(withIdentifier: LogoutTableViewCell.identifier, for: indexPath) as? LogoutTableViewCell else {
                 return UITableViewCell()
@@ -134,10 +123,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         else if indexPath.row == 1 {
             return 164
         }
-
-//        else if indexPath.row == 2 {
-//            return 36
-//        }
 
         else {
             return 36

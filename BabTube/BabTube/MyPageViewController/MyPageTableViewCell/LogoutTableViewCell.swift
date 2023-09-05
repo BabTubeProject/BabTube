@@ -23,7 +23,7 @@ class LogoutTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    // 좋아요 이미지
+    // 로그아웃 이미지
     var logoutImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,14 +61,15 @@ extension LogoutTableViewCell {
     }
     
     private func autoLayout() {
+        let imageSize: CGFloat = 20
         NSLayoutConstraint.activate([
-            logoutImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            logoutImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
             logoutImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            logoutImageView.widthAnchor.constraint(equalToConstant: 20),
-            logoutImageView.heightAnchor.constraint(equalToConstant: 20),
+            logoutImageView.widthAnchor.constraint(equalToConstant: imageSize),
+            logoutImageView.heightAnchor.constraint(equalToConstant: imageSize),
             
             logoutLabel.leadingAnchor.constraint(equalTo: logoutImageView.trailingAnchor, constant: 8),
-            logoutLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            logoutLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
             logoutLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
