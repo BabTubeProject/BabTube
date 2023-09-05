@@ -9,8 +9,10 @@ import UIKit
 
 class MainViewController: UIViewController {
   
-    private let sections: [String] = ["카테고리1","카테고리2","카테고리3","카테고리4","카테고리5","카테고리6"]
+
+ private let sections: [String] = ["카테고리1","카테고리2","카테고리3","카테고리4","카테고리5","카테고리6"]
     
+
     var MainTableView: UITableView = {
         let MainTableView = UITableView()
         MainTableView.allowsSelection = false
@@ -27,7 +29,6 @@ class MainViewController: UIViewController {
         
         MainTVAddSubView()
         MainTVAutoLayout()
-        configureUI()
         
         MainTableView.delegate = self
         MainTableView.dataSource = self
@@ -49,30 +50,32 @@ extension MainViewController {
             MainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
         ])
     }
-    func configureUI() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Image"
-        navigationItem.largeTitleDisplayMode = .never
-    }
 
 }
 
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
-    //셀 터치시 회색 표시 없애기
+    // cell 터치시 회색 표시 없애기
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         MainTableView.deselectRow(at: indexPath, animated: true)
     }
-    
+    // section의 개수
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
-
+    // header 폰트 속성 추가
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 22)
+        header.textLabel?.textColor = UIColor.black
+    }
+    // section마다 표현될 title
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
         return sections[section]
     }
-    
+    // section마다 표현될 row의 개수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -87,5 +90,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
 
 

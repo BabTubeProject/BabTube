@@ -12,6 +12,8 @@ class MainCVCell: UICollectionViewCell {
     static let id = "MainCVCell"
     public var lbl: UILabel!
     
+    
+    
     let ThumbnailView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +54,6 @@ extension MainCVCell {
         lbl.textAlignment = .left
         contentView.addSubview(lbl)
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        
         lbl.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
     }
 }
