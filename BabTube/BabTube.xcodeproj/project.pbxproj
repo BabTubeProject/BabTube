@@ -21,6 +21,7 @@
 		18D659322AA5B971000468D9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659312AA5B971000468D9 /* MainViewController.swift */; };
 		18D659362AA5B9A9000468D9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659352AA5B9A9000468D9 /* Font.swift */; };
 		18D659382AA5BA9E000468D9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659372AA5BA9E000468D9 /* Color.swift */; };
+		AC6CDEAE2AA727EC00A36674 /* DetailLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		18D659312AA5B971000468D9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		18D659352AA5B9A9000468D9 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		18D659372AA5BA9E000468D9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLikeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				18D659262AA5B8F8000468D9 /* LikeViewController.swift */,
+				AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */,
 			);
 			path = LikeViewController;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				18D659092AA5B5FA000468D9 /* AppDelegate.swift in Sources */,
 				18D659382AA5BA9E000468D9 /* Color.swift in Sources */,
 				18D6592D2AA5B920000468D9 /* LoginViewController.swift in Sources */,
+				AC6CDEAE2AA727EC00A36674 /* DetailLikeTableViewCell.swift in Sources */,
 				18D6590B2AA5B5FA000468D9 /* SceneDelegate.swift in Sources */,
 				18D659302AA5B95A000468D9 /* ProfileViewController.swift in Sources */,
 				18D659252AA5B8EC000468D9 /* MyPageViewController.swift in Sources */,
