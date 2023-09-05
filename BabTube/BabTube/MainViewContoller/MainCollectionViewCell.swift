@@ -23,9 +23,18 @@ class MainCVCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        MainCVAddSubView()
+        MainCVAutoLayout()
+    }
+}
+
+extension MainCVCell {
+    
+    private func MainCVAddSubView() {
         self.addSubview(self.ThumbnailView)
-        
+    }
+    
+    private func MainCVAutoLayout() {
         NSLayoutConstraint.activate([
             self.ThumbnailView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
             self.ThumbnailView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),

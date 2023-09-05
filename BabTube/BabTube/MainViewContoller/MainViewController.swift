@@ -8,6 +8,8 @@
 import UIKit
 
 class MainViewController: UIViewController {
+  
+    private let sections: [String] = ["카테고리1","카테고리2","카테고리3","카테고리4","카테고리5","카테고리6"]
     
     var MainTableView: UITableView = {
         let MainTableView = UITableView()
@@ -20,14 +22,12 @@ class MainViewController: UIViewController {
         return MainTableView
     }()
     
-    var list: [String] = ["1", "2", "3"]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         MainTVAddSubView()
         MainTVAutoLayout()
-        
+       
         MainTableView.delegate = self
         MainTableView.dataSource = self
     }
@@ -39,7 +39,6 @@ extension MainViewController {
     private func MainTVAddSubView() {
         view.addSubview(MainTableView)
     }
-    
     //TableView 오토레이아웃
     private func MainTVAutoLayout() {
         NSLayoutConstraint.activate([
@@ -48,14 +47,27 @@ extension MainViewController {
             MainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             MainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
         ])
-        
     }
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    //셀 터치시 회색 표시 없애기
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        MainTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

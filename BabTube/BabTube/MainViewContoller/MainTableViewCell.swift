@@ -15,7 +15,6 @@ class MainTableViewCell: UITableViewCell {
     var Clist: [String] = ["1", "2", "3"]
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 8.0
@@ -27,7 +26,7 @@ class MainTableViewCell: UITableViewCell {
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: self.collectionViewFlowLayout)
         view.isScrollEnabled = true
-        view.showsHorizontalScrollIndicator = true
+        view.showsHorizontalScrollIndicator = false
         view.showsVerticalScrollIndicator = true
         view.contentInset = .zero
         view.backgroundColor = .clear
@@ -50,7 +49,22 @@ class MainTableViewCell: UITableViewCell {
     
     func setup() {
         self.collectionView.dataSource = self
+        MainCVAddSubView()
+        MainCVAutoLayout()
+    }
+}
+extension MainTableViewCell {
+    private func MainCVAddSubView() {
         self.contentView.addSubview(self.collectionView)
+    }
+    
+    private func MainCVAutoLayout() {
+        NSLayoutConstraint.activate([
+            collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor)
+        ])
     }
 }
 
