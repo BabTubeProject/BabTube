@@ -11,8 +11,12 @@ class MainViewController: UIViewController {
     
     var MainTableView: UITableView = {
         let MainTableView = UITableView()
+        MainTableView.allowsSelection = false
+        MainTableView.backgroundColor = .clear
+        MainTableView.bounces = true
+        MainTableView.contentInset = .zero
         MainTableView.translatesAutoresizingMaskIntoConstraints = false
-        MainTableView.register(MainTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
+        MainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.id)
         return MainTableView
     }()
     
@@ -49,20 +53,20 @@ extension MainViewController {
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return list.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.id, for: indexPath) as! MainTableViewCell
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MainTableViewCell.cellHeight
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! MainTableViewCell
-        cell.lbl.text = list[indexPath.row]
-        return cell
-    }
 }
 
 

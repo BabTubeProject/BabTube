@@ -9,17 +9,38 @@ import UIKit
 
 class MainTableViewCell: UITableViewCell {
     
-    public var lbl: UILabel!
+    static let id = "MainTableViewCell"
+    static let cellHeight = 200.0
+
+    var Clist: [String] = ["1", "2", "3"]
     
-    static let cellHeight = 300.0
+    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 8.0
+        layout.minimumInteritemSpacing = 0
+        layout.itemSize = .init(width:200, height: cellHeight)
+        return layout
+    }()
+    
+    lazy var collectionView: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: self.collectionViewFlowLayout)
+        view.isScrollEnabled = true
+        view.showsHorizontalScrollIndicator = true
+        view.showsVerticalScrollIndicator = true
+        view.contentInset = .zero
+        view.backgroundColor = .clear
+        view.clipsToBounds = true
+        view.register(MainCVCell.self, forCellWithReuseIdentifier: MainCVCell.id)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
-        
-        contentView.addSubview(lbl)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+
     }
     
     required init?(coder: NSCoder) {
@@ -28,9 +49,19 @@ class MainTableViewCell: UITableViewCell {
     }
     
     func setup() {
-        lbl = UILabel()
-        lbl.textColor = .black
-        lbl.font = UIFont.boldSystemFont(ofSize: 16)
-        lbl.textAlignment = .left
+        self.collectionView.dataSource = self
+        self.contentView.addSubview(self.collectionView)
     }
 }
+
+extension MainTableViewCell: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    self.Clist.count
+  }
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCVCell.id, for: indexPath) as! MainCVCell
+      return cell
+    }
+  }
+
+

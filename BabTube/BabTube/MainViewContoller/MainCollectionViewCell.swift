@@ -8,6 +8,7 @@
 import UIKit
 
 class MainCVCell: UICollectionViewCell {
+    
     static let id = "MainCVCell"
     
     let ThumbnailView: UIView = {
