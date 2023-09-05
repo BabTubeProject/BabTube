@@ -12,8 +12,6 @@ class MainCVCell: UICollectionViewCell {
     static let id = "MainCVCell"
     public var lbl: UILabel!
     
-    
-    
     let ThumbnailView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,16 +27,18 @@ class MainCVCell: UICollectionViewCell {
         MainCVAddSubView()
         MainCVAutoLayout()
         setup()
-       
+        
     }
 }
 
 extension MainCVCell {
     
+    //cell안의 UIView를 View에 추가
     private func MainCVAddSubView() {
         self.addSubview(self.ThumbnailView)
     }
     
+    //CollectionViewCell 레이아웃
     private func MainCVAutoLayout() {
         NSLayoutConstraint.activate([
             self.ThumbnailView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
@@ -47,6 +47,8 @@ extension MainCVCell {
             self.ThumbnailView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
         ])
     }
+    
+    //보여주기 데이터를 위한 라벨 속성
     private func setup() {
         lbl = UILabel()
         lbl.textColor = .black

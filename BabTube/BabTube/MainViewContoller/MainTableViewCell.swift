@@ -10,8 +10,11 @@ import UIKit
 class MainTableViewCell: UITableViewCell {
     
     static let id = "MainTableViewCell"
+    
+    //cell 높이 설정
     static let cellHeight = 150.0
-
+    
+    //보여주기 위한 임시 더미데이터
     var list: [String] = ["1", "2", "3","4","5","6"]
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
@@ -53,11 +56,15 @@ class MainTableViewCell: UITableViewCell {
         MainCVAutoLayout()
     }
 }
+
 extension MainTableViewCell {
+    
+    //TableView에 컬렉션뷰 추가
     private func MainCVAddSubView() {
         self.contentView.addSubview(self.collectionView)
     }
     
+    //CollectionView 레이아웃
     private func MainCVAutoLayout() {
         NSLayoutConstraint.activate([
             collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
@@ -70,9 +77,12 @@ extension MainTableViewCell {
 
 extension MainTableViewCell: UICollectionViewDataSource {
     
+    //CollectionView 보여줄 셀의 개수
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     self.list.count
   }
+    
+    //CollectionView 셀에 보여줄 아이템
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCVCell.id, for: indexPath) as! MainCVCell
       cell.contentView.backgroundColor = UIColor.green

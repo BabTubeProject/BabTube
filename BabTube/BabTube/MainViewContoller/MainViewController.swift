@@ -8,11 +8,9 @@
 import UIKit
 
 class MainViewController: UIViewController {
-  
-
- private let sections: [String] = ["카테고리1","카테고리2","카테고리3","카테고리4","카테고리5","카테고리6"]
     
-
+    private let sections: [String] = ["카테고리1","카테고리2","카테고리3","카테고리4","카테고리5","카테고리6"]
+    
     var MainTableView: UITableView = {
         let MainTableView = UITableView()
         MainTableView.allowsSelection = false
@@ -61,13 +59,13 @@ extension MainViewController {
         MainLogoImage.layer.masksToBounds = true
         MainLogoImage.widthAnchor.constraint(equalToConstant: 149).isActive = true
         MainLogoImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
-       
+        
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.tintColor = UIColor.red
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: MainLogoImage)
         
     }
-
+    
 }
 
 
@@ -76,7 +74,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     // cell 터치시 회색 표시 없애기
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         MainTableView.deselectRow(at: indexPath, animated: true)
+        
+        //        let svc = VideoDetailViewController()
+        //        svc.modalPresentationStyle = .fullScreen
+        //        self.present(svc, animated: true, completion: nil)
     }
+    
     // section의 개수
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -107,6 +110,4 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
-
 
