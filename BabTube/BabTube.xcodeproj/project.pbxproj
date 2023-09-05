@@ -21,6 +21,10 @@
 		18D659322AA5B971000468D9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659312AA5B971000468D9 /* MainViewController.swift */; };
 		18D659362AA5B9A9000468D9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659352AA5B9A9000468D9 /* Font.swift */; };
 		18D659382AA5BA9E000468D9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659372AA5BA9E000468D9 /* Color.swift */; };
+		689BC5882AA5D516005BA3A2 /* MembershipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */; };
+		689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */; };
+		689BC58E2AA73E21005BA3A2 /* UserDaTa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58D2AA73E21005BA3A2 /* UserDaTa.swift */; };
+		689BC5902AA73E32005BA3A2 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58F2AA73E32005BA3A2 /* UserDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		18D659312AA5B971000468D9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		18D659352AA5B9A9000468D9 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		18D659372AA5BA9E000468D9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipViewController.swift; sourceTree = "<group>"; };
+		689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMakeViewController.swift; sourceTree = "<group>"; };
+		689BC58D2AA73E21005BA3A2 /* UserDaTa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDaTa.swift; sourceTree = "<group>"; };
+		689BC58F2AA73E32005BA3A2 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				18D6592C2AA5B920000468D9 /* LoginViewController.swift */,
+				689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */,
+				689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */,
+				689BC58D2AA73E21005BA3A2 /* UserDaTa.swift */,
+				689BC58F2AA73E32005BA3A2 /* UserDataManager.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -235,8 +247,12 @@
 			files = (
 				18D6590D2AA5B5FA000468D9 /* TabBarController.swift in Sources */,
 				18D659362AA5B9A9000468D9 /* Font.swift in Sources */,
+				689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */,
 				18D6592B2AA5B917000468D9 /* SignUpViewController.swift in Sources */,
+				689BC5902AA73E32005BA3A2 /* UserDataManager.swift in Sources */,
+				689BC5882AA5D516005BA3A2 /* MembershipViewController.swift in Sources */,
 				18D659292AA5B903000468D9 /* VideoDetailViewController.swift in Sources */,
+				689BC58E2AA73E21005BA3A2 /* UserDaTa.swift in Sources */,
 				18D659092AA5B5FA000468D9 /* AppDelegate.swift in Sources */,
 				18D659382AA5BA9E000468D9 /* Color.swift in Sources */,
 				18D6592D2AA5B920000468D9 /* LoginViewController.swift in Sources */,
