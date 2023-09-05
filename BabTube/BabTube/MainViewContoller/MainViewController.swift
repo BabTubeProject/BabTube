@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
         
         MainTVAddSubView()
         MainTVAutoLayout()
+        MainConfigureUI()
         
         MainTableView.delegate = self
         MainTableView.dataSource = self
@@ -49,6 +50,22 @@ extension MainViewController {
             MainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             MainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
         ])
+    }
+    //네이게이션바에 로고 이미지 추가
+    func MainConfigureUI() {
+        
+        let MainLogoImage = UIImageView()
+        MainLogoImage.translatesAutoresizingMaskIntoConstraints = false
+        MainLogoImage.image = UIImage(named: "MainLogo")
+        MainLogoImage.contentMode = .scaleAspectFit
+        MainLogoImage.layer.masksToBounds = true
+        MainLogoImage.widthAnchor.constraint(equalToConstant: 149).isActive = true
+        MainLogoImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
+       
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.tintColor = UIColor.red
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: MainLogoImage)
+        
     }
 
 }
