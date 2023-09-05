@@ -10,6 +10,7 @@ import UIKit
 class MainCVCell: UICollectionViewCell {
     
     static let id = "MainCVCell"
+    public var lbl: UILabel!
     
     let ThumbnailView: UIView = {
         let view = UIView()
@@ -25,6 +26,8 @@ class MainCVCell: UICollectionViewCell {
         super.init(frame: frame)
         MainCVAddSubView()
         MainCVAutoLayout()
+        setup()
+       
     }
 }
 
@@ -41,5 +44,15 @@ extension MainCVCell {
             self.ThumbnailView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             self.ThumbnailView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
         ])
+    }
+    private func setup() {
+        lbl = UILabel()
+        lbl.textColor = .black
+        lbl.font = UIFont.boldSystemFont(ofSize: 16)
+        lbl.textAlignment = .left
+        contentView.addSubview(lbl)
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        
+        lbl.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
     }
 }

@@ -27,7 +27,8 @@ class MainViewController: UIViewController {
         
         MainTVAddSubView()
         MainTVAutoLayout()
-       
+        configureUI()
+        
         MainTableView.delegate = self
         MainTableView.dataSource = self
     }
@@ -48,6 +49,12 @@ extension MainViewController {
             MainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
         ])
     }
+    func configureUI() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Image"
+        navigationItem.largeTitleDisplayMode = .never
+    }
+
 }
 
 

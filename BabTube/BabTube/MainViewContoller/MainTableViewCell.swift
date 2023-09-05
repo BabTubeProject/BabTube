@@ -10,9 +10,9 @@ import UIKit
 class MainTableViewCell: UITableViewCell {
     
     static let id = "MainTableViewCell"
-    static let cellHeight = 200.0
+    static let cellHeight = 150.0
 
-    var Clist: [String] = ["1", "2", "3"]
+    var list: [String] = ["1", "2", "3","4","5","6"]
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -69,11 +69,15 @@ extension MainTableViewCell {
 }
 
 extension MainTableViewCell: UICollectionViewDataSource {
+    
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    self.Clist.count
+    self.list.count
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCVCell.id, for: indexPath) as! MainCVCell
+      cell.contentView.backgroundColor = UIColor.green
+      cell.lbl.text = list[indexPath.row]
+      
       return cell
     }
   }
