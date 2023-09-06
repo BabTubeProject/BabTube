@@ -54,11 +54,11 @@ extension MainViewController {
         
         let mainLogoImage = UIImageView()
         mainLogoImage.translatesAutoresizingMaskIntoConstraints = false
-        mainLogoImage.image = UIImage(named: "MainLogo")
+        mainLogoImage.image = UIImage(named: "BabTube_Logo")
         mainLogoImage.contentMode = .scaleAspectFit
         mainLogoImage.layer.masksToBounds = true
-        mainLogoImage.widthAnchor.constraint(equalToConstant: 149).isActive = true
-        mainLogoImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        mainLogoImage.widthAnchor.constraint(equalToConstant: 95).isActive = true
+        mainLogoImage.heightAnchor.constraint(equalToConstant: 25.5).isActive = true
         
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.tintColor = UIColor.red
