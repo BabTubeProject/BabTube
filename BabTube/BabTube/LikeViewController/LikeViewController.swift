@@ -26,22 +26,20 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 이미지 설정
-        let titleImage = UIImage(named: "BabTube_Logo")
+        //네비게이션바 이미지 
+        let likeTitleImageView = UIImageView()
+        likeTitleImageView.translatesAutoresizingMaskIntoConstraints = false
+        likeTitleImageView.image = UIImage(named: "BabTube_Logo")
+        likeTitleImageView.contentMode = .scaleAspectFill
+        likeTitleImageView.layer.masksToBounds = true
+        likeTitleImageView.widthAnchor.constraint(equalToConstant: 95).isActive = true
+        likeTitleImageView.heightAnchor.constraint(equalToConstant: 25.5).isActive = true
 
-        // 네비게이션 바 타이틀 뷰 설정
-        let titleImageView = UIImageView(image: titleImage)
-        titleImageView.contentMode = .scaleAspectFit
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
 
-        // 이미지 크기 조정
-        let imageSize = CGSize(width: 75.45, height: 20)
-        titleImageView.frame = CGRect(origin: CGPoint.zero, size: imageSize)
-
-        // 좌측 정렬을 위한 컨테이너 뷰
-        let titleViewContainer = UIView(frame: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
-        titleViewContainer.addSubview(titleImageView)
-
-        navigationItem.titleView = titleViewContainer
+        let likeTitleBarButtonItem = UIBarButtonItem(customView: likeTitleImageView)
+        navigationItem.leftBarButtonItem = likeTitleBarButtonItem
 
         // 테이블 뷰 생성
         let likeViewTable = UITableView()
