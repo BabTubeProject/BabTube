@@ -26,6 +26,7 @@
 		18D659322AA5B971000468D9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659312AA5B971000468D9 /* MainViewController.swift */; };
 		18D659362AA5B9A9000468D9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659352AA5B9A9000468D9 /* Font.swift */; };
 		18D659382AA5BA9E000468D9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659372AA5BA9E000468D9 /* Color.swift */; };
+		AC6CDEAE2AA727EC00A36674 /* DetailLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */; };
 		F034B5AB2AA5E0C20019EED2 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034B5AA2AA5E0C20019EED2 /* MainTableViewCell.swift */; };
 		F0DE6E3B2AA6BB0D00DC03FE /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DE6E3A2AA6BB0D00DC03FE /* MainCollectionViewCell.swift */; };
 		689BC5882AA5D516005BA3A2 /* MembershipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */; };
@@ -56,6 +57,7 @@
 		18D659312AA5B971000468D9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		18D659352AA5B9A9000468D9 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		18D659372AA5BA9E000468D9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLikeTableViewCell.swift; sourceTree = "<group>"; };
 		F034B5AA2AA5E0C20019EED2 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		F0DE6E3A2AA6BB0D00DC03FE /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				18D659262AA5B8F8000468D9 /* LikeViewController.swift */,
+				AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */,
 			);
 			path = LikeViewController;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				18D659382AA5BA9E000468D9 /* Color.swift in Sources */,
 				F0DE6E3B2AA6BB0D00DC03FE /* MainCollectionViewCell.swift in Sources */,
 				18D6592D2AA5B920000468D9 /* LoginViewController.swift in Sources */,
+				AC6CDEAE2AA727EC00A36674 /* DetailLikeTableViewCell.swift in Sources */,
 				18D6590B2AA5B5FA000468D9 /* SceneDelegate.swift in Sources */,
 				109089CC2AA5E587001060A4 /* ProfileTableViewCell.swift in Sources */,
 				18D659302AA5B95A000468D9 /* ProfileViewController.swift in Sources */,
