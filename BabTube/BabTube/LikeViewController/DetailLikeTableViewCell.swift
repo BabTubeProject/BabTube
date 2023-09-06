@@ -52,7 +52,7 @@ class DetailLikeTableViewCell: UITableViewCell {
             // thumbnailImageView
             likeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             likeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            likeImageView.widthAnchor.constraint(equalToConstant: 89), // 이미지 크기 조정
+            likeImageView.widthAnchor.constraint(equalToConstant: 90), // 이미지 크기 조정
             likeImageView.heightAnchor.constraint(equalToConstant: 50),
 
             // titleLabel
