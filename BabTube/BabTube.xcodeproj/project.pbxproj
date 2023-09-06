@@ -32,6 +32,10 @@
 		18D659362AA5B9A9000468D9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659352AA5B9A9000468D9 /* Font.swift */; };
 		18D659382AA5BA9E000468D9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659372AA5BA9E000468D9 /* Color.swift */; };
 		18D6593B2AA5E7BE000468D9 /* CommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6593A2AA5E7BE000468D9 /* CommentStackView.swift */; };
+		18D6C3DB2AA8133E0036766F /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C3DA2AA8133E0036766F /* APIHandler.swift */; };
+		18D6C3DD2AA8136F0036766F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C3DC2AA8136F0036766F /* NetworkError.swift */; };
+		18D6C3DF2AA814350036766F /* APIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C3DE2AA814350036766F /* APIKEY.swift */; };
+		18D6C3E12AA815AD0036766F /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C3E02AA815AD0036766F /* SearchData.swift */; };
 		689BC5882AA5D516005BA3A2 /* MembershipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */; };
 		689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */; };
 		689BC58E2AA73E21005BA3A2 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58D2AA73E21005BA3A2 /* UserData.swift */; };
@@ -69,6 +73,10 @@
 		18D659352AA5B9A9000468D9 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		18D659372AA5BA9E000468D9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		18D6593A2AA5E7BE000468D9 /* CommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentStackView.swift; sourceTree = "<group>"; };
+		18D6C3DA2AA8133E0036766F /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		18D6C3DC2AA8136F0036766F /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		18D6C3DE2AA814350036766F /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
+		18D6C3E02AA815AD0036766F /* SearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
 		689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipViewController.swift; sourceTree = "<group>"; };
 		689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMakeViewController.swift; sourceTree = "<group>"; };
 		689BC58D2AA73E21005BA3A2 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -127,6 +135,7 @@
 		18D659072AA5B5FA000468D9 /* BabTube */ = {
 			isa = PBXGroup;
 			children = (
+				18D6C3D92AA8132F0036766F /* Model */,
 				18D659342AA5B99C000468D9 /* Util */,
 				18D659332AA5B976000468D9 /* TabbarViewController */,
 				18D6592E2AA5B944000468D9 /* ProfileViewController */,
@@ -142,6 +151,7 @@
 				18D659112AA5B5FC000468D9 /* Assets.xcassets */,
 				18D659132AA5B5FC000468D9 /* LaunchScreen.storyboard */,
 				18D659162AA5B5FC000468D9 /* Info.plist */,
+				18D6C3DE2AA814350036766F /* APIKEY.swift */,
 			);
 			path = BabTube;
 			sourceTree = "<group>";
@@ -226,6 +236,8 @@
 				18D659372AA5BA9E000468D9 /* Color.swift */,
 				18D2623A2AA7980D00652695 /* Reuseable.swift */,
 				10BDAD872AA751F400DC2F0D /* Margin.swift */,
+				18D6C3DA2AA8133E0036766F /* APIHandler.swift */,
+				18D6C3DC2AA8136F0036766F /* NetworkError.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -239,6 +251,14 @@
 				18D262412AA7AD3F00652695 /* VideoDescriptionTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		18D6C3D92AA8132F0036766F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18D6C3E02AA815AD0036766F /* SearchData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,10 +336,12 @@
 				10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */,
 				109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */,
 				18D659362AA5B9A9000468D9 /* Font.swift in Sources */,
+				18D6C3DD2AA8136F0036766F /* NetworkError.swift in Sources */,
 				18D2623B2AA7980D00652695 /* Reuseable.swift in Sources */,
 				689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */,
 				109089CE2AA5F7C4001060A4 /* RecordTableViewCell.swift in Sources */,
 				18D6592B2AA5B917000468D9 /* SignUpViewController.swift in Sources */,
+				18D6C3DF2AA814350036766F /* APIKEY.swift in Sources */,
 				689BC5902AA73E32005BA3A2 /* UserDataManager.swift in Sources */,
 				689BC5882AA5D516005BA3A2 /* MembershipViewController.swift in Sources */,
 				18D659292AA5B903000468D9 /* VideoDetailViewController.swift in Sources */,
@@ -335,10 +357,12 @@
 				18D262392AA796E300652695 /* CommentTableViewCell.swift in Sources */,
 				AC6CDEAE2AA727EC00A36674 /* DetailLikeTableViewCell.swift in Sources */,
 				18D6590B2AA5B5FA000468D9 /* SceneDelegate.swift in Sources */,
+				18D6C3E12AA815AD0036766F /* SearchData.swift in Sources */,
 				109089CC2AA5E587001060A4 /* ProfileTableViewCell.swift in Sources */,
 				18D659302AA5B95A000468D9 /* ProfileViewController.swift in Sources */,
 				18D659252AA5B8EC000468D9 /* MyPageViewController.swift in Sources */,
 				18D659272AA5B8F8000468D9 /* LikeViewController.swift in Sources */,
+				18D6C3DB2AA8133E0036766F /* APIHandler.swift in Sources */,
 				18D659322AA5B971000468D9 /* MainViewController.swift in Sources */,
 				18D6593B2AA5E7BE000468D9 /* CommentStackView.swift in Sources */,
 			);

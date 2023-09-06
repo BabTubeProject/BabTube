@@ -33,13 +33,10 @@ final class VideoDetailViewController: UIViewController {
     }()
     private let commentStackView = CommentStackView()
     
-    private let margin: CGFloat = 16
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addViews()
-        configureView()
         configureAutoLayout()
         configureTableView()
     }
@@ -61,10 +58,6 @@ extension VideoDetailViewController {
         view.addSubview(imageView)
         view.addSubview(commentTableView)
         view.addSubview(commentStackView)
-    }
-
-    private func configureView() {
-//        likeButton.addTarget(self, action: #selector(likeButtonClick), for: .touchUpInside)
     }
 
     private func configureAutoLayout() {
