@@ -8,19 +8,19 @@
 import Foundation
 
 final class APIHandler {
-    private let baseUrl: String = "https://youtube.googleapis.com/youtube/v3/search?"
+    private let baseUrl: String = "https://youtube.googleapis.com/youtube/v3/"
     private let sesstion: URLSession = URLSession.shared
 
     
     /**
         Json 형식으로 Youtube영상을 Serach하여 가져오는 기능을 하는 메서드
-     
         - part: snippet으로 해야 영상 정보를 가져옴
-        - maxResults: 한번에 가져올 데이터 갯수 최대 50 (기본값 5)
+        - maxResults: 한번에 가져올 데이터 갯수 최대 50 (작성을 안할경우 기본으로 5개를 반환해줌)
         - q: 검색할 내용
      ```
         let query = ["part": "snippet", "maxResults": "2", "q": "무한도전"]
-        apiHandler.getJson(type: SearchListData.self, query: query) { result in
+        let path = "search"
+        apiHandler.getJson(type: SearchListData.self, path: path, query: query) { result in
              switch result {
              case .success(let searchDataList):
                  print(searchDataList)
@@ -30,8 +30,8 @@ final class APIHandler {
          }
      ```
      */
-    func getJson<T: Decodable>(type: T.Type, query: [String:String], completed: @escaping (Result<T, NetworkError>) -> Void) {
-        let fullPath: String = baseUrl + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + "&key=\(APIKEY)"
+    func getJson<T: Decodable>(type: T.Type, path: String, query: [String:String], completed: @escaping (Result<T, NetworkError>) -> Void) {
+        let fullPath: String = baseUrl + path + "?" + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + "&key=\(APIKEY)"
         print(fullPath)
         
         //URL에 한글이 들어가면 nil이 반환되어 encoding해주는 작업을 해줌
@@ -44,9 +44,9 @@ final class APIHandler {
         let task = sesstion.dataTask(with: url) { data, response, error in
             if let error {
                 let nsError = error as NSError
-                if nsError.code == NSURLErrorCancelled {
-                    completed(.failure(.cancel))
-                } else if nsError.code == NSURLErrorNotConnectedToInternet || nsError.code == NSURLErrorTimedOut {
+                
+                // 인터넷이 연결되지 않았거나, 요청 시간을 초과한 경우 에러 처리
+                if nsError.code == NSURLErrorNotConnectedToInternet || nsError.code == NSURLErrorTimedOut {
                     completed(.failure(.notConnectedToInternet))
                 } else {
                     completed(.failure(.transport(error)))
@@ -55,6 +55,7 @@ final class APIHandler {
                 if let response = response as? HTTPURLResponse {
                     let statusCode = response.statusCode
                     
+                    // HTTPSatusCode가 200번대가 아닌경우 서버 에러
                     guard (200...299).contains(statusCode) else {
                         completed(.failure(.server(statusCode)))
                         return
@@ -64,6 +65,8 @@ final class APIHandler {
                         return
                     }
                     let decoder = JSONDecoder()
+                    
+                    // decode를 진행하고 catch를 통해 error가 발생한경우 에러 처리
                     do {
                         let decodeData = try decoder.decode(type, from: data)
                         completed(.success(decodeData))
