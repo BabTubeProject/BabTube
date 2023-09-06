@@ -10,15 +10,17 @@ import UIKit
 class MainViewController: UIViewController {
     
     private let sections: [String] = ["카테고리1","카테고리2","카테고리3","카테고리4","카테고리5","카테고리6"]
+    private let detailVC = VideoDetailViewController()
     
     var mainTableView: UITableView = {
         let mainTableView = UITableView()
         mainTableView.allowsSelection = false
         mainTableView.backgroundColor = .clear
         mainTableView.bounces = true
+     //   mainTableView.isUserInteractionEnabled = true
         mainTableView.contentInset = .zero
         mainTableView.translatesAutoresizingMaskIntoConstraints = false
-        mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.id)
+        mainTableView.register(MainTVCell.self, forCellReuseIdentifier: MainTVCell.id)
         return mainTableView
     }()
     
@@ -54,11 +56,11 @@ extension MainViewController {
         
         let mainLogoImage = UIImageView()
         mainLogoImage.translatesAutoresizingMaskIntoConstraints = false
-        mainLogoImage.image = UIImage(named: "MainLogo")
+        mainLogoImage.image = UIImage(named: "BabTube_Logo")
         mainLogoImage.contentMode = .scaleAspectFit
         mainLogoImage.layer.masksToBounds = true
-        mainLogoImage.widthAnchor.constraint(equalToConstant: 149).isActive = true
-        mainLogoImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        mainLogoImage.widthAnchor.constraint(equalToConstant: 95).isActive = true
+        mainLogoImage.heightAnchor.constraint(equalToConstant: 25.5).isActive = true
         
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.tintColor = UIColor.red
@@ -74,12 +76,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     // cell 터치시 회색 표시 없애기
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTableView.deselectRow(at: indexPath, animated: true)
-        
-        //        let svc = VideoDetailViewController()
-        //        svc.modalPresentationStyle = .fullScreen
-        //        self.present(svc, animated: true, completion: nil)
     }
-    
+    //셀의 높이
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return MainTVCell.cellHeight
+    }
     // section의 개수
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -101,13 +102,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.id, for: indexPath) as! MainTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTVCell.id, for: indexPath) as? MainTVCell else {
+            
+            return UITableViewCell()
+        }
+        cell.cellDelegate = self
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return MainTableViewCell.cellHeight
+}
+extension MainViewController: CollectionViewCellDelegate {
+    func collectionView(mainCVCell: MainCVCell?, index: Int, didTappedInTableViewCell: MainTVCell) {
+        navigationController?.pushViewController(detailVC, animated: true)
     }
-    
 }
 
