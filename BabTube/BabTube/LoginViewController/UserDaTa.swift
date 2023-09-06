@@ -6,3 +6,13 @@
 //
 
 import UIKit
+
+struct UserData: Codable {
+    var name: String?
+    var userID: String?
+    var password: String?
+    var nickname: String?
+    var introduction: String?
+    var userImage: Data?
+    
+}
