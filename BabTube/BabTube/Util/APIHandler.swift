@@ -31,6 +31,8 @@ final class APIHandler {
      ```
      */
     func getJson<T: Decodable>(type: T.Type, path: String, query: [String:String], completed: @escaping (Result<T, NetworkError>) -> Void) {
+        
+        // baseUrl에 query를 string으로 변환하여 경로로 변환하는 작업
         let fullPath: String = baseUrl + path + "?" + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + "&key=\(APIKEY)"
         
         //URL에 한글이 들어가면 nil이 반환되어 encoding해주는 작업을 해줌
