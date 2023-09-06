@@ -21,6 +21,9 @@ class MyPageViewController: UIViewController {
         
         // 경계선 없애기
         tableView.separatorStyle = .none
+        
+        // 스크롤 없애기
+        tableView.isScrollEnabled = false
         return tableView
     }()
 
@@ -48,13 +51,13 @@ extension MyPageViewController {
         let navigationLogoImageView = UIImageView()
         navigationLogoImageView.translatesAutoresizingMaskIntoConstraints = false
         navigationLogoImageView.image = UIImage(named: "BabTube_Logo")
-        navigationLogoImageView.contentMode = .scaleAspectFit
+        navigationLogoImageView.contentMode = .scaleAspectFill
         navigationLogoImageView.layer.masksToBounds = true
-        navigationLogoImageView.widthAnchor.constraint(equalToConstant: 149).isActive = true
-        navigationLogoImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        navigationLogoImageView.widthAnchor.constraint(equalToConstant: 95).isActive = true
+        navigationLogoImageView.heightAnchor.constraint(equalToConstant: 25.5).isActive = true
         
         navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.tintColor = UIColor.red
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationLogoImageView)
         
