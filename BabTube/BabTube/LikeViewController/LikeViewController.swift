@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Data{
+struct LikeData{
     let image: UIImage
     let title: String
     let subtitle: String
@@ -17,9 +17,9 @@ struct Data{
 class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
-    let cellData: [Data] = [
-        Data(image: UIImage(named: "LikeImage1")!, title: "제목1", subtitle: "소제목1", contentLabel: "내용1"),
-        Data(image: UIImage(named: "LikeImage2")!, title: "제목2", subtitle: "소제목2", contentLabel: "내용2")
+    let cellData: [LikeData] = [
+        LikeData(image: UIImage(named: "LikeImage1")!, title: "제목1", subtitle: "소제목1", contentLabel: "내용1"),
+        LikeData(image: UIImage(named: "LikeImage2")!, title: "제목2", subtitle: "소제목2", contentLabel: "내용2")
     ]
     
     
