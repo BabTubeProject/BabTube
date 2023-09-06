@@ -132,6 +132,9 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension LoginViewController {
     func makeUi() {
+        
+        view.backgroundColor = UIColor.white
+        
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         babtubeIcon.translatesAutoresizingMaskIntoConstraints = false
         newMembership.translatesAutoresizingMaskIntoConstraints = false

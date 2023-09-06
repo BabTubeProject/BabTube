@@ -9,10 +9,11 @@ import UIKit
 
 class MyPageViewController: UIViewController {
     
-    //let myPageFixVC = MyPageFixViewController()
+    private let loginVC = LoginViewController()
+    private let profileMakeVC = ProfileMakeViewController()
     
     // TableView 만들기
-    var myPageTableView: UITableView = {
+    private let myPageTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
@@ -80,16 +81,19 @@ extension MyPageViewController {
     }
     
     // 마이페이지 수정 페이지 이동
-    @objc func moveMyPageFixVC() {
-//        navigationController?.pushViewController(myPageFixVC, animated: true)
+    @objc private func moveMyPageFixVC() {
+        navigationController?.pushViewController(profileMakeVC, animated: true)
     }
 }
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // TableViewCell의 줄 개수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
 
+    // TableView의 각 줄
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row == 0 {
@@ -117,6 +121,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    // Cell의 높이
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         if indexPath.row == 0 {
@@ -129,6 +134,14 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 
         else {
             return 36
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            loginVC.modalPresentationStyle = .fullScreen
+            loginVC.modalTransitionStyle = .coverVertical
+            present(loginVC, animated: true)
         }
     }
 }

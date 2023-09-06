@@ -24,7 +24,7 @@ class LogoutTableViewCell: UITableViewCell {
     }
     
     // 로그아웃 이미지
-    var logoutImageView: UIImageView = {
+    private let logoutImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "arrow.forward.square")
@@ -32,7 +32,7 @@ class LogoutTableViewCell: UITableViewCell {
         return imageView
     }()
 
-    var logoutLabel: UILabel = {
+    private let logoutLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "로그아웃"

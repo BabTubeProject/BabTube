@@ -13,7 +13,7 @@ class RecordCollectionViewCell: UICollectionViewCell {
     static let identifier = "RecordCollectionViewCell"
     
     // 시청 기록 썸네일
-    var thumbnailImageView: UIImageView = {
+    private let thumbnailImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill

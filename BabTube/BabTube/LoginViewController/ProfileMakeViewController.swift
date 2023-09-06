@@ -9,9 +9,9 @@ import UIKit
 
 class ProfileMakeViewController: UIViewController {
     
-    let picker = UIImagePickerController()
+    private let picker = UIImagePickerController()
 
-    lazy var profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.circle.fill")
         imageView.tintColor = UIColor(red: 235/255, green: 141/255, blue: 142/255, alpha: 1)
@@ -22,7 +22,7 @@ class ProfileMakeViewController: UIViewController {
         return imageView
     }()
 
-    lazy var profileChangeButton: UIButton = {
+    private lazy var profileChangeButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("프로필 사진 변경", for: .normal)
         btn.titleLabel?.font = .body
@@ -32,7 +32,7 @@ class ProfileMakeViewController: UIViewController {
         return btn
     }()
 
-    lazy var nickName: UILabel = {
+    private lazy var nickName: UILabel = {
         let lb = UILabel()
         lb.text = "닉네임"
         lb.font = .body
@@ -41,7 +41,7 @@ class ProfileMakeViewController: UIViewController {
         return lb
     }()
 
-    lazy var nickNameTextField: UITextField = {
+    private lazy var nickNameTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "닉네임을 입력해주세요."
         tf.backgroundColor = .systemGray5
@@ -53,7 +53,7 @@ class ProfileMakeViewController: UIViewController {
         return tf
     }()
 
-    lazy var introduce: UILabel = {
+    private lazy var introduce: UILabel = {
         let lb = UILabel()
         lb.text = "자기소개"
         lb.font = .body
@@ -62,7 +62,7 @@ class ProfileMakeViewController: UIViewController {
         return lb
     }()
 
-    lazy var introduceTextField: UITextField = {
+    private lazy var introduceTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "안녕하세요"
         tf.backgroundColor = .systemGray5
@@ -74,7 +74,7 @@ class ProfileMakeViewController: UIViewController {
         return tf
     }()
 
-    lazy var startButton: UIButton = {
+    private lazy var startButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("로그인", for: .normal)
         btn.backgroundColor = .mainColor
@@ -84,21 +84,21 @@ class ProfileMakeViewController: UIViewController {
         return btn
     }()
 
-    @objc func profileButtonPressed() {
+    @objc private func profileButtonPressed() {
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeUi()
+        makeUI()
         textFieldSetting()
         picker.delegate = self
         profileImageView.layoutIfNeeded()
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
     }
 
-    func textFieldSetting() {
+    private func textFieldSetting() {
         nickNameTextField.autocapitalizationType = .none
         nickNameTextField.autocorrectionType = .no
         nickNameTextField.clearButtonMode = .always
@@ -129,7 +129,11 @@ extension ProfileMakeViewController: UIImagePickerControllerDelegate, UINavigati
 }
 
 extension ProfileMakeViewController {
-    func makeUi() {
+    
+    private func makeUI() {
+        
+        view.backgroundColor = UIColor.white
+        
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileChangeButton.translatesAutoresizingMaskIntoConstraints = false
         nickName.translatesAutoresizingMaskIntoConstraints = false
@@ -169,7 +173,7 @@ extension ProfileMakeViewController {
             introduceTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             introduceTextField.heightAnchor.constraint(equalToConstant: 80),
 
-            startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             startButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             startButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             startButton.heightAnchor.constraint(equalToConstant: 50)
@@ -183,4 +187,6 @@ extension ProfileMakeViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: false)
     }
+    
+    
 }

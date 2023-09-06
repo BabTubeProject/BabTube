@@ -9,6 +9,8 @@ import UIKit
 
 class RecordTableViewCell: UITableViewCell {
     
+    private let videoDetailVC = VideoDetailViewController()
+    
     // Cell 식별자
     static let identifier = "RecordTableViewCellRecordTableViewCell"
 
@@ -23,7 +25,7 @@ class RecordTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    var recordLabel: UILabel = {
+    private let recordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "시청 기록"
@@ -32,7 +34,7 @@ class RecordTableViewCell: UITableViewCell {
         return label
     }()
     
-    var recordCollectionView: UICollectionView = {
+    private let recordCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -78,6 +80,7 @@ extension RecordTableViewCell {
 }
 
 extension RecordTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
