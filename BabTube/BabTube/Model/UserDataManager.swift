@@ -32,8 +32,11 @@ class UserDataManager {
     // 사용자 데이터를 UserDefaults에 저장
     private func saveUsers() {
         let encoder = JSONEncoder()
-        if let encodedData = try? encoder.encode(users) {
+        do {
+            let encodedData = try encoder.encode(users)
             userDefaults.set(encodedData, forKey: "users")
+        } catch {
+            print("사용자 추가 중 에러 발생: \(error)")
         }
     }
 
@@ -41,17 +44,23 @@ class UserDataManager {
     private func loadUsers() {
         if let savedData = userDefaults.data(forKey: "users") {
             let decoder = JSONDecoder()
-            if let savedUsers = try? decoder.decode([UserData].self, from: savedData) {
+            do {
+                let savedUsers = try decoder.decode([UserData].self, from: savedData)
                 users = savedUsers
+            } catch {
+                print("사용자데이터를 UserDefaults에서 로드 \(error)")
             }
         }
     }
 
     // 프로필 업데이트
-    func updateUserInfo(userIndex: Int, newNickname: String, newIntroduce: String, newImage: UIImage?) {
+    func updateUserInfo(userIndex: Int, newNickname: String, newIntroduce: String, newImage: UIImage?) throws {
         guard userIndex >= 0, userIndex < users.count else {
             return
         }
+
+        // 해당 사용자의 데이터를 백업
+        let originalUserData = users[userIndex]
 
         // 해당 사용자의 정보를 업데이트
         users[userIndex].nickname = newNickname
@@ -61,6 +70,7 @@ class UserDataManager {
         if let newImage = newImage {
             users[userIndex].userImage = newImage.pngData()
         }
+
         // 업데이트된 정보를 저장
         saveUsers()
     }
@@ -86,7 +96,6 @@ class UserDataManager {
         guard likeVideoIndex >= 0, likeVideoIndex < user.likeVideo.count else {
             return
         }
-
         user.likeVideo.remove(at: likeVideoIndex)
         saveUsers()
     }
