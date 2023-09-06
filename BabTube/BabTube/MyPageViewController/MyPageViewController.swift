@@ -11,7 +11,7 @@ class MyPageViewController: UIViewController {
     
     private let loginVC = LoginViewController()
     private let profileMakeVC = ProfileMakeViewController()
-    private let videoDetailVC = VideoDetailViewController()
+    private let videoDetailVC = VideoDetailViewController(videoId: "z8gl6HcWqCA")
     
     // TableView 만들기
     private let myPageTableView: UITableView = {

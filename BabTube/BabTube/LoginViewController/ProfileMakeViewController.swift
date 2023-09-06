@@ -145,8 +145,8 @@ extension ProfileMakeViewController {
         NSLayoutConstraint.activate([
             profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
             profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 70),
-            profileImageView.heightAnchor.constraint(equalToConstant: 70),
+            profileImageView.widthAnchor.constraint(equalToConstant: 80),
+            profileImageView.heightAnchor.constraint(equalToConstant: 80),
 
             profileChangeButton.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10),
             profileChangeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

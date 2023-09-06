@@ -14,7 +14,7 @@ protocol RecordTableViewCellDelegate: AnyObject {
 
 class RecordTableViewCell: UITableViewCell {
     
-    private let videoDetailVC = VideoDetailViewController()
+    private let videoDetailVC = VideoDetailViewController(videoId: "z8gl6HcWqCA")
     
     // Cell 식별자
     static let identifier = "RecordTableViewCellRecordTableViewCell"
