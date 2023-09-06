@@ -8,27 +8,21 @@
 import UIKit
 
 class ProfileMakeViewController: UIViewController {
-    let picker = UIImagePickerController()
-    lazy var profileView: UIView = {
-        let views = UIView()
-        views.backgroundColor = .systemGray5
-        views.tintColor = .white
-        views.addSubview(profileImageView)
-        views.layer.cornerRadius = 30
+    
+    private let picker = UIImagePickerController()
 
-        view.addSubview(views)
-
-        return views
-    }()
-
-    lazy var profileImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "person"))
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.circle.fill")
+        imageView.tintColor = UIColor(red: 235/255, green: 141/255, blue: 142/255, alpha: 1)
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         view.addSubview(imageView)
 
         return imageView
     }()
 
-    lazy var profileChangeButton: UIButton = {
+    private lazy var profileChangeButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("프로필 사진 변경", for: .normal)
         btn.titleLabel?.font = .body
@@ -38,7 +32,7 @@ class ProfileMakeViewController: UIViewController {
         return btn
     }()
 
-    lazy var nickName: UILabel = {
+    private lazy var nickName: UILabel = {
         let lb = UILabel()
         lb.text = "닉네임"
         lb.font = .body
@@ -47,7 +41,7 @@ class ProfileMakeViewController: UIViewController {
         return lb
     }()
 
-    lazy var nickNameTextField: UITextField = {
+    private lazy var nickNameTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "닉네임을 입력해주세요."
         tf.backgroundColor = .systemGray5
@@ -59,7 +53,7 @@ class ProfileMakeViewController: UIViewController {
         return tf
     }()
 
-    lazy var introduce: UILabel = {
+    private lazy var introduce: UILabel = {
         let lb = UILabel()
         lb.text = "자기소개"
         lb.font = .body
@@ -68,7 +62,7 @@ class ProfileMakeViewController: UIViewController {
         return lb
     }()
 
-    lazy var introduceTextField: UITextField = {
+    private lazy var introduceTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "안녕하세요"
         tf.backgroundColor = .systemGray5
@@ -80,7 +74,7 @@ class ProfileMakeViewController: UIViewController {
         return tf
     }()
 
-    lazy var startButton: UIButton = {
+    private lazy var startButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("로그인", for: .normal)
         btn.backgroundColor = .mainColor
@@ -90,19 +84,21 @@ class ProfileMakeViewController: UIViewController {
         return btn
     }()
 
-    @objc func profileButtonPressed() {
+    @objc private func profileButtonPressed() {
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeUi()
+        makeUI()
         textFieldSetting()
         picker.delegate = self
+        profileImageView.layoutIfNeeded()
+        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
     }
 
-    func textFieldSetting() {
+    private func textFieldSetting() {
         nickNameTextField.autocapitalizationType = .none
         nickNameTextField.autocorrectionType = .no
         nickNameTextField.clearButtonMode = .always
@@ -133,10 +129,13 @@ extension ProfileMakeViewController: UIImagePickerControllerDelegate, UINavigati
 }
 
 extension ProfileMakeViewController {
-    func makeUi() {
+    
+    private func makeUI() {
+        
+        view.backgroundColor = UIColor.white
+        
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileChangeButton.translatesAutoresizingMaskIntoConstraints = false
-        profileView.translatesAutoresizingMaskIntoConstraints = false
         nickName.translatesAutoresizingMaskIntoConstraints = false
         nickNameTextField.translatesAutoresizingMaskIntoConstraints = false
         introduce.translatesAutoresizingMaskIntoConstraints = false
@@ -146,40 +145,35 @@ extension ProfileMakeViewController {
         NSLayoutConstraint.activate([
             profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
             profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 70),
-            profileImageView.heightAnchor.constraint(equalToConstant: 70),
-
-            profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
-            profileView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileView.widthAnchor.constraint(equalToConstant: 70),
-            profileView.heightAnchor.constraint(equalToConstant: 70),
+            profileImageView.widthAnchor.constraint(equalToConstant: 80),
+            profileImageView.heightAnchor.constraint(equalToConstant: 80),
 
             profileChangeButton.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10),
             profileChangeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             profileChangeButton.widthAnchor.constraint(equalToConstant: 110),
             profileChangeButton.heightAnchor.constraint(equalToConstant: 30),
 
-            nickName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            nickName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            nickName.bottomAnchor.constraint(equalTo: nickNameTextField.topAnchor, constant: 5),
-            nickName.heightAnchor.constraint(equalToConstant: 30),
+            nickName.topAnchor.constraint(equalTo: profileChangeButton.bottomAnchor, constant: 40),
+            nickName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            nickName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            nickName.heightAnchor.constraint(equalToConstant: 20),
 
-            nickNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            nickNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            nickNameTextField.topAnchor.constraint(equalTo: profileChangeButton.bottomAnchor, constant: 50),
+            nickNameTextField.topAnchor.constraint(equalTo: nickName.bottomAnchor, constant: 4),
+            nickNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            nickNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             nickNameTextField.heightAnchor.constraint(equalToConstant: 30),
 
-            introduce.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            introduce.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            introduce.bottomAnchor.constraint(equalTo: introduceTextField.topAnchor, constant: 5),
-            introduce.heightAnchor.constraint(equalToConstant: 30),
+            introduce.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: 24),
+            introduce.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            introduce.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            introduce.heightAnchor.constraint(equalToConstant: 20),
 
-            introduceTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            introduceTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            introduceTextField.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: 50),
+            introduceTextField.topAnchor.constraint(equalTo: introduce.bottomAnchor, constant: 4),
+            introduceTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            introduceTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             introduceTextField.heightAnchor.constraint(equalToConstant: 80),
 
-            startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             startButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             startButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             startButton.heightAnchor.constraint(equalToConstant: 50)
@@ -192,5 +186,22 @@ extension ProfileMakeViewController {
         let vc = LoginViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: false)
+    }
+    
+    func changeToProfileEdit() {
+        
+        // UI는 메인 쓰레드에서 변경
+        DispatchQueue.main.async {
+            self.profileImageView.image = UIImage(systemName: "pencil")
+            self.nickNameTextField.text = "홍준영"
+            self.introduceTextField.text = "만나서 반갑습니다"
+            self.startButton.setTitle("수정하기", for: .normal)
+            self.startButton.removeTarget(self, action: #selector(self.profileButtonPressed), for: .touchUpInside)
+            self.startButton.addTarget(self, action: #selector(self.moveBackMyPage), for: .touchUpInside)
+        }
+    }
+    
+    @objc func moveBackMyPage() {
+        navigationController?.popViewController(animated: true)
     }
 }

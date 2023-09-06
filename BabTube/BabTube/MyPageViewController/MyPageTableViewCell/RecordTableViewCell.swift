@@ -7,10 +7,20 @@
 
 import UIKit
 
+// Delegate Pattern을 위한 Protocol 생성
+protocol RecordTableViewCellDelegate: AnyObject {
+    func didTapRecordCollectionViewCell()
+}
+
 class RecordTableViewCell: UITableViewCell {
+    
+    private let videoDetailVC = VideoDetailViewController(videoId: "z8gl6HcWqCA")
     
     // Cell 식별자
     static let identifier = "RecordTableViewCellRecordTableViewCell"
+    
+    // Delegate 타입의 변수
+    weak var recordTableViewCellDelegate: RecordTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +33,7 @@ class RecordTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    var recordLabel: UILabel = {
+    private let recordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "시청 기록"
@@ -32,7 +42,7 @@ class RecordTableViewCell: UITableViewCell {
         return label
     }()
     
-    var recordCollectionView: UICollectionView = {
+    private let recordCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -78,14 +88,20 @@ extension RecordTableViewCell {
 }
 
 extension RecordTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCollectionViewCell.identifier, for: indexPath) as? RecordCollectionViewCell else { return UICollectionViewCell() }
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let recordTableViewCellDelegate = recordTableViewCellDelegate {
+            recordTableViewCellDelegate.didTapRecordCollectionViewCell()
+        }
     }
 }
 

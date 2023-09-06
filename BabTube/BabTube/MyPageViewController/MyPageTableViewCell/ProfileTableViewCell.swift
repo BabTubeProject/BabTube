@@ -24,7 +24,7 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     // 사용자 프로필 사진
-    var profileImageView: UIImageView = {
+    private let profileImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -34,7 +34,7 @@ class ProfileTableViewCell: UITableViewCell {
     }()
 
     // 사용자 이름
-    var nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "홍준영"
