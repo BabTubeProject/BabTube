@@ -49,6 +49,23 @@ class UserDataManager {
         }
     }
 
+    func updateUserInfo(userIndex: Int, newNickname: String, newIntroduce: String, newImage: UIImage?) {
+        guard userIndex >= 0, userIndex < users.count else {
+            return // 유효하지 않은 인덱스라면 업데이트하지 않음
+        }
+
+        // 해당 사용자의 정보를 업데이트
+        users[userIndex].nickname = newNickname
+        users[userIndex].introduce = newIntroduce
+
+        // 이미지 업데이트
+        if let newImage = newImage {
+            users[userIndex].userImage = newImage
+        }
+        // 업데이트된 정보를 저장
+        saveUsers()
+    }
+
     // 사용자 데이터 초기화
     func clearUsers() {
         users.removeAll()

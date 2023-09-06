@@ -12,7 +12,6 @@ struct UserData: Codable {
     var userID: String?
     var password: String?
     var nickname: String?
-    var introduction: String?
-    var userImage: Data?
-    
+    var introduce: String?
+    var userImage: UIImage?
 }
