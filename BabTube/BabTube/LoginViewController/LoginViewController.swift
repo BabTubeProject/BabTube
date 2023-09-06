@@ -107,14 +107,8 @@ class LoginViewController: UIViewController {
         passwordTextField.addLeftPadding()
     }
 
-    @objc private func loginButtonClick() {
-//        if emailTextField.text?.isEmpty == true || passwordTextField.text?.isEmpty == true {
-//            loginButton.backgroundColor = .systemGray5
-//        } else {
-//            loginButton.backgroundColor = .mainColor
-//        }
-        
-        let vc = TabBarController()
+    @objc private func loginButtonClick() {        
+    let vc = TabBarController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: false)
     }
