@@ -31,9 +31,10 @@ final class VideoDetailViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
-    private let commentStackView = CommentStackView()
+    private let commentStackView: CommentStackView = CommentStackView()
     
     private let apiHandler: APIHandler = APIHandler()
+    private let imageLoader: ImageLoader = ImageLoader()
     private var snippet: Snippet?
     private var statistics: Statistics?
     
@@ -49,7 +50,7 @@ final class VideoDetailViewController: UIViewController {
     init(snippet: Snippet, videoId: String) {
         self.snippet = snippet
         super.init(nibName: nil, bundle: nil)
-//        getStatistics(videoId: videoId)
+        getStatistics(videoId: videoId)
     }
     
     /// videoId 만 있는 경우 사용
@@ -70,9 +71,7 @@ final class VideoDetailViewController: UIViewController {
             case .success(let videoDataList):
                 self.snippet = videoDataList.snippet
                 self.statistics = videoDataList.statistics
-                DispatchQueue.main.async {
-                    self.commentTableView.reloadData()
-                }
+                self.updateViews()
             case .failure(let failure):
                 print(failure)
             }
@@ -86,9 +85,34 @@ final class VideoDetailViewController: UIViewController {
             switch result {
             case .success(let videoDataList):
                 self.statistics = videoDataList.statistics
-                self.commentTableView.reloadData()
+                self.updateViews()
             case .failure(let failure):
                 print(failure)
+            }
+        }
+    }
+    
+    private func updateViews() {
+        guard let snippet else {
+            print("snippet is nil")
+            return
+        }
+        let stringUrl = snippet.thumbnails.high.url
+        guard let url = URL(string: stringUrl) else {
+            print("url is nil")
+            return
+        }
+        DispatchQueue.global().async {
+            self.imageLoader.getImage(url: url) { result in
+                switch result {
+                case .success(let image):
+                    DispatchQueue.main.async {
+                        self.imageView.image = image
+                        self.commentTableView.reloadData()
+                    }
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
     }
