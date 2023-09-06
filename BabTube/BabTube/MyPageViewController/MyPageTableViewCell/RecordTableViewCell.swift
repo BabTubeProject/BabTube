@@ -7,12 +7,20 @@
 
 import UIKit
 
+// Delegate Pattern을 위한 Protocol 생성
+protocol RecordTableViewCellDelegate: AnyObject {
+    func didTapRecordCollectionViewCell()
+}
+
 class RecordTableViewCell: UITableViewCell {
     
     private let videoDetailVC = VideoDetailViewController()
     
     // Cell 식별자
     static let identifier = "RecordTableViewCellRecordTableViewCell"
+    
+    // Delegate 타입의 변수
+    weak var recordTableViewCellDelegate: RecordTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -87,8 +95,13 @@ extension RecordTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCollectionViewCell.identifier, for: indexPath) as? RecordCollectionViewCell else { return UICollectionViewCell() }
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let recordTableViewCellDelegate = recordTableViewCellDelegate {
+            recordTableViewCellDelegate.didTapRecordCollectionViewCell()
+        }
     }
 }
 

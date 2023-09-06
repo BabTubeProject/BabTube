@@ -11,6 +11,7 @@ class MyPageViewController: UIViewController {
     
     private let loginVC = LoginViewController()
     private let profileMakeVC = ProfileMakeViewController()
+    private let videoDetailVC = VideoDetailViewController()
     
     // TableView 만들기
     private let myPageTableView: UITableView = {
@@ -61,7 +62,6 @@ extension MyPageViewController {
         navigationController?.navigationBar.tintColor = UIColor.mainColor
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationLogoImageView)
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(moveMyPageFixVC))
     }
     
@@ -82,6 +82,7 @@ extension MyPageViewController {
     
     // 마이페이지 수정 페이지 이동
     @objc private func moveMyPageFixVC() {
+        profileMakeVC.changeToProfileEdit()
         navigationController?.pushViewController(profileMakeVC, animated: true)
     }
 }
@@ -109,6 +110,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             recordTableViewCell.selectionStyle = .none
+            recordTableViewCell.recordTableViewCellDelegate = self
             return recordTableViewCell
         }
 
@@ -143,5 +145,12 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             loginVC.modalTransitionStyle = .coverVertical
             present(loginVC, animated: true)
         }
+    }
+}
+
+extension MyPageViewController: RecordTableViewCellDelegate {
+    
+    func didTapRecordCollectionViewCell() {
+        navigationController?.pushViewController(videoDetailVC, animated: true)
     }
 }

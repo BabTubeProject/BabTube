@@ -46,6 +46,9 @@ final class VideoDetailViewController: UIViewController {
 extension VideoDetailViewController {
     
     private func configureTableView() {
+        
+        view.backgroundColor = UIColor.white
+        
         commentTableView.dataSource = self
         commentTableView.delegate = self
         

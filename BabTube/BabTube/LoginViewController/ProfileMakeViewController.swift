@@ -188,5 +188,20 @@ extension ProfileMakeViewController {
         present(vc, animated: false)
     }
     
+    func changeToProfileEdit() {
+        
+        // UI는 메인 쓰레드에서 변경
+        DispatchQueue.main.async {
+            self.profileImageView.image = UIImage(systemName: "pencil")
+            self.nickNameTextField.text = "홍준영"
+            self.introduceTextField.text = "만나서 반갑습니다"
+            self.startButton.setTitle("수정하기", for: .normal)
+            self.startButton.removeTarget(self, action: #selector(self.profileButtonPressed), for: .touchUpInside)
+            self.startButton.addTarget(self, action: #selector(self.moveBackMyPage), for: .touchUpInside)
+        }
+    }
     
+    @objc func moveBackMyPage() {
+        navigationController?.popViewController(animated: true)
+    }
 }
