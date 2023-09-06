@@ -8,7 +8,7 @@
 import UIKit
 
 struct LikeData{
-    let image: UIImage
+    let image: UIImage?
     let title: String
     let subtitle: String
     let contentLabel: String
@@ -18,8 +18,8 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     
     let cellData: [LikeData] = [
-        LikeData(image: UIImage(named: "LikeImage1")!, title: "제목1", subtitle: "소제목1", contentLabel: "내용1"),
-        LikeData(image: UIImage(named: "LikeImage2")!, title: "제목2", subtitle: "소제목2", contentLabel: "내용2")
+        LikeData(image: UIImage(named: ""), title: "제목1", subtitle: "소제목1", contentLabel: "내용1"),
+        LikeData(image: UIImage(named: ""), title: "제목2", subtitle: "소제목2", contentLabel: "내용2")
     ]
     
     
@@ -27,7 +27,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
 
         // 이미지 설정
-        let titleImage = UIImage(named: "LikeViewImage")
+        let titleImage = UIImage(named: "BabTube_Logo")
 
         // 네비게이션 바 타이틀 뷰 설정
         let titleImageView = UIImageView(image: titleImage)
