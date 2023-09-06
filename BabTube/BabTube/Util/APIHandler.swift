@@ -11,16 +11,37 @@ final class APIHandler {
     private let baseUrl: String = "https://youtube.googleapis.com/youtube/v3/search?"
     private let sesstion: URLSession = URLSession.shared
 
+    
+    /**
+        Json 형식으로 Youtube영상을 Serach하여 가져오는 기능을 하는 메서드
+     
+        - part: snippet으로 해야 영상 정보를 가져옴
+        - maxResults: 한번에 가져올 데이터 갯수 최대 50 (기본값 5)
+        - q: 검색할 내용
+     ```
+        let query = ["part": "snippet", "maxResults": "2", "q": "무한도전"]
+        apiHandler.getJson(type: SearchListData.self, query: query) { result in
+             switch result {
+             case .success(let searchDataList):
+                 print(searchDataList)
+             case .failure(let failure):
+                 print(failure.message)
+             }
+         }
+     ```
+     */
     func getJson<T: Decodable>(type: T.Type, query: [String:String], completed: @escaping (Result<T, NetworkError>) -> Void) {
-        let fullPath: String = baseUrl + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + 
-        guard let url = URL(string: fullPath) else {
+        let fullPath: String = baseUrl + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + "&key=\(APIKEY)"
+        print(fullPath)
+        
+        //URL에 한글이 들어가면 nil이 반환되어 encoding해주는 작업을 해줌
+        guard let encoded = fullPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: encoded) else {
             completed(.failure(.url))
             return
         }
         
-        task?.cancel()
-        
-        task = sesstion.dataTask(with: url) { data, response, error in
+        let task = sesstion.dataTask(with: url) { data, response, error in
             if let error {
                 let nsError = error as NSError
                 if nsError.code == NSURLErrorCancelled {
@@ -48,12 +69,15 @@ final class APIHandler {
                         completed(.success(decodeData))
                         
                     } catch let DecodingError.dataCorrupted(context) {
+                        print(context)
                         completed(.failure(.decode(DecodingError.dataCorrupted(context))))
                     } catch let DecodingError.valueNotFound(value, context) {
                         completed(.failure(.decode(DecodingError.valueNotFound(value, context))))
                     } catch let DecodingError.keyNotFound(key, context) {
+                        print(context)
                         completed(.failure(.decode(DecodingError.keyNotFound(key, context))))
                     } catch let DecodingError.typeMismatch(type, context)  {
+                        print(context)
                         completed(.failure(.decode(DecodingError.typeMismatch(type, context))))
                     } catch let error {
                         completed(.failure(.other(error)))
@@ -62,7 +86,7 @@ final class APIHandler {
             }
         }
         
-        task?.resume()
+        task.resume()
     }
     
 }
