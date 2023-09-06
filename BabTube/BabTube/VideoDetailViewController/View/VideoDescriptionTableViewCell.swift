@@ -45,4 +45,9 @@ extension VideoDescriptionTableViewCell {
             videoDescriptionStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
     }
+    
+    // cell안에 stackview에 UI를 업데이트 해야할때 부르는 함수
+    func updateView(title: String, description: String, publishTime: String, statistics: Statistics) {
+        videoDescriptionStackView.updateArrangedSubviews(title: title, description: description, publishTime: publishTime, statistics: statistics)
+    }
 }
