@@ -10,7 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     private let sections: [String] = ["카테고리1","카테고리2","카테고리3","카테고리4","카테고리5","카테고리6"]
-    private let detailVC = VideoDetailViewController()
+    private let detailVC = VideoDetailViewController(videoId: "z8gl6HcWqCA")
     
     var mainTableView: UITableView = {
         let mainTableView = UITableView()
