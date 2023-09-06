@@ -31,6 +31,13 @@
 		18D659362AA5B9A9000468D9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659352AA5B9A9000468D9 /* Font.swift */; };
 		18D659382AA5BA9E000468D9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659372AA5BA9E000468D9 /* Color.swift */; };
 		18D6593B2AA5E7BE000468D9 /* CommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6593A2AA5E7BE000468D9 /* CommentStackView.swift */; };
+		AC6CDEAE2AA727EC00A36674 /* DetailLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */; };
+		F034B5AB2AA5E0C20019EED2 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034B5AA2AA5E0C20019EED2 /* MainTableViewCell.swift */; };
+		F0DE6E3B2AA6BB0D00DC03FE /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DE6E3A2AA6BB0D00DC03FE /* MainCollectionViewCell.swift */; };
+		689BC5882AA5D516005BA3A2 /* MembershipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */; };
+		689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */; };
+		689BC58E2AA73E21005BA3A2 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58D2AA73E21005BA3A2 /* UserData.swift */; };
+		689BC5902AA73E32005BA3A2 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58F2AA73E32005BA3A2 /* UserDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +67,13 @@
 		18D659352AA5B9A9000468D9 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		18D659372AA5BA9E000468D9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		18D6593A2AA5E7BE000468D9 /* CommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentStackView.swift; sourceTree = "<group>"; };
+		AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLikeTableViewCell.swift; sourceTree = "<group>"; };
+		F034B5AA2AA5E0C20019EED2 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		F0DE6E3A2AA6BB0D00DC03FE /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipViewController.swift; sourceTree = "<group>"; };
+		689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMakeViewController.swift; sourceTree = "<group>"; };
+		689BC58D2AA73E21005BA3A2 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		689BC58F2AA73E32005BA3A2 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				18D659312AA5B971000468D9 /* MainViewController.swift */,
+				F034B5AA2AA5E0C20019EED2 /* MainTableViewCell.swift */,
+				F0DE6E3A2AA6BB0D00DC03FE /* MainCollectionViewCell.swift */,
 			);
 			path = MainViewContoller;
 			sourceTree = "<group>";
@@ -133,6 +149,10 @@
 			isa = PBXGroup;
 			children = (
 				18D6592C2AA5B920000468D9 /* LoginViewController.swift */,
+				689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */,
+				689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */,
+				689BC58D2AA73E21005BA3A2 /* UserData.swift */,
+				689BC58F2AA73E32005BA3A2 /* UserDataManager.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -158,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				18D659262AA5B8F8000468D9 /* LikeViewController.swift */,
+				AC6CDEAD2AA727EC00A36674 /* DetailLikeTableViewCell.swift */,
 			);
 			path = LikeViewController;
 			sourceTree = "<group>";
@@ -279,21 +300,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F034B5AB2AA5E0C20019EED2 /* MainTableViewCell.swift in Sources */,
 				18D6590D2AA5B5FA000468D9 /* TabBarController.swift in Sources */,
 				10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */,
 				109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */,
 				18D659362AA5B9A9000468D9 /* Font.swift in Sources */,
 				18D2623B2AA7980D00652695 /* Reuseable.swift in Sources */,
+				689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */,
 				109089CE2AA5F7C4001060A4 /* RecordTableViewCell.swift in Sources */,
 				18D6592B2AA5B917000468D9 /* SignUpViewController.swift in Sources */,
+				689BC5902AA73E32005BA3A2 /* UserDataManager.swift in Sources */,
+				689BC5882AA5D516005BA3A2 /* MembershipViewController.swift in Sources */,
 				18D659292AA5B903000468D9 /* VideoDetailViewController.swift in Sources */,
+				689BC58E2AA73E21005BA3A2 /* UserData.swift in Sources */,
 				18D659092AA5B5FA000468D9 /* AppDelegate.swift in Sources */,
 				10BDAD882AA751F400DC2F0D /* Margin.swift in Sources */,
 				18D659382AA5BA9E000468D9 /* Color.swift in Sources */,
+				F0DE6E3B2AA6BB0D00DC03FE /* MainCollectionViewCell.swift in Sources */,
 				18D6592D2AA5B920000468D9 /* LoginViewController.swift in Sources */,
 				18D262402AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift in Sources */,
 				18D262422AA7AD3F00652695 /* VideoDescriptionTableViewCell.swift in Sources */,
 				18D262392AA796E300652695 /* CommentTableViewCell.swift in Sources */,
+				AC6CDEAE2AA727EC00A36674 /* DetailLikeTableViewCell.swift in Sources */,
 				18D6590B2AA5B5FA000468D9 /* SceneDelegate.swift in Sources */,
 				109089CC2AA5E587001060A4 /* ProfileTableViewCell.swift in Sources */,
 				18D659302AA5B95A000468D9 /* ProfileViewController.swift in Sources */,
