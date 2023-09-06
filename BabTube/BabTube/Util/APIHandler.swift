@@ -9,7 +9,7 @@ import Foundation
 
 final class APIHandler {
     private let baseUrl: String = "https://youtube.googleapis.com/youtube/v3/"
-    private let sesstion: URLSession = URLSession.shared
+    private let session: URLSession = URLSession.shared
 
     
     /**
@@ -32,7 +32,6 @@ final class APIHandler {
      */
     func getJson<T: Decodable>(type: T.Type, path: String, query: [String:String], completed: @escaping (Result<T, NetworkError>) -> Void) {
         let fullPath: String = baseUrl + path + "?" + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + "&key=\(APIKEY)"
-        print(fullPath)
         
         //URL에 한글이 들어가면 nil이 반환되어 encoding해주는 작업을 해줌
         guard let encoded = fullPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
@@ -41,7 +40,7 @@ final class APIHandler {
             return
         }
         
-        let task = sesstion.dataTask(with: url) { data, response, error in
+        let task = session.dataTask(with: url) { data, response, error in
             if let error {
                 let nsError = error as NSError
                 
