@@ -12,7 +12,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
     private let firstLineHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .center
+        stackView.alignment = .top
         stackView.distribution = .equalSpacing
         return stackView
     }()
@@ -20,6 +20,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
         let label = UILabel()
         label.text = "제목"
         label.font = .title2
+        label.numberOfLines = 0
         return label
     }()
     private let likeButton: UIButton = {
@@ -43,7 +44,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
         label.font = .body
         return label
     }()
-    private let viewsCountLabel: UILabel = {
+    private let viewCountLabel: UILabel = {
         let label = UILabel()
         label.text = "조회수 0회"
         label.font = .body
@@ -53,7 +54,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
         let label = UILabel()
         label.text = "설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다"
         label.font = .body
-        label.numberOfLines = 3
+        label.numberOfLines = 0
         return label
     }()
     
@@ -62,6 +63,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
         configureInit()
         addViews()
         configureView()
+        configureAutoLayout()
     }
     
     required init(coder: NSCoder) {
@@ -84,7 +86,7 @@ extension VideoDescriptionVerticalStackView {
         addArrangedSubview(videoDescriptionLabel)
 
         dateAndViewsContStackView.addArrangedSubview(videoDateLabel)
-        dateAndViewsContStackView.addArrangedSubview(viewsCountLabel)
+        dateAndViewsContStackView.addArrangedSubview(viewCountLabel)
 
         firstLineHorizontalStackView.addArrangedSubview(titleLabel)
         firstLineHorizontalStackView.addArrangedSubview(likeButton)
@@ -94,7 +96,22 @@ extension VideoDescriptionVerticalStackView {
         likeButton.addTarget(self, action: #selector(likeButtonClick), for: .touchUpInside)
     }
     
+    private func configureAutoLayout() {
+        NSLayoutConstraint.activate([
+            likeButton.widthAnchor.constraint(equalToConstant: 20),
+            likeButton.heightAnchor.constraint(equalToConstant: 20)
+        ])
+    }
+    
     @objc private func likeButtonClick() {
         likeButton.isSelected.toggle()
+    }
+    
+    // view를 업데이트 해야하는 경우 부르는 함수
+    func updateArrangedSubviews(title: String, description: String, publishTime: String, statistics: Statistics) {
+        titleLabel.text = title
+        videoDescriptionLabel.text = description
+        videoDateLabel.text = publishTime
+        viewCountLabel.text = "\(statistics.viewCount)"
     }
 }
