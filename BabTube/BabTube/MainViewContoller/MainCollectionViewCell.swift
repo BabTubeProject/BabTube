@@ -12,7 +12,7 @@ class MainCVCell: UICollectionViewCell {
     static let id = "MainCVCell"
     public var lbl: UILabel!
     
-    let ThumbnailView: UIView = {
+    let thumbnailView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -24,8 +24,8 @@ class MainCVCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        MainCVAddSubView()
-        MainCVAutoLayout()
+        mainCVAddSubView()
+        mainCVAutoLayout()
         setup()
         
     }
@@ -34,17 +34,17 @@ class MainCVCell: UICollectionViewCell {
 extension MainCVCell {
     
     //cell안의 UIView를 View에 추가
-    private func MainCVAddSubView() {
-        self.addSubview(self.ThumbnailView)
+    private func mainCVAddSubView() {
+        self.addSubview(self.thumbnailView)
     }
     
     //CollectionViewCell 레이아웃
-    private func MainCVAutoLayout() {
+    private func mainCVAutoLayout() {
         NSLayoutConstraint.activate([
-            self.ThumbnailView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-            self.ThumbnailView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
-            self.ThumbnailView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            self.ThumbnailView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
+            self.thumbnailView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
+            self.thumbnailView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
+            self.thumbnailView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            self.thumbnailView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
         ])
     }
     

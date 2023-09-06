@@ -52,20 +52,20 @@ class MainTableViewCell: UITableViewCell {
     
     func setup() {
         self.collectionView.dataSource = self
-        MainCVAddSubView()
-        MainCVAutoLayout()
+        mainCVAddSubView()
+        mainCVAutoLayout()
     }
 }
 
 extension MainTableViewCell {
     
     //TableView에 컬렉션뷰 추가
-    private func MainCVAddSubView() {
+    private func mainCVAddSubView() {
         self.contentView.addSubview(self.collectionView)
     }
     
     //CollectionView 레이아웃
-    private func MainCVAutoLayout() {
+    private func mainCVAutoLayout() {
         NSLayoutConstraint.activate([
             collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor),

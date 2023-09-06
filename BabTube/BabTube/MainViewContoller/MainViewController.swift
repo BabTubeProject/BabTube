@@ -11,58 +11,58 @@ class MainViewController: UIViewController {
     
     private let sections: [String] = ["카테고리1","카테고리2","카테고리3","카테고리4","카테고리5","카테고리6"]
     
-    var MainTableView: UITableView = {
-        let MainTableView = UITableView()
-        MainTableView.allowsSelection = false
-        MainTableView.backgroundColor = .clear
-        MainTableView.bounces = true
-        MainTableView.contentInset = .zero
-        MainTableView.translatesAutoresizingMaskIntoConstraints = false
-        MainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.id)
-        return MainTableView
+    var mainTableView: UITableView = {
+        let mainTableView = UITableView()
+        mainTableView.allowsSelection = false
+        mainTableView.backgroundColor = .clear
+        mainTableView.bounces = true
+        mainTableView.contentInset = .zero
+        mainTableView.translatesAutoresizingMaskIntoConstraints = false
+        mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.id)
+        return mainTableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MainTVAddSubView()
-        MainTVAutoLayout()
-        MainConfigureUI()
+        mainTVAddSubView()
+        mainTVAutoLayout()
+        mainConfigureUI()
         
-        MainTableView.delegate = self
-        MainTableView.dataSource = self
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
     }
 }
 
 extension MainViewController {
     
     //View에 TableView 추가
-    private func MainTVAddSubView() {
-        view.addSubview(MainTableView)
+    private func mainTVAddSubView() {
+        view.addSubview(mainTableView)
     }
     //TableView 오토레이아웃
-    private func MainTVAutoLayout() {
+    private func mainTVAutoLayout() {
         NSLayoutConstraint.activate([
-            MainTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            MainTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            MainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            MainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            mainTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            mainTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            mainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
         ])
     }
     //네이게이션바에 로고 이미지 추가
-    func MainConfigureUI() {
+    func mainConfigureUI() {
         
-        let MainLogoImage = UIImageView()
-        MainLogoImage.translatesAutoresizingMaskIntoConstraints = false
-        MainLogoImage.image = UIImage(named: "MainLogo")
-        MainLogoImage.contentMode = .scaleAspectFit
-        MainLogoImage.layer.masksToBounds = true
-        MainLogoImage.widthAnchor.constraint(equalToConstant: 149).isActive = true
-        MainLogoImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        let mainLogoImage = UIImageView()
+        mainLogoImage.translatesAutoresizingMaskIntoConstraints = false
+        mainLogoImage.image = UIImage(named: "MainLogo")
+        mainLogoImage.contentMode = .scaleAspectFit
+        mainLogoImage.layer.masksToBounds = true
+        mainLogoImage.widthAnchor.constraint(equalToConstant: 149).isActive = true
+        mainLogoImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.tintColor = UIColor.red
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: MainLogoImage)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: mainLogoImage)
         
     }
     
@@ -73,7 +73,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     // cell 터치시 회색 표시 없애기
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        MainTableView.deselectRow(at: indexPath, animated: true)
+        mainTableView.deselectRow(at: indexPath, animated: true)
         
         //        let svc = VideoDetailViewController()
         //        svc.modalPresentationStyle = .fullScreen
