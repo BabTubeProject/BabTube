@@ -8,11 +8,15 @@
 import UIKit
 
 class DetailLikeTableViewCell: UITableViewCell {
+    
+    //API 변수
+    private var searchItemList: [SearchItems]?
+    private let imageLoader = ImageLoader()
+    
     // 셀에 표시할 UI
     let likeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
     
@@ -53,7 +57,8 @@ class DetailLikeTableViewCell: UITableViewCell {
             likeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             likeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             likeImageView.widthAnchor.constraint(equalToConstant: 90), // 이미지 크기 조정
-            likeImageView.heightAnchor.constraint(equalToConstant: 50),
+            likeImageView.heightAnchor.constraint(equalToConstant: 90),
+            
 
             // titleLabel
             titleLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: 16),
@@ -71,6 +76,26 @@ class DetailLikeTableViewCell: UITableViewCell {
             contentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             contentLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
+    }
+    
+    //cell에 표시될 api 데이터
+    func likeUpdateUI(snippet: Snippet, items: [SearchItems]) {
+        self.searchItemList = items
+        titleLabel.text = snippet.title
+        subtitleLabel.text = snippet.channelTitle
+        contentLabel.text = snippet.description
+        let stringURL: String = snippet.thumbnails.medium.url
+        guard let url = URL(string: stringURL) else { return }
+        imageLoader.getImage(url: url) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.likeImageView.image = image
+                }
+            case .failure(let failure):
+                print(failure.message)
+            }
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

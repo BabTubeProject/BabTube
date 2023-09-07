@@ -16,15 +16,22 @@ struct LikeData{
 
 class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    //API 변수
+    private let apiHandler: APIHandler = APIHandler()
+    private let imageLoader: ImageLoader = ImageLoader()
+    private var searchItemList: [SearchItems]?
     
-    let cellData: [LikeData] = [
-        LikeData(image: UIImage(named: ""), title: "제목1", subtitle: "소제목1", contentLabel: "내용1"),
-        LikeData(image: UIImage(named: ""), title: "제목2", subtitle: "소제목2", contentLabel: "내용2")
-    ]
-    
+    // 테이블 뷰 생성
+    private let likeViewTable: UITableView = {
+        let likeViewTable = UITableView()
+        likeViewTable.translatesAutoresizingMaskIntoConstraints = false
+        return likeViewTable
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        likeGetSnippet()
 
         //네비게이션바 이미지 
         let likeTitleImageView = UIImageView()
@@ -40,12 +47,8 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         let likeTitleBarButtonItem = UIBarButtonItem(customView: likeTitleImageView)
         navigationItem.leftBarButtonItem = likeTitleBarButtonItem
-
-        // 테이블 뷰 생성
-        let likeViewTable = UITableView()
-        likeViewTable.translatesAutoresizingMaskIntoConstraints = false
+       
         view.addSubview(likeViewTable)
-
         // 테이블 뷰 오토레이아웃 설정
         NSLayoutConstraint.activate([
             likeViewTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -63,36 +66,44 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // 셀 사이 간격 줄 없앰
         likeViewTable.separatorStyle = .none
     }
-
-    // 셀 내용
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellData.count
+    
+    private func likeGetSnippet() {
+        let query: [String: String] = ["part": "snippet", "maxResults": "5", "q": "무힌도전"]
+        apiHandler.getSearchJson(query: query) { result in
+            switch result {
+            case .success(let searchDataList):
+                self.searchItemList = searchDataList.items
+                DispatchQueue.main.sync {
+                    self.likeViewTable.reloadData()
+                }
+            case .failure(let failure):
+                print(failure.message)
+            }
+        }
     }
 
+    // 셀의 갯수
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchItemList?.count ?? 0
+    }
+
+    // 셀에 표시될 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCellIdentifier", for: indexPath) as! DetailLikeTableViewCell
         
-        cell.likeImageView.image = cellData[indexPath.row].image
-        cell.titleLabel.text = cellData[indexPath.row].title
-        cell.subtitleLabel.text = cellData[indexPath.row].subtitle
-        cell.contentLabel.text = cellData[indexPath.row].contentLabel
-        
+        guard let searchItemList,
+                let snippet = searchItemList[indexPath.row].snippet else {
+            return cell
+        }
+        cell.likeUpdateUI(snippet: snippet, items: searchItemList)
+
         return cell
     }
 
     // 셀 눌렀을 때
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            let testViewController = UIViewController() // test 뷰 컨트롤러 생성
-            testViewController.view.backgroundColor = .gray
-            testViewController.title = "test"
-            navigationController?.pushViewController(testViewController, animated: true) // test 뷰 컨트롤러로 이동
-        }
-        if indexPath.row == 1 {
-            let testViewController2 = UIViewController() // test 뷰 컨트롤러 생성
-            testViewController2.view.backgroundColor = .green
-            testViewController2.title = "test2"
-            navigationController?.pushViewController(testViewController2, animated: true) // test 뷰 컨트롤러로 이동
-        }
+            //VideoDetail 화면으로 이동
+            let videoDetail = VideoDetailViewController(videoId: "z8gl6HcWqCA" )
+            navigationController?.pushViewController(videoDetail, animated: true)
     }
 }
