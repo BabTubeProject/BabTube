@@ -116,23 +116,8 @@ final class VideoDetailViewController: UIViewController {
             print("snippet is nil")
             return
         }
-        let stringUrl = snippet.thumbnails.high.url
-        guard let url = URL(string: stringUrl) else {
-            print("url is nil")
-            return
-        }
-        DispatchQueue.global().async {
-            self.imageLoader.getImage(url: url) { result in
-                switch result {
-                case .success(let image):
-                    DispatchQueue.main.async {
-//                        self.imageView.image = image
-                        self.commentTableView.reloadData()
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            }
+        DispatchQueue.main.async {
+            self.commentTableView.reloadData()
         }
     }
     
