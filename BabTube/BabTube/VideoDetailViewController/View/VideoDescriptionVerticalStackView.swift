@@ -50,13 +50,21 @@ class VideoDescriptionVerticalStackView: UIStackView {
         label.font = .body
         return label
     }()
+    private let moreLabel: UILabel = {
+        let label = UILabel()
+        label.text = "더보기"
+        label.font = .body
+        return label
+    }()
     private let videoDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다"
         label.font = .body
         label.numberOfLines = 0
+        label.isHidden = true
         return label
     }()
+    private var isMoreDescriptionHidden: Bool = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -85,15 +93,28 @@ extension VideoDescriptionVerticalStackView {
         addArrangedSubview(dateAndViewsContStackView)
         addArrangedSubview(videoDescriptionLabel)
 
-        dateAndViewsContStackView.addArrangedSubview(videoDateLabel)
-        dateAndViewsContStackView.addArrangedSubview(viewCountLabel)
-
         firstLineHorizontalStackView.addArrangedSubview(titleLabel)
         firstLineHorizontalStackView.addArrangedSubview(likeButton)
+        
+        dateAndViewsContStackView.addArrangedSubview(videoDateLabel)
+        dateAndViewsContStackView.addArrangedSubview(viewCountLabel)
+        dateAndViewsContStackView.addArrangedSubview(moreLabel)
     }
     
     private func configureView() {
         likeButton.addTarget(self, action: #selector(likeButtonClick), for: .touchUpInside)
+        moreLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(moreDescription))
+        moreLabel.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func likeButtonClick() {
+        likeButton.isSelected.toggle()
+    }
+    
+    @objc private func moreDescription() {
+        isMoreDescriptionHidden.toggle()
+        videoDescriptionLabel.isHidden = isMoreDescriptionHidden
     }
     
     private func configureAutoLayout() {
@@ -103,15 +124,13 @@ extension VideoDescriptionVerticalStackView {
         ])
     }
     
-    @objc private func likeButtonClick() {
-        likeButton.isSelected.toggle()
-    }
-    
     // view를 업데이트 해야하는 경우 부르는 함수
     func updateArrangedSubviews(title: String, description: String, publishTime: String, statistics: Statistics) {
-        titleLabel.text = title
-        videoDescriptionLabel.text = description
-        videoDateLabel.text = publishTime
-        viewCountLabel.text = "\(statistics.viewCount)"
+        DispatchQueue.main.async {
+            self.titleLabel.text = title
+            self.videoDescriptionLabel.text = description
+            self.videoDateLabel.text = publishTime.toDate?.diffrenceDate
+            self.viewCountLabel.text = statistics.viewCount.splitViewCount
+        }
     }
 }
