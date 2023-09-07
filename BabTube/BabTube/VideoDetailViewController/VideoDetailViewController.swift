@@ -50,13 +50,17 @@ final class VideoDetailViewController: UIViewController {
     init(snippet: Snippet, videoId: String) {
         self.snippet = snippet
         super.init(nibName: nil, bundle: nil)
-        getStatistics(videoId: videoId)
+        DispatchQueue.global().async {
+            self.getStatistics(videoId: videoId)
+        }
     }
     
     /// videoId 만 있는 경우 사용
     init(videoId: String) {
         super.init(nibName: nil, bundle: nil)
-        getSnippetAndStatistics(videoId: videoId)
+        DispatchQueue.global().async {
+            self.getSnippetAndStatistics(videoId: videoId)
+        }
     }
     
     required init?(coder: NSCoder) {
