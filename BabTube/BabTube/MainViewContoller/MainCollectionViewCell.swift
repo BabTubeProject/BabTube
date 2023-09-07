@@ -11,13 +11,7 @@ class MainCVCell: UICollectionViewCell {
     
     //Cell 식별자
     static let id = "MainCVCell"
-    
-    let thumbnailView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

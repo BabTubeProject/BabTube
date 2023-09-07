@@ -17,7 +17,6 @@ class MainViewController: UIViewController {
         mainTableView.allowsSelection = false
         mainTableView.backgroundColor = .clear
         mainTableView.bounces = true
-     //   mainTableView.isUserInteractionEnabled = true
         mainTableView.contentInset = .zero
         mainTableView.translatesAutoresizingMaskIntoConstraints = false
         mainTableView.register(MainTVCell.self, forCellReuseIdentifier: MainTVCell.id)
@@ -51,7 +50,7 @@ extension MainViewController {
             mainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
         ])
     }
-    //네이게이션바에 로고 이미지 추가
+    //네이게이션바 로고 이미지
     func mainConfigureUI() {
         
         let mainLogoImage = UIImageView()
@@ -77,7 +76,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTableView.deselectRow(at: indexPath, animated: true)
     }
-    //셀의 높이
+    // cell의 높이
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MainTVCell.cellHeight
     }
@@ -85,10 +84,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
-    // header 폰트 속성 추가
+    // header 폰트 속성
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 22)
+        header.textLabel?.font = UIFont.title2
         header.textLabel?.textColor = UIColor.black
     }
     // section마다 표현될 title
@@ -111,6 +110,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+//cell 클릭시 VideoDetail 화면으로 이동
 extension MainViewController: CollectionViewCellDelegate {
     func collectionView(mainCVCell: MainCVCell?, index: Int, didTappedInTableViewCell: MainTVCell) {
         navigationController?.pushViewController(detailVC, animated: true)
