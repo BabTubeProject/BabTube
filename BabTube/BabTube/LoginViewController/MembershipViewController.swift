@@ -147,6 +147,13 @@ class MembershipViewController: UIViewController {
             guard let newName = nameTextField.text else { return }
             guard let newEmail = emailAdressTextField.text else { return }
             guard let newPassword = passwordTextField.text else { return }
+            
+            if !emailTypeCheck(email: newEmail) {
+                let titles = "잘못된 이메일형식"
+                let messages = "이메일 형식으로 다시 작성해주세요."
+                failAlert(title: titles, message: messages)
+            }
+            
             if UserDataManager.shared.users.contains(where: { $0.userID == newEmail }) {
                 let titles = "이미 사용 중인 이메일"
                 let messages = "이미 사용 중인 이메일 주소입니다. 다른 이메일 주소를 입력해주세요."
@@ -179,11 +186,19 @@ class MembershipViewController: UIViewController {
         print(UserDataManager.shared.users)
     }
 
+    // 입력이 안되거나 비밀번호가 틀렸을때의 Alert창
     private func failAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
+    }
+
+    // 이메일 유효성 검사
+    private func emailTypeCheck(email: String) -> Bool {
+        let emailType = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailCheck = NSPredicate(format: "SELF MATCHES %@", emailType)
+        return emailCheck.evaluate(with: email)
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -184,7 +184,7 @@ extension ProfileMakeViewController {
             guard let newProfileImage = profileImageView.image else { return }
             guard let newUserIndex = newUserIndex else { return }
             do {
-                try UserDataManager.shared.updateUserInfo(userIndex: newUserIndex, newNickname: newNickName, newIntroduce: "", newImage: newProfileImage)
+                try UserDataManager.shared.updateUserInfo(userIndex: newUserIndex, newNickname: newNickName, newImage: newProfileImage)
                 print(UserDataManager.shared.users[newUserIndex].nickname!)
                 let vc = LoginViewController()
                 vc.modalPresentationStyle = .fullScreen

@@ -54,7 +54,7 @@ class UserDataManager {
     }
 
     // 프로필 업데이트
-    func updateUserInfo(userIndex: Int, newNickname: String, newIntroduce: String, newImage: UIImage?) throws {
+    func updateUserInfo(userIndex: Int, newNickname: String, newImage: UIImage?) throws {
         guard userIndex >= 0, userIndex < users.count else {
             return
         }
