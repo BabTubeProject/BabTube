@@ -8,11 +8,7 @@
 import UIKit
 
 class MyPageViewController: UIViewController {
-    
-    private let loginVC = LoginViewController()
-    private let profileMakeVC = ProfileMakeViewController()
-    private let videoDetailVC = VideoDetailViewController(videoId: "z8gl6HcWqCA")
-    
+        
     // TableView 만들기
     private let myPageTableView: UITableView = {
         let tableView = UITableView()
@@ -82,6 +78,7 @@ extension MyPageViewController {
     
     // 마이페이지 수정 페이지 이동
     @objc private func moveMyPageFixVC() {
+        let profileMakeVC = ProfileMakeViewController()
         profileMakeVC.changeToProfileEdit()
         navigationController?.pushViewController(profileMakeVC, animated: true)
     }
@@ -141,6 +138,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
+            let loginVC = LoginViewController()
             loginVC.modalPresentationStyle = .fullScreen
             loginVC.modalTransitionStyle = .coverVertical
             present(loginVC, animated: true)
@@ -151,6 +149,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 extension MyPageViewController: RecordTableViewCellDelegate {
     
     func didTapRecordCollectionViewCell() {
+        let videoDetailVC = VideoDetailViewController(videoId: "z8gl6HcWqCA")
         navigationController?.pushViewController(videoDetailVC, animated: true)
     }
 }
