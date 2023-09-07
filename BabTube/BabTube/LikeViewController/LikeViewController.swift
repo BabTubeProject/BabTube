@@ -16,11 +16,6 @@ struct LikeData{
 
 class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let cellData: [LikeData] = [
-        LikeData(image: UIImage(named: ""), title: "제목1", subtitle: "채널명1", contentLabel: "내용1"),
-        LikeData(image: UIImage(named: ""), title: "제목2", subtitle: "채널명2", contentLabel: "내용2")
-    ]
-   
     //API 변수
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
@@ -87,18 +82,14 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 
-    // 셀 내용
+    // 셀의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellData.count
+        return searchItemList?.count ?? 0
     }
 
+    // 셀에 표시될 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCellIdentifier", for: indexPath) as! DetailLikeTableViewCell
-        
-        cell.likeImageView.image = cellData[indexPath.row].image
-        cell.titleLabel.text = cellData[indexPath.row].title
-        cell.subtitleLabel.text = cellData[indexPath.row].subtitle
-        cell.contentLabel.text = cellData[indexPath.row].contentLabel
         
         guard let searchItemList,
                 let snippet = searchItemList[indexPath.row].snippet else {
@@ -111,17 +102,8 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // 셀 눌렀을 때
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            let testViewController = UIViewController() // test 뷰 컨트롤러 생성
-            testViewController.view.backgroundColor = .gray
-            testViewController.title = "test"
-            navigationController?.pushViewController(testViewController, animated: true) // test 뷰 컨트롤러로 이동
-        }
-        if indexPath.row == 1 {
-            let testViewController2 = UIViewController() // test 뷰 컨트롤러 생성
-            testViewController2.view.backgroundColor = .green
-            testViewController2.title = "test2"
-            navigationController?.pushViewController(testViewController2, animated: true) // test 뷰 컨트롤러로 이동
-        }
+            //VideoDetail 화면으로 이동
+            let videoDetail = VideoDetailViewController(videoId: "z8gl6HcWqCA" )
+            navigationController?.pushViewController(videoDetail, animated: true)
     }
 }
