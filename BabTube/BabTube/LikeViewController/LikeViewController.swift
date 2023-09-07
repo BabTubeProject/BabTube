@@ -17,8 +17,8 @@ struct LikeData{
 class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let cellData: [LikeData] = [
-        LikeData(image: UIImage(named: ""), title: "제목1", subtitle: "소제목1", contentLabel: "내용1"),
-        LikeData(image: UIImage(named: ""), title: "제목2", subtitle: "소제목2", contentLabel: "내용2")
+        LikeData(image: UIImage(named: ""), title: "제목1", subtitle: "채널명1", contentLabel: "내용1"),
+        LikeData(image: UIImage(named: ""), title: "제목2", subtitle: "채널명2", contentLabel: "내용2")
     ]
    
     //API 변수
@@ -36,7 +36,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getSnippet()
+        likeGetSnippet()
 
         //네비게이션바 이미지 
         let likeTitleImageView = UIImageView()
@@ -72,7 +72,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         likeViewTable.separatorStyle = .none
     }
     
-    private func getSnippet() {
+    private func likeGetSnippet() {
         let query: [String: String] = ["part": "snippet", "maxResults": "5", "q": "무힌도전"]
         apiHandler.getSearchJson(query: query) { result in
             switch result {
@@ -105,6 +105,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return cell
         }
         cell.likeUpdateUI(snippet: snippet, items: searchItemList)
+
         return cell
     }
 
