@@ -121,12 +121,17 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
-    func textFieldDidChange(_ textField: UITextField) {
-        if emailTextField.text?.isEmpty == true || passwordTextField.text?.isEmpty == true {
-            loginButton.backgroundColor = .systemGray5
-        } else {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+
+        textField.text = currentText
+
+        if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty {
             loginButton.backgroundColor = .mainColor
+        } else {
+            loginButton.backgroundColor = .systemGray5
         }
+        return false
     }
 }
 
