@@ -58,14 +58,8 @@ class UserDataManager {
         guard userIndex >= 0, userIndex < users.count else {
             return
         }
-
-        // 해당 사용자의 데이터를 백업
-        let originalUserData = users[userIndex]
-
         // 해당 사용자의 정보를 업데이트
         users[userIndex].nickname = newNickname
-        users[userIndex].introduce = newIntroduce
-
         // 이미지 업데이트
         if let newImage = newImage {
             users[userIndex].userImage = newImage.pngData()
@@ -108,7 +102,25 @@ class UserDataManager {
 
         return users[userIndex].likeVideo
     }
-
+    
+    func addViewHistory(userIndex: Int,viewHistory: ViewHistory){
+        guard userIndex >= 0, userIndex < users.count else {
+            return // 유효하지 않은 인덱스일 경우 처리하지 않음
+        }
+        users[userIndex].viewHistory.append(viewHistory)
+        saveUsers()
+    }
+    func removeViewHistory(userIndex: Int, viewHistoryIndex: Int){
+        guard userIndex >= 0, userIndex < users.count else {
+            return // 유효하지 않은 인덱스일 경우 처리하지 않음
+        }
+        var users = users[userIndex]
+        guard viewHistoryIndex >= 0, viewHistoryIndex < users.viewHistory.count else {
+            return
+        }
+        users.viewHistory.remove(at: viewHistoryIndex)
+        saveUsers()
+    }
     // 사용자 데이터 초기화
     func clearUsers() {
         users.removeAll()
