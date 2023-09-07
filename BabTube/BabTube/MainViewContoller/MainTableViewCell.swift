@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+//cell delegate protocol
 protocol CollectionViewCellDelegate: AnyObject {
     func collectionView(mainCVCell: MainCVCell?, index: Int, didTappedInTableViewCell: MainTVCell)
 }
@@ -21,9 +21,6 @@ class MainTVCell: UITableViewCell {
     
     //cell 높이 설정
     static let cellHeight = 150.0
-    
-    //보여주기 위한 임시 더미데이터
-    var list: [String] = ["1", "2", "3","4","5","6"]
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -42,7 +39,6 @@ class MainTVCell: UITableViewCell {
         view.contentInset = .zero
         view.backgroundColor = .clear
         view.clipsToBounds = true
-       // view.isUserInteractionEnabled = true
         view.register(MainCVCell.self, forCellWithReuseIdentifier: MainCVCell.id)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
