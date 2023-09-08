@@ -138,6 +138,9 @@ final class VideoDetailViewController: UIViewController {
             return
         }
         videoDecriptionStackView.updateArrangedSubviews(title: snippet.title, description: snippet.description, publishTime: snippet.publishedAt, statistics: statistics)
+        DispatchQueue.main.async {
+            self.view.setNeedsLayout()
+        }
     }
     
     private func removeAlert(index: Int) {
@@ -178,7 +181,6 @@ extension VideoDetailViewController {
             CommentManager.shared.saveCommentList(videoId: videoId, commentList: commentList)
             DispatchQueue.main.async {
                 self.commentTableView.reloadData()
-                self.viewDidLayoutSubviews()
             }
         }
         
@@ -212,7 +214,6 @@ extension VideoDetailViewController {
         addCommentStackView.translatesAutoresizingMaskIntoConstraints = false
         
         tableViewheight = commentTableView.heightAnchor.constraint(equalToConstant: 0)
-        let tableViewBottomAnchor = commentTableView.bottomAnchor.constraint(equalTo: contentLayout.bottomAnchor)
 
         NSLayoutConstraint.activate([
             videoWebView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: margin),
@@ -233,19 +234,13 @@ extension VideoDetailViewController {
             commentTableView.topAnchor.constraint(equalTo: videoDecriptionStackView.bottomAnchor, constant: margin),
             commentTableView.leadingAnchor.constraint(equalTo: contentLayout.leadingAnchor),
             commentTableView.trailingAnchor.constraint(equalTo: contentLayout.trailingAnchor),
+            commentTableView.bottomAnchor.constraint(equalTo: contentLayout.bottomAnchor),
             tableViewheight!,
             
             addCommentStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             addCommentStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             addCommentStackView.bottomAnchor.constraint(equalTo: keyboardArea.topAnchor),
         ])
-        
-        addCommentStackView.layoutIfNeeded()
-        
-        tableViewBottomAnchor.isActive = true
-
-        tableViewBottomAnchor.constant = -(addCommentStackView.bounds.height)
-        
 
     }
 }
