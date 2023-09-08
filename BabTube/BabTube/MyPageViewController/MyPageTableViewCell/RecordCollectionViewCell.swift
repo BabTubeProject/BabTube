@@ -12,6 +12,8 @@ class RecordCollectionViewCell: UICollectionViewCell {
     // Cell 식별자
     static let identifier = "RecordCollectionViewCell"
     
+    private let imageLoader = ImageLoader()
+    
     // 시청 기록 썸네일
     private let thumbnailImageView: UIImageView = {
        let imageView = UIImageView()
@@ -48,5 +50,20 @@ extension RecordCollectionViewCell {
             thumbnailImageView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
             thumbnailImageView.heightAnchor.constraint(equalToConstant: contentView.frame.height)
         ])
+    }
+    
+    func updateCellImage(snippet: Snippet) {
+        let stringURL: String = snippet.thumbnails.medium.url
+        guard let url = URL(string: stringURL) else { return }
+        imageLoader.getImage(url: url) { result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.thumbnailImageView.image = image
+                }
+            case .failure(let failure):
+                print(failure.message)
+            }
+        }
     }
 }
