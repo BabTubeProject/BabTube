@@ -9,10 +9,6 @@ import UIKit
 
 class MyPageViewController: UIViewController {
     
-    private let loginVC = LoginViewController()
-    private let profileMakeVC = ProfileMakeViewController()
-    private let videoDetailVC = VideoDetailViewController(videoId: "z8gl6HcWqCA")
-    
     // TableView 만들기
     private let myPageTableView: UITableView = {
         let tableView = UITableView()
@@ -28,6 +24,11 @@ class MyPageViewController: UIViewController {
         tableView.isScrollEnabled = false
         return tableView
     }()
+    
+    // API 활용을 위한 변수
+    private let apiHandler: APIHandler = APIHandler()
+    private let imageLoader: ImageLoader = ImageLoader()
+    private var searchItemList: [SearchItems]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +36,26 @@ class MyPageViewController: UIViewController {
         configureMyPageUI()
         addSubView()
         autoLayout()
+        getSnippet()
         
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
+    }
+    
+    // Snippet을 가져오기 위한 함수
+    private func getSnippet() {
+        let query: [String: String] = ["part": "snippet", "maxResults": "5", "q": "무한도전"]
+        apiHandler.getSearchJson(query: query) { result in
+            switch result {
+            case .success(let searchDataList):
+                self.searchItemList = searchDataList.items
+                DispatchQueue.main.async {
+                    self.myPageTableView.reloadData()
+                }
+            case .failure(let failure):
+                print(failure.message)
+            }
+        }
     }
 }
 
@@ -82,6 +100,7 @@ extension MyPageViewController {
     
     // 마이페이지 수정 페이지 이동
     @objc private func moveMyPageFixVC() {
+        let profileMakeVC = ProfileMakeViewController()
         profileMakeVC.changeToProfileEdit()
         navigationController?.pushViewController(profileMakeVC, animated: true)
     }
@@ -111,6 +130,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
             recordTableViewCell.selectionStyle = .none
             recordTableViewCell.recordTableViewCellDelegate = self
+            guard let searchItemList else { return recordTableViewCell }
+            recordTableViewCell.updateUI(items: searchItemList)
             return recordTableViewCell
         }
 
@@ -141,6 +162,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
+            let loginVC = LoginViewController()
             loginVC.modalPresentationStyle = .fullScreen
             loginVC.modalTransitionStyle = .coverVertical
             present(loginVC, animated: true)
@@ -150,7 +172,13 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MyPageViewController: RecordTableViewCellDelegate {
     
-    func didTapRecordCollectionViewCell() {
-        navigationController?.pushViewController(videoDetailVC, animated: true)
+    func didTapRecordCollectionViewCell(at indexPath: IndexPath) {
+        if let searchItemList = searchItemList, indexPath.row < searchItemList.count {
+            
+            // 각 cell의 indexPath의 videoId를 전달
+            let videoId = searchItemList[indexPath.row].id.videoId
+            let videoDetailVC = VideoDetailViewController(videoId: videoId)
+            navigationController?.pushViewController(videoDetailVC, animated: true)
+        }
     }
 }

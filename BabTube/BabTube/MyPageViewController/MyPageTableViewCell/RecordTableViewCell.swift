@@ -9,18 +9,18 @@ import UIKit
 
 // Delegate Pattern을 위한 Protocol 생성
 protocol RecordTableViewCellDelegate: AnyObject {
-    func didTapRecordCollectionViewCell()
+    func didTapRecordCollectionViewCell(at indexPath: IndexPath)
 }
 
 class RecordTableViewCell: UITableViewCell {
-    
-    private let videoDetailVC = VideoDetailViewController(videoId: "z8gl6HcWqCA")
     
     // Cell 식별자
     static let identifier = "RecordTableViewCellRecordTableViewCell"
     
     // Delegate 타입의 변수
     weak var recordTableViewCellDelegate: RecordTableViewCellDelegate?
+    
+    private var searchItemList: [SearchItems]?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -85,22 +85,30 @@ extension RecordTableViewCell {
             recordCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
         ])
     }
+    
+    func updateUI(items: [SearchItems]) {
+        searchItemList = items
+        recordCollectionView.reloadData()
+    }
 }
 
 extension RecordTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return searchItemList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCollectionViewCell.identifier, for: indexPath) as? RecordCollectionViewCell else { return UICollectionViewCell() }
+        guard let searchItemList,
+              let snippet = searchItemList[indexPath.item].snippet else { return cell }
+        cell.updateCellImage(snippet: snippet)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let recordTableViewCellDelegate = recordTableViewCellDelegate {
-            recordTableViewCellDelegate.didTapRecordCollectionViewCell()
+            recordTableViewCellDelegate.didTapRecordCollectionViewCell(at: indexPath)
         }
     }
 }
