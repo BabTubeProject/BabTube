@@ -27,7 +27,6 @@ final class VideoDetailViewController: UIViewController {
     }()
     private let commentTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(VideoDescriptionTableViewCell.self, forCellReuseIdentifier: VideoDescriptionTableViewCell.identifier)
         tableView.register(CommentTableViewCell.self, forCellReuseIdentifier: CommentTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
@@ -55,10 +54,10 @@ final class VideoDetailViewController: UIViewController {
         configureTableView()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         guard let tableViewheight else { return }
-        tableViewheight.constant = commentTableView.contentSize.height + addCommentStackView.bounds.height
+        tableViewheight.constant = commentTableView.contentSize.height + addCommentStackView.bounds.height + margin
     }
     
     /// snippet이 있는 경우 사용
