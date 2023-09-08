@@ -53,27 +53,6 @@ class ProfileMakeViewController: UIViewController {
         return tf
     }()
 
-    private lazy var introduce: UILabel = {
-        let lb = UILabel()
-        lb.text = "자기소개"
-        lb.font = .body
-        lb.textColor = .black
-        view.addSubview(lb)
-        return lb
-    }()
-
-    private lazy var introduceTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "안녕하세요"
-        tf.backgroundColor = .systemGray5
-        tf.font = .body
-        tf.textColor = .black
-        tf.layer.cornerRadius = 10
-        view.addSubview(tf)
-
-        return tf
-    }()
-
     private lazy var startButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("로그인", for: .normal)
@@ -104,12 +83,6 @@ class ProfileMakeViewController: UIViewController {
         nickNameTextField.clearButtonMode = .always
         nickNameTextField.spellCheckingType = .no
         nickNameTextField.addLeftPadding()
-
-        introduceTextField.autocapitalizationType = .none
-        introduceTextField.autocorrectionType = .no
-        introduceTextField.clearButtonMode = .always
-        introduceTextField.spellCheckingType = .no
-        introduceTextField.addLeftPadding()
     }
 }
 
@@ -135,8 +108,6 @@ extension ProfileMakeViewController {
         profileChangeButton.translatesAutoresizingMaskIntoConstraints = false
         nickName.translatesAutoresizingMaskIntoConstraints = false
         nickNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        introduce.translatesAutoresizingMaskIntoConstraints = false
-        introduceTextField.translatesAutoresizingMaskIntoConstraints = false
         startButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -159,16 +130,6 @@ extension ProfileMakeViewController {
             nickNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
             nickNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             nickNameTextField.heightAnchor.constraint(equalToConstant: 30),
-
-            introduce.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: 24),
-            introduce.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
-            introduce.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
-            introduce.heightAnchor.constraint(equalToConstant: 20),
-
-            introduceTextField.topAnchor.constraint(equalTo: introduce.bottomAnchor, constant: 4),
-            introduceTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
-            introduceTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
-            introduceTextField.heightAnchor.constraint(equalToConstant: 80),
 
             startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             startButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
@@ -205,7 +166,6 @@ extension ProfileMakeViewController {
         DispatchQueue.main.async {
             self.profileImageView.image = UIImage(systemName: "pencil")
             self.nickNameTextField.text = "홍준영"
-            self.introduceTextField.text = "만나서 반갑습니다"
             self.startButton.setTitle("수정하기", for: .normal)
             self.startButton.removeTarget(self, action: #selector(self.profileButtonPressed), for: .touchUpInside)
             self.startButton.addTarget(self, action: #selector(self.moveBackMyPage), for: .touchUpInside)
