@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommentStackView: UIStackView {
+final class AddCommentStackView: UIStackView {
     
     private let lineView: UIView = {
         let view = UIView()
@@ -52,7 +52,7 @@ final class CommentStackView: UIStackView {
     }
 }
 
-extension CommentStackView {
+extension AddCommentStackView {
     private func configureInit() {
         axis = .horizontal
         alignment = .center
