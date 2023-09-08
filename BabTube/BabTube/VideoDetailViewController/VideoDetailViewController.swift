@@ -42,9 +42,11 @@ final class VideoDetailViewController: UIViewController {
     
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
+    
     private let videoId: String
     private var snippet: Snippet?
     private var statistics: Statistics?
+    private var commentList: [Comment] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +69,7 @@ final class VideoDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         loadVideo()
+        loadComment()
         DispatchQueue.global().async {
             self.getStatistics(videoId: videoId)
         }
@@ -78,6 +81,7 @@ final class VideoDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         loadVideo()
+        loadComment()
         DispatchQueue.global().async {
             self.getSnippetAndStatistics(videoId: videoId)
         }
@@ -92,6 +96,10 @@ final class VideoDetailViewController: UIViewController {
         guard let url = URL(string: stringUrl) else { return }
         let urlRequest = URLRequest(url: url)
         videoWebView.load(urlRequest)
+    }
+    
+    private func loadComment() {
+        commentList = CommentManager.shared.loadCommetList(videoId: videoId)
     }
     
     // snippet이 없는 경우 사용, snippet과 Statistics를 같이 가져오도록 하는 함수
@@ -131,6 +139,21 @@ final class VideoDetailViewController: UIViewController {
         videoDecriptionStackView.updateArrangedSubviews(title: snippet.title, description: snippet.description, publishTime: snippet.publishedAt, statistics: statistics)
     }
     
+    private func removeAlert(index: Int) {
+        let alertVC = UIAlertController(title: "댓글을 지우겠습니까?", message: nil, preferredStyle: .alert)
+        let removeAction =  UIAlertAction(title: "지우기", style: .destructive) { _ in
+            self.commentList.remove(at: index)
+            CommentManager.shared.saveCommentList(videoId: self.videoId, commentList: self.commentList)
+            self.commentTableView.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alertVC.addAction(cancelAction)
+        alertVC.addAction(removeAction)
+        
+        present(alertVC, animated: true)
+    }
+    
 }
 
 // MARK: 기본 UISetting
@@ -142,6 +165,19 @@ extension VideoDetailViewController {
         
         commentTableView.dataSource = self
         commentTableView.delegate = self
+        
+        addCommentStackView.commentAddHandler = { [weak self] textComment in
+            guard let self else { return }
+            guard let userData = UserDataManager.shared.loginUser else {
+                print("로그인 되어있지 않음")
+                return
+            }
+            let comment = Comment(userId: userData.userID, profileImage: userData.userImage, text: textComment)
+            self.commentList.append(comment)
+            CommentManager.shared.saveCommentList(videoId: videoId, commentList: commentList)
+            self.commentTableView.reloadData()
+            self.viewWillLayoutSubviews()
+        }
         
         addCommentStackView.layoutIfNeeded()
         let bottomInset = addCommentStackView.frame.height
@@ -216,12 +252,22 @@ extension VideoDetailViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return commentList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let commentCell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.identifier, for: indexPath) as? CommentTableViewCell else {
             return UITableViewCell()
+        }
+        let comment = commentList[indexPath.row]
+        guard let myUserData = UserDataManager.shared.loginUser else { return UITableViewCell() }
+        
+        let isMyComment = comment.userId == myUserData.userID
+        let commentProfileImage = comment.profileImage == nil ? UIImage(systemName: "person") : UIImage(data: comment.profileImage!)
+        commentCell.updateView(profileImage: commentProfileImage, comment: comment.text, isMyComment: isMyComment)
+        commentCell.commentUpdateHandler = { [weak self] in
+            guard let self else { return }
+            self.removeAlert(index: indexPath.row)
         }
         return commentCell
     }

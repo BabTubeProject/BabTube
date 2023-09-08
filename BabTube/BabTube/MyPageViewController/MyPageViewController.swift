@@ -162,10 +162,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            let loginVC = LoginViewController()
-            loginVC.modalPresentationStyle = .fullScreen
-            loginVC.modalTransitionStyle = .coverVertical
-            present(loginVC, animated: true)
+            dismiss(animated: true)
         }
     }
 }

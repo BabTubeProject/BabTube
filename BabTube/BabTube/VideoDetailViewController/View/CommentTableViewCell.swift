@@ -24,7 +24,19 @@ final class CommentTableViewCell: UITableViewCell, Reuseable {
         return label
     }()
     
-    private let topBottomMargin: CGFloat = 8
+    private let moreButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "trash.fill"), for: .normal)
+        button.tintColor = .systemGray3
+        button.isHidden = true
+        return button
+    }()
+    
+    var commentUpdateHandler: (() -> Void)?
+    
+    private let moreButtonMargin: CGFloat = 4
+    private let topBottomMargin: CGFloat = 26
     private let imageSize: CGFloat = 30
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,10 +57,15 @@ extension CommentTableViewCell {
     private func addViews() {
         contentView.addSubview(profileImageView)
         contentView.addSubview(commentLabel)
+        contentView.addSubview(moreButton)
     }
     
     private func configureAutoLayout() {
         NSLayoutConstraint.activate([
+            moreButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: moreButtonMargin),
+            moreButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -moreButtonMargin),
+            moreButton.widthAnchor.constraint(equalToConstant: 30),
+            
             profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomMargin),
             profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             profileImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -topBottomMargin),
@@ -64,5 +81,20 @@ extension CommentTableViewCell {
     
     private func configureViews() {
         profileImageView.layer.cornerRadius = imageSize / 2
+    }
+    
+    private func moreButtonVisible() {
+        moreButton.isHidden = false
+        moreButton.addTarget(self, action: #selector(moreButtonClick), for: .touchUpInside)
+    }
+    
+    @objc private func moreButtonClick() {
+        commentUpdateHandler?()
+    }
+        
+    func updateView(profileImage: UIImage?, comment: String, isMyComment: Bool) {
+        profileImageView.image = profileImage
+        commentLabel.text = comment
+        if isMyComment { moreButtonVisible() }
     }
 }

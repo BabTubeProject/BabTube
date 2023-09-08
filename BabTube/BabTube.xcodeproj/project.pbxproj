@@ -12,6 +12,8 @@
 		109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109089D12AA5F87D001060A4 /* LogoutTableViewCell.swift */; };
 		10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */; };
 		10BDAD882AA751F400DC2F0D /* Margin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDAD872AA751F400DC2F0D /* Margin.swift */; };
+		18B943AB2AAAC70B00E674F3 /* VideoComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AA2AAAC70B00E674F3 /* VideoComment.swift */; };
+		18B943AD2AAAC76C00E674F3 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AC2AAAC76C00E674F3 /* CommentManager.swift */; };
 		18D262392AA796E300652695 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D262382AA796E300652695 /* CommentTableViewCell.swift */; };
 		18D2623B2AA7980D00652695 /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2623A2AA7980D00652695 /* Reuseable.swift */; };
 		18D262402AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2623F2AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift */; };
@@ -52,6 +54,8 @@
 		109089D12AA5F87D001060A4 /* LogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutTableViewCell.swift; sourceTree = "<group>"; };
 		10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		10BDAD872AA751F400DC2F0D /* Margin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Margin.swift; sourceTree = "<group>"; };
+		18B943AA2AAAC70B00E674F3 /* VideoComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComment.swift; sourceTree = "<group>"; };
+		18B943AC2AAAC76C00E674F3 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		18D262382AA796E300652695 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		18D2623A2AA7980D00652695 /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
 		18D2623F2AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDescriptionVerticalStackView.swift; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				18D6C3E02AA815AD0036766F /* VideoData.swift */,
 				689BC58D2AA73E21005BA3A2 /* UserData.swift */,
 				689BC58F2AA73E32005BA3A2 /* UserDataManager.swift */,
+				18B943AA2AAAC70B00E674F3 /* VideoComment.swift */,
+				18B943AC2AAAC76C00E674F3 /* CommentManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,10 +333,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F034B5AB2AA5E0C20019EED2 /* MainTableViewCell.swift in Sources */,
+				18B943AB2AAAC70B00E674F3 /* VideoComment.swift in Sources */,
 				18D6590D2AA5B5FA000468D9 /* TabBarController.swift in Sources */,
 				10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */,
 				109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */,
 				18D659362AA5B9A9000468D9 /* Font.swift in Sources */,
+				18B943AD2AAAC76C00E674F3 /* CommentManager.swift in Sources */,
 				18D6C3DD2AA8136F0036766F /* NetworkError.swift in Sources */,
 				18D2623B2AA7980D00652695 /* Reuseable.swift in Sources */,
 				689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */,
