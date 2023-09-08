@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CommentStackView: UIStackView {
+final class AddCommentStackView: UIStackView {
     
     private let lineView: UIView = {
         let view = UIView()
@@ -35,6 +35,7 @@ final class CommentStackView: UIStackView {
         button.tintColor = .systemGray5
         return button
     }()
+    var commentAddHandler: ((String) -> Void)?
     
     private let margin: CGFloat = 12
     private let imageSize: CGFloat = 30
@@ -52,7 +53,7 @@ final class CommentStackView: UIStackView {
     }
 }
 
-extension CommentStackView {
+extension AddCommentStackView {
     private func configureInit() {
         axis = .horizontal
         alignment = .center
@@ -72,6 +73,13 @@ extension CommentStackView {
     
     private func configureView() {
         profileImageView.layer.cornerRadius = imageSize / 2
+        
+        sendButton.addTarget(self, action: #selector(sendButtonClick), for: .touchUpInside)
+    }
+    
+    @objc private func sendButtonClick() {
+        guard let textComment = commentTextView.text else { return }
+        commentAddHandler?(textComment)
     }
     
     private func configureAutoLayout() {

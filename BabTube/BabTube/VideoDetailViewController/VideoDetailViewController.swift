@@ -27,20 +27,26 @@ final class VideoDetailViewController: UIViewController {
     }()
     private let commentTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(VideoDescriptionTableViewCell.self, forCellReuseIdentifier: VideoDescriptionTableViewCell.identifier)
         tableView.register(CommentTableViewCell.self, forCellReuseIdentifier: CommentTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.showsVerticalScrollIndicator = false
+        tableView.isScrollEnabled = false
         return tableView
     }()
-    private let commentStackView: CommentStackView = CommentStackView()
+    private var tableViewheight: NSLayoutConstraint? = nil
+    private let scrollView: UIScrollView = UIScrollView()
+    
+    private let videoDecriptionStackView: VideoDescriptionVerticalStackView = VideoDescriptionVerticalStackView()
+    private let addCommentStackView: AddCommentStackView = AddCommentStackView()
     
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
+    
     private let videoId: String
     private var snippet: Snippet?
     private var statistics: Statistics?
+    private var commentList: [Comment] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +56,20 @@ final class VideoDetailViewController: UIViewController {
         configureTableView()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        guard let tableViewheight else { return }
+        tableViewheight.constant = commentTableView.contentSize.height + addCommentStackView.bounds.height + margin
+    }
+    
     /// snippet이 있는 경우 사용
     init(snippet: Snippet, videoId: String) {
         self.snippet = snippet
         self.videoId = videoId
         super.init(nibName: nil, bundle: nil)
+        
+        loadVideo()
+        loadComment()
         DispatchQueue.global().async {
             self.getStatistics(videoId: videoId)
         }
@@ -66,6 +81,7 @@ final class VideoDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         loadVideo()
+        loadComment()
         DispatchQueue.global().async {
             self.getSnippetAndStatistics(videoId: videoId)
         }
@@ -80,6 +96,10 @@ final class VideoDetailViewController: UIViewController {
         guard let url = URL(string: stringUrl) else { return }
         let urlRequest = URLRequest(url: url)
         videoWebView.load(urlRequest)
+    }
+    
+    private func loadComment() {
+        commentList = CommentManager.shared.loadCommetList(videoId: videoId)
     }
     
     // snippet이 없는 경우 사용, snippet과 Statistics를 같이 가져오도록 하는 함수
@@ -112,13 +132,26 @@ final class VideoDetailViewController: UIViewController {
     }
     
     private func updateViews() {
-        guard let snippet else {
+        guard let snippet, let statistics else {
             print("snippet is nil")
             return
         }
-        DispatchQueue.main.async {
+        videoDecriptionStackView.updateArrangedSubviews(title: snippet.title, description: snippet.description, publishTime: snippet.publishedAt, statistics: statistics)
+    }
+    
+    private func removeAlert(index: Int) {
+        let alertVC = UIAlertController(title: "댓글을 지우겠습니까?", message: nil, preferredStyle: .alert)
+        let removeAction =  UIAlertAction(title: "지우기", style: .destructive) { _ in
+            self.commentList.remove(at: index)
+            CommentManager.shared.saveCommentList(videoId: self.videoId, commentList: self.commentList)
             self.commentTableView.reloadData()
         }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alertVC.addAction(cancelAction)
+        alertVC.addAction(removeAction)
+        
+        present(alertVC, animated: true)
     }
     
 }
@@ -133,20 +166,42 @@ extension VideoDetailViewController {
         commentTableView.dataSource = self
         commentTableView.delegate = self
         
-        commentStackView.layoutIfNeeded()
-        let bottomInset = commentStackView.frame.height
+        addCommentStackView.commentAddHandler = { [weak self] textComment in
+            guard let self else { return }
+            guard let userData = UserDataManager.shared.loginUser else {
+                print("로그인 되어있지 않음")
+                return
+            }
+            let comment = Comment(userId: userData.userID, profileImage: userData.userImage, text: textComment)
+            self.commentList.append(comment)
+            CommentManager.shared.saveCommentList(videoId: videoId, commentList: commentList)
+            self.commentTableView.reloadData()
+            self.viewWillLayoutSubviews()
+        }
+        
+        addCommentStackView.layoutIfNeeded()
+        let bottomInset = addCommentStackView.frame.height
         commentTableView.contentInset.bottom = bottomInset
     }
     private func addViews() {
         view.addSubview(videoWebView)
-        view.addSubview(commentTableView)
-        view.addSubview(commentStackView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(videoDecriptionStackView)
+        scrollView.addSubview(commentTableView)
+        view.addSubview(addCommentStackView)
     }
     private func configureAutoLayout() {
+        let framLayout = scrollView.frameLayoutGuide
+        let contentLayout = scrollView.contentLayoutGuide
         let safeArea = view.safeAreaLayoutGuide
         let keyboardArea = view.keyboardLayoutGuide
 
-        commentStackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        videoDecriptionStackView.translatesAutoresizingMaskIntoConstraints = false
+        commentTableView.translatesAutoresizingMaskIntoConstraints = false
+        addCommentStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableViewheight = commentTableView.heightAnchor.constraint(equalToConstant: 0)
 
         NSLayoutConstraint.activate([
             videoWebView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: margin),
@@ -154,57 +209,67 @@ extension VideoDetailViewController {
             videoWebView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -margin),
             videoWebView.heightAnchor.constraint(equalTo: videoWebView.widthAnchor, multiplier: 9.0/16.0),
             
-            commentTableView.topAnchor.constraint(equalTo: videoWebView.bottomAnchor, constant: 8),
-            commentTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: margin),
-            commentTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -margin),
-            commentTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -margin),
-
-            commentStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            commentStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            commentStackView.bottomAnchor.constraint(equalTo: keyboardArea.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: videoWebView.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: margin),
+            scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -margin),
+            scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -margin),
+            
+            videoDecriptionStackView.topAnchor.constraint(equalTo: contentLayout.topAnchor, constant: 8),
+            videoDecriptionStackView.leadingAnchor.constraint(equalTo: contentLayout.leadingAnchor),
+            videoDecriptionStackView.trailingAnchor.constraint(equalTo: contentLayout.trailingAnchor),
+            videoDecriptionStackView.widthAnchor.constraint(equalTo: framLayout.widthAnchor),
+            
+            commentTableView.topAnchor.constraint(equalTo: videoDecriptionStackView.bottomAnchor, constant: margin),
+            commentTableView.leadingAnchor.constraint(equalTo: contentLayout.leadingAnchor),
+            commentTableView.trailingAnchor.constraint(equalTo: contentLayout.trailingAnchor),
+            commentTableView.bottomAnchor.constraint(equalTo: contentLayout.bottomAnchor),
+            tableViewheight!,
+            
+            addCommentStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            addCommentStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            addCommentStackView.bottomAnchor.constraint(equalTo: keyboardArea.topAnchor),
         ])
     }
 }
 
 extension VideoDetailViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0 : 30
+        return 30
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.addSubview(commentLabel)
-        return section == 0 ? nil : headerView
+        return headerView
     }
 }
 
 extension VideoDetailViewController: UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : 3
+        return commentList.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
-        if indexPath.section == 0 {
-            guard let descriptionCell = tableView.dequeueReusableCell(withIdentifier: VideoDescriptionTableViewCell.identifier, for: indexPath) as? VideoDescriptionTableViewCell else {
-                return UITableViewCell()
-            }
-            guard let snippet, let statistics else { return descriptionCell }
-            descriptionCell.updateView(title: snippet.title, description: snippet.description, publishTime: snippet.publishedAt, statistics: statistics)
-            cell = descriptionCell
-        } else {
-            guard let commentCell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.identifier, for: indexPath) as? CommentTableViewCell else {
-                return UITableViewCell()
-            }
-            cell = commentCell
+        guard let commentCell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.identifier, for: indexPath) as? CommentTableViewCell else {
+            return UITableViewCell()
         }
-        return cell
-    }
+        let comment = commentList[indexPath.row]
+        guard let myUserData = UserDataManager.shared.loginUser else { return UITableViewCell() }
         
+        let isMyComment = comment.userId == myUserData.userID
+        let commentProfileImage = comment.profileImage == nil ? UIImage(systemName: "person") : UIImage(data: comment.profileImage!)
+        commentCell.updateView(profileImage: commentProfileImage, comment: comment.text, isMyComment: isMyComment)
+        commentCell.commentUpdateHandler = { [weak self] in
+            guard let self else { return }
+            self.removeAlert(index: indexPath.row)
+        }
+        return commentCell
+    }
+
 }

@@ -13,10 +13,11 @@
 		10BD6EB82AAABBB60054DD30 /* QuitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD6EB72AAABBB60054DD30 /* QuitTableViewCell.swift */; };
 		10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */; };
 		10BDAD882AA751F400DC2F0D /* Margin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDAD872AA751F400DC2F0D /* Margin.swift */; };
+		18B943AB2AAAC70B00E674F3 /* VideoComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AA2AAAC70B00E674F3 /* VideoComment.swift */; };
+		18B943AD2AAAC76C00E674F3 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AC2AAAC76C00E674F3 /* CommentManager.swift */; };
 		18D262392AA796E300652695 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D262382AA796E300652695 /* CommentTableViewCell.swift */; };
 		18D2623B2AA7980D00652695 /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2623A2AA7980D00652695 /* Reuseable.swift */; };
 		18D262402AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2623F2AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift */; };
-		18D262422AA7AD3F00652695 /* VideoDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D262412AA7AD3F00652695 /* VideoDescriptionTableViewCell.swift */; };
 		18D659092AA5B5FA000468D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659082AA5B5FA000468D9 /* AppDelegate.swift */; };
 		18D6590B2AA5B5FA000468D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6590A2AA5B5FA000468D9 /* SceneDelegate.swift */; };
 		18D6590D2AA5B5FA000468D9 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6590C2AA5B5FA000468D9 /* TabBarController.swift */; };
@@ -31,11 +32,13 @@
 		18D659322AA5B971000468D9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659312AA5B971000468D9 /* MainViewController.swift */; };
 		18D659362AA5B9A9000468D9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659352AA5B9A9000468D9 /* Font.swift */; };
 		18D659382AA5BA9E000468D9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D659372AA5BA9E000468D9 /* Color.swift */; };
-		18D6593B2AA5E7BE000468D9 /* CommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6593A2AA5E7BE000468D9 /* CommentStackView.swift */; };
+		18D6593B2AA5E7BE000468D9 /* AddCommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6593A2AA5E7BE000468D9 /* AddCommentStackView.swift */; };
 		18D6C3DB2AA8133E0036766F /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C3DA2AA8133E0036766F /* APIHandler.swift */; };
 		18D6C3DD2AA8136F0036766F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C3DC2AA8136F0036766F /* NetworkError.swift */; };
 		18D6C3E12AA815AD0036766F /* VideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C3E02AA815AD0036766F /* VideoData.swift */; };
 		18D6C3E32AA893F40036766F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C3E22AA893F40036766F /* ImageLoader.swift */; };
+		18D98F442AA9EFAD004816D0 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D98F432AA9EFAD004816D0 /* Date.swift */; };
+		18D98F462AA9F61D004816D0 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D98F452AA9F61D004816D0 /* String.swift */; };
 		689BC5882AA5D516005BA3A2 /* MembershipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */; };
 		689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */; };
 		689BC58E2AA73E21005BA3A2 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BC58D2AA73E21005BA3A2 /* UserData.swift */; };
@@ -53,10 +56,11 @@
 		10BD6EB72AAABBB60054DD30 /* QuitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitTableViewCell.swift; sourceTree = "<group>"; };
 		10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		10BDAD872AA751F400DC2F0D /* Margin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Margin.swift; sourceTree = "<group>"; };
+		18B943AA2AAAC70B00E674F3 /* VideoComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComment.swift; sourceTree = "<group>"; };
+		18B943AC2AAAC76C00E674F3 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		18D262382AA796E300652695 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		18D2623A2AA7980D00652695 /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
 		18D2623F2AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDescriptionVerticalStackView.swift; sourceTree = "<group>"; };
-		18D262412AA7AD3F00652695 /* VideoDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		18D659052AA5B5FA000468D9 /* BabTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D659082AA5B5FA000468D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18D6590A2AA5B5FA000468D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,11 +77,13 @@
 		18D659312AA5B971000468D9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		18D659352AA5B9A9000468D9 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		18D659372AA5BA9E000468D9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		18D6593A2AA5E7BE000468D9 /* CommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentStackView.swift; sourceTree = "<group>"; };
+		18D6593A2AA5E7BE000468D9 /* AddCommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentStackView.swift; sourceTree = "<group>"; };
 		18D6C3DA2AA8133E0036766F /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 		18D6C3DC2AA8136F0036766F /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		18D6C3E02AA815AD0036766F /* VideoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoData.swift; sourceTree = "<group>"; };
 		18D6C3E22AA893F40036766F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		18D98F432AA9EFAD004816D0 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		18D98F452AA9F61D004816D0 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipViewController.swift; sourceTree = "<group>"; };
 		689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMakeViewController.swift; sourceTree = "<group>"; };
 		689BC58D2AA73E21005BA3A2 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -231,6 +237,8 @@
 				18D6C3DA2AA8133E0036766F /* APIHandler.swift */,
 				18D6C3DC2AA8136F0036766F /* NetworkError.swift */,
 				18D6C3E22AA893F40036766F /* ImageLoader.swift */,
+				18D98F432AA9EFAD004816D0 /* Date.swift */,
+				18D98F452AA9F61D004816D0 /* String.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -238,10 +246,9 @@
 		18D659392AA5DEEF000468D9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				18D6593A2AA5E7BE000468D9 /* CommentStackView.swift */,
+				18D6593A2AA5E7BE000468D9 /* AddCommentStackView.swift */,
 				18D262382AA796E300652695 /* CommentTableViewCell.swift */,
 				18D2623F2AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift */,
-				18D262412AA7AD3F00652695 /* VideoDescriptionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -252,6 +259,8 @@
 				18D6C3E02AA815AD0036766F /* VideoData.swift */,
 				689BC58D2AA73E21005BA3A2 /* UserData.swift */,
 				689BC58F2AA73E32005BA3A2 /* UserDataManager.swift */,
+				18B943AA2AAAC70B00E674F3 /* VideoComment.swift */,
+				18B943AC2AAAC76C00E674F3 /* CommentManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,11 +336,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F034B5AB2AA5E0C20019EED2 /* MainTableViewCell.swift in Sources */,
+				18B943AB2AAAC70B00E674F3 /* VideoComment.swift in Sources */,
 				18D6590D2AA5B5FA000468D9 /* TabBarController.swift in Sources */,
 				10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */,
 				10BD6EB82AAABBB60054DD30 /* QuitTableViewCell.swift in Sources */,
 				109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */,
 				18D659362AA5B9A9000468D9 /* Font.swift in Sources */,
+				18B943AD2AAAC76C00E674F3 /* CommentManager.swift in Sources */,
 				18D6C3DD2AA8136F0036766F /* NetworkError.swift in Sources */,
 				18D2623B2AA7980D00652695 /* Reuseable.swift in Sources */,
 				689BC58C2AA611A4005BA3A2 /* ProfileMakeViewController.swift in Sources */,
@@ -343,14 +354,15 @@
 				18D659292AA5B903000468D9 /* VideoDetailViewController.swift in Sources */,
 				689BC58E2AA73E21005BA3A2 /* UserData.swift in Sources */,
 				18D659092AA5B5FA000468D9 /* AppDelegate.swift in Sources */,
+				18D98F442AA9EFAD004816D0 /* Date.swift in Sources */,
 				10BDAD882AA751F400DC2F0D /* Margin.swift in Sources */,
 				18D659382AA5BA9E000468D9 /* Color.swift in Sources */,
 				F0DE6E3B2AA6BB0D00DC03FE /* MainCollectionViewCell.swift in Sources */,
 				18D6592D2AA5B920000468D9 /* LoginViewController.swift in Sources */,
 				18D262402AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift in Sources */,
-				18D262422AA7AD3F00652695 /* VideoDescriptionTableViewCell.swift in Sources */,
 				18D262392AA796E300652695 /* CommentTableViewCell.swift in Sources */,
 				AC6CDEAE2AA727EC00A36674 /* DetailLikeTableViewCell.swift in Sources */,
+				18D98F462AA9F61D004816D0 /* String.swift in Sources */,
 				18D6590B2AA5B5FA000468D9 /* SceneDelegate.swift in Sources */,
 				18D6C3E12AA815AD0036766F /* VideoData.swift in Sources */,
 				109089CC2AA5E587001060A4 /* ProfileTableViewCell.swift in Sources */,
@@ -360,7 +372,7 @@
 				18D659272AA5B8F8000468D9 /* LikeViewController.swift in Sources */,
 				18D6C3DB2AA8133E0036766F /* APIHandler.swift in Sources */,
 				18D659322AA5B971000468D9 /* MainViewController.swift in Sources */,
-				18D6593B2AA5E7BE000468D9 /* CommentStackView.swift in Sources */,
+				18D6593B2AA5E7BE000468D9 /* AddCommentStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
