@@ -15,8 +15,9 @@ final class AddCommentStackView: UIStackView {
         view.backgroundColor = .systemGray5
         return view
     }()
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person"))
+        imageView.clipsToBounds = true
         imageView.tintColor = .systemGray6
         imageView.backgroundColor = .systemGray3
         return imageView

@@ -53,11 +53,11 @@ final class VideoDetailViewController: UIViewController {
         
         addViews()
         configureAutoLayout()
-        configureTableView()
+        configureView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         guard let tableViewheight else { return }
         tableViewheight.constant = commentTableView.contentSize.height + addCommentStackView.bounds.height + margin
     }
@@ -100,6 +100,7 @@ final class VideoDetailViewController: UIViewController {
     
     private func loadComment() {
         commentList = CommentManager.shared.loadCommetList(videoId: videoId)
+        print(commentList)
     }
     
     // snippet이 없는 경우 사용, snippet과 Statistics를 같이 가져오도록 하는 함수
@@ -159,7 +160,7 @@ final class VideoDetailViewController: UIViewController {
 // MARK: 기본 UISetting
 extension VideoDetailViewController {
     
-    private func configureTableView() {
+    private func configureView() {
         
         view.backgroundColor = UIColor.white
         
@@ -175,8 +176,17 @@ extension VideoDetailViewController {
             let comment = Comment(userId: userData.userID, profileImage: userData.userImage, text: textComment)
             self.commentList.append(comment)
             CommentManager.shared.saveCommentList(videoId: videoId, commentList: commentList)
-            self.commentTableView.reloadData()
-            self.viewWillLayoutSubviews()
+            DispatchQueue.main.async {
+                self.commentTableView.reloadData()
+                self.viewDidLayoutSubviews()
+            }
+        }
+        
+        guard let userData = UserDataManager.shared.loginUser,
+              let userImageData = userData.userImage else { return }
+        let myProfileImage = UIImage(data: userImageData)
+        DispatchQueue.main.async {
+            self.addCommentStackView.profileImageView.image = myProfileImage
         }
         
         addCommentStackView.layoutIfNeeded()
@@ -202,6 +212,7 @@ extension VideoDetailViewController {
         addCommentStackView.translatesAutoresizingMaskIntoConstraints = false
         
         tableViewheight = commentTableView.heightAnchor.constraint(equalToConstant: 0)
+        let tableViewBottomAnchor = commentTableView.bottomAnchor.constraint(equalTo: contentLayout.bottomAnchor)
 
         NSLayoutConstraint.activate([
             videoWebView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: margin),
@@ -222,13 +233,20 @@ extension VideoDetailViewController {
             commentTableView.topAnchor.constraint(equalTo: videoDecriptionStackView.bottomAnchor, constant: margin),
             commentTableView.leadingAnchor.constraint(equalTo: contentLayout.leadingAnchor),
             commentTableView.trailingAnchor.constraint(equalTo: contentLayout.trailingAnchor),
-            commentTableView.bottomAnchor.constraint(equalTo: contentLayout.bottomAnchor),
             tableViewheight!,
             
             addCommentStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             addCommentStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             addCommentStackView.bottomAnchor.constraint(equalTo: keyboardArea.topAnchor),
         ])
+        
+        addCommentStackView.layoutIfNeeded()
+        
+        tableViewBottomAnchor.isActive = true
+
+        tableViewBottomAnchor.constant = -(addCommentStackView.bounds.height)
+        
+
     }
 }
 
