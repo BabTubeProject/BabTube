@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileMakeViewController: UIViewController {
-    
+    var newUserIndex: Int?
     private let picker = UIImagePickerController()
 
     private lazy var profileImageView: UIImageView = {
@@ -118,8 +118,7 @@ extension ProfileMakeViewController: UIImagePickerControllerDelegate, UINavigati
         if let image = info[UIImagePickerController.InfoKey.originalImage] {
             profileImageView.image = image as? UIImage
 
-            
-            profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+            profileImageView.layer.cornerRadius = profileImageView.frame.height/2
             profileImageView.layer.borderWidth = 1
             profileImageView.layer.borderColor = UIColor.clear.cgColor
             profileImageView.clipsToBounds = true
@@ -129,11 +128,9 @@ extension ProfileMakeViewController: UIImagePickerControllerDelegate, UINavigati
 }
 
 extension ProfileMakeViewController {
-    
     private func makeUI() {
-        
         view.backgroundColor = UIColor.white
-        
+
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileChangeButton.translatesAutoresizingMaskIntoConstraints = false
         nickName.translatesAutoresizingMaskIntoConstraints = false
@@ -182,14 +179,28 @@ extension ProfileMakeViewController {
     }
 
     @objc private func startButtonClick() {
-        print("pressed")
-        let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false)
+        if nickNameTextField.text != "" {
+            guard let newNickName = nickNameTextField.text else { return }
+            guard let newProfileImage = profileImageView.image else { return }
+            guard let newUserIndex = newUserIndex else { return }
+            do {
+                try UserDataManager.shared.updateUserInfo(userIndex: newUserIndex, newNickname: newNickName, newImage: newProfileImage)
+                print(UserDataManager.shared.users[newUserIndex].nickname!)
+                let vc = LoginViewController()
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: false)
+            } catch {
+                print("프로필 저장 실패")
+            }
+        } else if nickNameTextField.text == "" {
+            let alertController = UIAlertController(title: "닉네임을 입력해주세요", message: "닉네임을 입력해주세요.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        }
     }
-    
+
     func changeToProfileEdit() {
-        
         // UI는 메인 쓰레드에서 변경
         DispatchQueue.main.async {
             self.profileImageView.image = UIImage(systemName: "pencil")
@@ -200,7 +211,7 @@ extension ProfileMakeViewController {
             self.startButton.addTarget(self, action: #selector(self.moveBackMyPage), for: .touchUpInside)
         }
     }
-    
+
     @objc func moveBackMyPage() {
         navigationController?.popViewController(animated: true)
     }

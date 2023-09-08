@@ -6,16 +6,21 @@
 //
 
 import UIKit
+//cell delegate protocol
+protocol CollectionViewCellDelegate: AnyObject {
+    func collectionView(mainCVCell: MainCVCell?, index: Int, didTappedInTableViewCell: MainTVCell)
+}
 
-class MainTableViewCell: UITableViewCell {
+class MainTVCell: UITableViewCell {
     
+    //위임자 (ViewController와 강한 참조 순환이 발생하기 때문에 weak로 선언)
+    weak var cellDelegate: CollectionViewCellDelegate?
+    
+    //cell 식별자
     static let id = "MainTableViewCell"
     
     //cell 높이 설정
     static let cellHeight = 150.0
-    
-    //보여주기 위한 임시 더미데이터
-    var list: [String] = ["1", "2", "3","4","5","6"]
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -52,12 +57,13 @@ class MainTableViewCell: UITableViewCell {
     
     func setup() {
         self.collectionView.dataSource = self
+        self.collectionView.delegate = self
         mainCVAddSubView()
         mainCVAutoLayout()
     }
 }
 
-extension MainTableViewCell {
+extension MainTVCell {
     
     //TableView에 컬렉션뷰 추가
     private func mainCVAddSubView() {
@@ -75,21 +81,28 @@ extension MainTableViewCell {
     }
 }
 
-extension MainTableViewCell: UICollectionViewDataSource {
+extension MainTVCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     
     //CollectionView 보여줄 셀의 개수
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    self.list.count
-  }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        6
+    }
     
     //CollectionView 셀에 보여줄 아이템
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCVCell.id, for: indexPath) as! MainCVCell
-      cell.contentView.backgroundColor = UIColor.green
-      cell.lbl.text = list[indexPath.row]
-      
-      return cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCVCell.id, for: indexPath) as? MainCVCell else {
+            return UICollectionViewCell()
+        }
+        cell.contentView.backgroundColor = UIColor.green
+        return cell
     }
-  }
-
+    
+    func collectionView(_ collectionView: UICollectionView,  didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCVCell.id, for: indexPath) as! MainCVCell
+        if let cellDelegate = cellDelegate {
+            cellDelegate.collectionView(mainCVCell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+        }
+    }
+}
 

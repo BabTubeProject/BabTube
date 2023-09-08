@@ -6,14 +6,17 @@
 //
 
 import UIKit
+import WebKit
 
 final class VideoDetailViewController: UIViewController {
     
-    private let imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "xmark"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .systemGray5
-        return imageView
+    private let videoWebView: WKWebView = {
+        let webViewConfiguration: WKWebViewConfiguration = WKWebViewConfiguration()
+        webViewConfiguration.allowsInlineMediaPlayback = true
+        let webView = WKWebView(frame: .zero, configuration: webViewConfiguration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.backgroundColor = .gray
+        return webView
     }()
     private let commentLabel: UILabel = {
         let label = UILabel()
@@ -35,6 +38,7 @@ final class VideoDetailViewController: UIViewController {
     
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
+    private let videoId: String
     private var snippet: Snippet?
     private var statistics: Statistics?
     
@@ -49,18 +53,33 @@ final class VideoDetailViewController: UIViewController {
     /// snippet이 있는 경우 사용
     init(snippet: Snippet, videoId: String) {
         self.snippet = snippet
+        self.videoId = videoId
         super.init(nibName: nil, bundle: nil)
-        getStatistics(videoId: videoId)
+        DispatchQueue.global().async {
+            self.getStatistics(videoId: videoId)
+        }
     }
     
     /// videoId 만 있는 경우 사용
     init(videoId: String) {
+        self.videoId = videoId
         super.init(nibName: nil, bundle: nil)
-        getSnippetAndStatistics(videoId: videoId)
+        
+        loadVideo()
+        DispatchQueue.global().async {
+            self.getSnippetAndStatistics(videoId: videoId)
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func loadVideo() {
+        let stringUrl = "https://www.youtube.com/embed/\(videoId)?playsinline=1"
+        guard let url = URL(string: stringUrl) else { return }
+        let urlRequest = URLRequest(url: url)
+        videoWebView.load(urlRequest)
     }
     
     // snippet이 없는 경우 사용, snippet과 Statistics를 같이 가져오도록 하는 함수
@@ -97,23 +116,8 @@ final class VideoDetailViewController: UIViewController {
             print("snippet is nil")
             return
         }
-        let stringUrl = snippet.thumbnails.high.url
-        guard let url = URL(string: stringUrl) else {
-            print("url is nil")
-            return
-        }
-        DispatchQueue.global().async {
-            self.imageLoader.getImage(url: url) { result in
-                switch result {
-                case .success(let image):
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
-                        self.commentTableView.reloadData()
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            }
+        DispatchQueue.main.async {
+            self.commentTableView.reloadData()
         }
     }
     
@@ -134,7 +138,7 @@ extension VideoDetailViewController {
         commentTableView.contentInset.bottom = bottomInset
     }
     private func addViews() {
-        view.addSubview(imageView)
+        view.addSubview(videoWebView)
         view.addSubview(commentTableView)
         view.addSubview(commentStackView)
     }
@@ -145,12 +149,12 @@ extension VideoDetailViewController {
         commentStackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: margin),
-            imageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: margin),
-            imageView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -margin),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.7),
+            videoWebView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: margin),
+            videoWebView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: margin),
+            videoWebView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -margin),
+            videoWebView.heightAnchor.constraint(equalTo: videoWebView.widthAnchor, multiplier: 9.0/16.0),
             
-            commentTableView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            commentTableView.topAnchor.constraint(equalTo: videoWebView.bottomAnchor, constant: 8),
             commentTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: margin),
             commentTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -margin),
             commentTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -margin),
