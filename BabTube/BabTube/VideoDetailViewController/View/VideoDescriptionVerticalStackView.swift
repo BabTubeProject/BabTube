@@ -115,6 +115,7 @@ extension VideoDescriptionVerticalStackView {
     @objc private func moreDescription() {
         isMoreDescriptionHidden.toggle()
         videoDescriptionLabel.isHidden = isMoreDescriptionHidden
+        moreLabel.text = isMoreDescriptionHidden ? "더보기" : "줄이기"
     }
     
     private func configureAutoLayout() {
