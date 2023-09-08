@@ -107,10 +107,55 @@ class LoginViewController: UIViewController {
         passwordTextField.addLeftPadding()
     }
 
-    @objc private func loginButtonClick() {        
-    let vc = TabBarController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false)
+    @objc private func loginButtonClick() {
+        guard let userEmail = emailTextField.text, !userEmail.isEmpty else {
+            let titles = "이메일을 입력해주세요"
+            let messages = "이메일을 입력해주세요"
+            failAlert(title: titles, message: messages)
+            return
+        }
+        guard let userPassword = passwordTextField.text, !userPassword.isEmpty else {
+            let titles = "비밀번호를 입력해주세요"
+            let messages = "비밀번호를 입력해주세요"
+            failAlert(title: titles, message: messages)
+            return
+        }
+        // 이메일 유효성 검사
+        if !emailTypeCheck(email: userEmail) {
+            let titles = "유효하지 않은 이메일"
+            let messages = "유효한 이메일 주소를 입력해주세요."
+            failAlert(title: titles, message: messages)
+            return
+        }
+            
+        // 사용자 데이터에서 이메일과 비밀번호를 확인하여 로그인
+        if let user = UserDataManager.shared.users.first(where: { $0.userID == userEmail && $0.password == userPassword }) {
+            print("로그인 성공")
+            UserDataManager.shared.loginUser = user
+            let vc = TabBarController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: false)
+               
+        } else {
+            let titles = "로그인 실패"
+            let messages = "이메일 주소 또는 비밀번호가 일치하지 않습니다."
+            failAlert(title: titles, message: messages)
+        }
+        print(UserDataManager.shared.loginUser ?? "로그인 실패")
+    }
+
+    private func failAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    // 이메일 유효성 검사
+    private func emailTypeCheck(email: String) -> Bool {
+        let emailType = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailCheck = NSPredicate(format: "SELF MATCHES %@", emailType)
+        return emailCheck.evaluate(with: email)
     }
 
     @objc private func newMembershipClick() {
@@ -137,7 +182,6 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension LoginViewController {
     func makeUi() {
-        
         view.backgroundColor = UIColor.white
         
         loginButton.translatesAutoresizingMaskIntoConstraints = false
