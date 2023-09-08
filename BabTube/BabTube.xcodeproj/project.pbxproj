@@ -10,6 +10,7 @@
 		109089CC2AA5E587001060A4 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109089CB2AA5E587001060A4 /* ProfileTableViewCell.swift */; };
 		109089CE2AA5F7C4001060A4 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109089CD2AA5F7C4001060A4 /* RecordTableViewCell.swift */; };
 		109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109089D12AA5F87D001060A4 /* LogoutTableViewCell.swift */; };
+		10BD6EB82AAABBB60054DD30 /* QuitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD6EB72AAABBB60054DD30 /* QuitTableViewCell.swift */; };
 		10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */; };
 		10BDAD882AA751F400DC2F0D /* Margin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDAD872AA751F400DC2F0D /* Margin.swift */; };
 		18B943AB2AAAC70B00E674F3 /* VideoComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AA2AAAC70B00E674F3 /* VideoComment.swift */; };
@@ -52,6 +53,7 @@
 		109089CB2AA5E587001060A4 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		109089CD2AA5F7C4001060A4 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		109089D12AA5F87D001060A4 /* LogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutTableViewCell.swift; sourceTree = "<group>"; };
+		10BD6EB72AAABBB60054DD30 /* QuitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitTableViewCell.swift; sourceTree = "<group>"; };
 		10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		10BDAD872AA751F400DC2F0D /* Margin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Margin.swift; sourceTree = "<group>"; };
 		18B943AA2AAAC70B00E674F3 /* VideoComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComment.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				109089CD2AA5F7C4001060A4 /* RecordTableViewCell.swift */,
 				10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */,
 				109089D12AA5F87D001060A4 /* LogoutTableViewCell.swift */,
+				10BD6EB72AAABBB60054DD30 /* QuitTableViewCell.swift */,
 			);
 			path = MyPageTableViewCell;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				18B943AB2AAAC70B00E674F3 /* VideoComment.swift in Sources */,
 				18D6590D2AA5B5FA000468D9 /* TabBarController.swift in Sources */,
 				10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */,
+				10BD6EB82AAABBB60054DD30 /* QuitTableViewCell.swift in Sources */,
 				109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */,
 				18D659362AA5B9A9000468D9 /* Font.swift in Sources */,
 				18B943AD2AAAC76C00E674F3 /* CommentManager.swift in Sources */,

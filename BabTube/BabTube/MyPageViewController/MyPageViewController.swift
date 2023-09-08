@@ -16,6 +16,7 @@ class MyPageViewController: UIViewController {
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
         tableView.register(RecordTableViewCell.self, forCellReuseIdentifier: RecordTableViewCell.identifier)
         tableView.register(LogoutTableViewCell.self, forCellReuseIdentifier: LogoutTableViewCell.identifier)
+        tableView.register(QuitTableViewCell.self, forCellReuseIdentifier: QuitTableViewCell.identifier)
         
         // 경계선 없애기
         tableView.separatorStyle = .none
@@ -40,6 +41,11 @@ class MyPageViewController: UIViewController {
         
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        myPageTableView.reloadData()
     }
     
     // Snippet을 가져오기 위한 함수
@@ -110,7 +116,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     // TableViewCell의 줄 개수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
 
     // TableView의 각 줄
@@ -119,6 +125,16 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             guard let profileTableViewCell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as? ProfileTableViewCell else {
                 return UITableViewCell()
+            }
+            if let userImage = UserDataManager.shared.loginUser?.userImage {
+                profileTableViewCell.profileImageView.image = UIImage(data: userImage)
+            } else {
+                profileTableViewCell.profileImageView.image = UIImage(systemName: "person.circle.fill")
+            }
+            if let nickName = UserDataManager.shared.loginUser?.nickname {
+                profileTableViewCell.nameLabel.text = nickName
+            } else {
+                profileTableViewCell.nameLabel.text = "사용자"
             }
             profileTableViewCell.selectionStyle = .none
             return profileTableViewCell
@@ -135,12 +151,20 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             return recordTableViewCell
         }
 
-        else {
+        else if indexPath.row == 2 {
             guard let logoutTableViewCell = tableView.dequeueReusableCell(withIdentifier: LogoutTableViewCell.identifier, for: indexPath) as? LogoutTableViewCell else {
                 return UITableViewCell()
             }
             logoutTableViewCell.selectionStyle = .none
             return logoutTableViewCell
+        }
+        
+        else {
+            guard let quitTableViewCell = tableView.dequeueReusableCell(withIdentifier: QuitTableViewCell.identifier, for: indexPath) as? QuitTableViewCell else {
+                return UITableViewCell()
+            }
+            quitTableViewCell.selectionStyle = .none
+            return quitTableViewCell
         }
     }
 
@@ -154,6 +178,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         else if indexPath.row == 1 {
             return 164
         }
+        
+        else if indexPath.row == 2 {
+            return 36
+        }
 
         else {
             return 36
@@ -163,6 +191,13 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
             dismiss(animated: true)
+        }
+        else if indexPath.row == 3 {
+            UserDataManager.shared.clearUsers()
+            let loginVC = LoginViewController()
+            loginVC.modalPresentationStyle = .fullScreen
+            loginVC.modalTransitionStyle = .coverVertical
+            present(loginVC, animated: true)
         }
     }
 }

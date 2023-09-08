@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileMakeViewController: UIViewController {
     var newUserIndex: Int?
+    var editUserIndex = UserDataManager.shared.users.firstIndex(where: { $0.userID == UserDataManager.shared.loginUser?.userID })
     private let picker = UIImagePickerController()
 
     private lazy var profileImageView: UIImageView = {
@@ -164,15 +165,37 @@ extension ProfileMakeViewController {
     func changeToProfileEdit() {
         // UI는 메인 쓰레드에서 변경
         DispatchQueue.main.async {
-            self.profileImageView.image = UIImage(systemName: "pencil")
-            self.nickNameTextField.text = "홍준영"
+            if let userImage = UserDataManager.shared.loginUser?.userImage {
+                self.profileImageView.image = UIImage(data: userImage)
+            } else {
+                self.profileImageView.image = UIImage(systemName: "person.circle.fill")
+            }
+            self.nickNameTextField.text = UserDataManager.shared.loginUser?.nickname
             self.startButton.setTitle("수정하기", for: .normal)
-            self.startButton.removeTarget(self, action: #selector(self.profileButtonPressed), for: .touchUpInside)
-            self.startButton.addTarget(self, action: #selector(self.moveBackMyPage), for: .touchUpInside)
+            self.startButton.removeTarget(self, action: #selector(self.startButtonClick), for: .touchUpInside)
+            self.startButton.addTarget(self, action: #selector(self.editButtonClick), for: .touchUpInside)
         }
     }
 
-    @objc func moveBackMyPage() {
-        navigationController?.popViewController(animated: true)
+    @objc func editButtonClick() {
+        if nickNameTextField.text != "" {
+            guard let editNickName = nickNameTextField.text else { return }
+            guard let editProfileImage = profileImageView.image else { return }
+            guard let editUserIndex = editUserIndex else { return }
+            do {
+                try UserDataManager.shared.updateUserInfo(userIndex: editUserIndex, newNickname: editNickName, newImage: editProfileImage)
+                print(UserDataManager.shared.users[editUserIndex].nickname!)
+                UserDataManager.shared.loginUser = UserDataManager.shared.users[editUserIndex]
+                self.navigationController?.popViewController(animated: true)
+            } catch {
+                print("프로필 저장 실패")
+            }
+        } else if nickNameTextField.text == "" {
+            let alertController = UIAlertController(title: "닉네임을 입력해주세요", message: "닉네임을 입력해주세요.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        }
+        print("test")
     }
 }

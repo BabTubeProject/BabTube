@@ -24,20 +24,26 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     // 사용자 프로필 사진
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
-        imageView.backgroundColor = UIColor.blue
+        imageView.tintColor = UIColor(red: 235/255, green: 141/255, blue: 142/255, alpha: 1)
+        if let userImage = UserDataManager.shared.loginUser?.userImage {
+            imageView.image = UIImage(data: userImage)
+        } else {
+            imageView.image = UIImage(systemName: "person.circle.fill")
+        }
+
         return imageView
     }()
 
     // 사용자 이름
-    private let nameLabel: UILabel = {
+    let nameLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "홍준영"
+        label.text = UserDataManager.shared.loginUser?.nickname
         label.font = .title2
         label.textColor = UIColor.black
         return label

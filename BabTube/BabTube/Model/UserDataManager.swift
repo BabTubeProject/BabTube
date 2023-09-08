@@ -17,7 +17,9 @@ class UserDataManager {
     }
 
     var users: [UserData] = []
+    
     var loginUser: UserData?
+    
     // 사용자 추가
     func addUser(userData: UserData) {
         users.append(userData)
