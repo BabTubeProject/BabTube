@@ -102,8 +102,12 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // 셀 눌렀을 때
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            //VideoDetail 화면으로 이동
-            let videoDetail = VideoDetailViewController(videoId: "z8gl6HcWqCA" )
+         
+        //VideoDetail 화면으로 이동 및 VideoID 넘겨주기
+        if let searchItemList = searchItemList, indexPath.row < searchItemList.count {
+            let videoId = searchItemList[indexPath.row].id.videoId
+            let videoDetail = VideoDetailViewController(videoId: videoId)
             navigationController?.pushViewController(videoDetail, animated: true)
+        }
     }
 }
