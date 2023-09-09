@@ -20,7 +20,8 @@ class RecordTableViewCell: UITableViewCell {
     // Delegate 타입의 변수
     weak var recordTableViewCellDelegate: RecordTableViewCellDelegate?
     
-    private var searchItemList: [SearchItems]?
+//    private var searchItemList: [SearchItems]?
+    private var viewHistoryList: [ViewHistory]?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -86,8 +87,12 @@ extension RecordTableViewCell {
         ])
     }
     
-    func updateUI(items: [SearchItems]) {
-        searchItemList = items
+//    func updateUI(items: [SearchItems]) {
+//        searchItemList = items
+//        recordCollectionView.reloadData()
+//    }
+    func updateUI(items: [ViewHistory]) {
+        viewHistoryList = items
         recordCollectionView.reloadData()
     }
 }
@@ -95,14 +100,17 @@ extension RecordTableViewCell {
 extension RecordTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchItemList?.count ?? 0
+//        return searchItemList?.count ?? 0
+        return viewHistoryList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCollectionViewCell.identifier, for: indexPath) as? RecordCollectionViewCell else { return UICollectionViewCell() }
-        guard let searchItemList,
-              let snippet = searchItemList[indexPath.item].snippet else { return cell }
-        cell.updateCellImage(snippet: snippet)
+//        guard let searchItemList,
+//              let snippet = searchItemList[indexPath.item].snippet else { return cell }
+//        cell.updateCellImage(snippet: snippet)
+        guard let viewHistoryList = viewHistoryList, indexPath.row < viewHistoryList.count else { return cell }
+                cell.updateCellImage(viewHistory: viewHistoryList[indexPath.row])
         return cell
     }
     

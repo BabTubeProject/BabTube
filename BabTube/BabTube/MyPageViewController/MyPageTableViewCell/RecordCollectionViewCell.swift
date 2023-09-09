@@ -52,9 +52,23 @@ extension RecordCollectionViewCell {
         ])
     }
     
-    func updateCellImage(snippet: Snippet) {
-        let stringURL: String = snippet.thumbnails.medium.url
-        guard let url = URL(string: stringURL) else { return }
+//    func updateCellImage(snippet: Snippet) {
+//        let stringURL: String = snippet.thumbnails.medium.url
+//        guard let url = URL(string: stringURL) else { return }
+//        imageLoader.getImage(url: url) { result in
+//            switch result {
+//            case .success(let image):
+//                DispatchQueue.main.async {
+//                    self.thumbnailImageView.image = image
+//                }
+//            case .failure(let failure):
+//                print(failure.message)
+//            }
+//        }
+//    }
+    func updateCellImage(viewHistory: ViewHistory) {
+        let thumbnailStringURL = viewHistory.videoThumbnail
+        guard let url = URL(string: thumbnailStringURL) else { return }
         imageLoader.getImage(url: url) { result in
             switch result {
             case .success(let image):
