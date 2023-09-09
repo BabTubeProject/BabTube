@@ -19,7 +19,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //API 변수
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
-    private var searchItemList: [SearchItems]?
+    private var likeVideoList = UserDataManager.shared.loginUser?.likeVideo
     
     // 테이블 뷰 생성
     private let likeViewTable: UITableView = {
@@ -28,10 +28,18 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return likeViewTable
     }()
     
+    private let nonLikeVideoLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "좋아요를 누른 동영상이 없습니다."
+        label.font = .body
+        label.textColor = UIColor.mainColor
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        likeGetSnippet()
 
         //네비게이션바 이미지 
         let likeTitleImageView = UIImageView()
@@ -49,12 +57,17 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         navigationItem.leftBarButtonItem = likeTitleBarButtonItem
        
         view.addSubview(likeViewTable)
+        view.addSubview(nonLikeVideoLabel)
+        
         // 테이블 뷰 오토레이아웃 설정
         NSLayoutConstraint.activate([
             likeViewTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             likeViewTable.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             likeViewTable.topAnchor.constraint(equalTo: view.topAnchor), // 네비게이션 바 아래부터 표시되도록 상단 여백 설정
             likeViewTable.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            nonLikeVideoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nonLikeVideoLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
 
         likeViewTable.dataSource = self
@@ -66,36 +79,29 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // 셀 사이 간격 줄 없앰
         likeViewTable.separatorStyle = .none
     }
-    
-    private func likeGetSnippet() {
-        let query: [String: String] = ["part": "snippet", "maxResults": "5", "q": "무힌도전"]
-        apiHandler.getSearchJson(query: query) { result in
-            switch result {
-            case .success(let searchDataList):
-                self.searchItemList = searchDataList.items
-                DispatchQueue.main.sync {
-                    self.likeViewTable.reloadData()
-                }
-            case .failure(let failure):
-                print(failure.message)
-            }
-        }
-    }
 
     // 셀의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchItemList?.count ?? 0
+        if likeVideoList?.count == 0 {
+            likeViewTable.isHidden = true
+            nonLikeVideoLabel.isHidden = false
+        }
+        else {
+            likeViewTable.isHidden = false
+            nonLikeVideoLabel.isHidden = true
+        }
+        return likeVideoList?.count ?? 0
     }
 
     // 셀에 표시될 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCellIdentifier", for: indexPath) as! DetailLikeTableViewCell
         
-        guard let searchItemList,
-                let snippet = searchItemList[indexPath.row].snippet else {
+        guard let likeVideoList,
+                let snippet = likeVideoList[indexPath.row].snippet else {
             return cell
         }
-        cell.likeUpdateUI(snippet: snippet, items: searchItemList)
+        cell.likeUpdateUI(snippet: snippet, items: likeVideoList)
 
         return cell
     }
@@ -104,8 +110,8 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          
         //VideoDetail 화면으로 이동 및 VideoID 넘겨주기
-        if let searchItemList = searchItemList, indexPath.row < searchItemList.count {
-            let videoId = searchItemList[indexPath.row].id.videoId
+        if let likeVideoList = likeVideoList, indexPath.row < likeVideoList.count {
+            let videoId = likeVideoList[indexPath.row].videoId
             let videoDetail = VideoDetailViewController(videoId: videoId)
             navigationController?.pushViewController(videoDetail, animated: true)
         }
