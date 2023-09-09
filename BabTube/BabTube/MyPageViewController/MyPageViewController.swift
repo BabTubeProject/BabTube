@@ -29,7 +29,7 @@ class MyPageViewController: UIViewController {
     // API 활용을 위한 변수
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
-    private var viewHistoryList: [ViewHistory]?
+    private var viewHistoryList = UserDataManager.shared.loginUser?.viewHistory
 
     override func viewDidLoad() {
         super.viewDidLoad()
