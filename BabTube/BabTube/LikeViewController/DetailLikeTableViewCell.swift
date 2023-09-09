@@ -10,7 +10,7 @@ import UIKit
 class DetailLikeTableViewCell: UITableViewCell {
     
     //API 변수
-    private var searchItemList: [SearchItems]?
+    private var likeVideoList: [LikeVideo]?
     private let imageLoader = ImageLoader()
     
     // 셀에 표시할 UI
@@ -79,8 +79,8 @@ class DetailLikeTableViewCell: UITableViewCell {
     }
     
     //cell에 표시될 api 데이터
-    func likeUpdateUI(snippet: Snippet, items: [SearchItems]) {
-        self.searchItemList = items
+    func likeUpdateUI(snippet: Snippet, items: [LikeVideo]) {
+        self.likeVideoList = items
         titleLabel.text = snippet.title
         subtitleLabel.text = snippet.channelTitle
         contentLabel.text = snippet.description

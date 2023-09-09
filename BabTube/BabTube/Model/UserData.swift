@@ -21,6 +21,7 @@ struct UserData: Codable {
 
 struct LikeVideo: Codable {
     var videoId: String
+    var snippet: Snippet?
     var videoThumbnail: String
 }
 
