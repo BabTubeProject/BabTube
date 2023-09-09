@@ -29,7 +29,6 @@ class MyPageViewController: UIViewController {
     // API 활용을 위한 변수
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
-//    private var searchItemList: [SearchItems]?
     private var viewHistoryList: [ViewHistory]?
 
     override func viewDidLoad() {
@@ -38,7 +37,6 @@ class MyPageViewController: UIViewController {
         configureMyPageUI()
         addSubView()
         autoLayout()
-//        getSnippet()
         
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
@@ -48,22 +46,6 @@ class MyPageViewController: UIViewController {
         super.viewWillAppear(animated)
         myPageTableView.reloadData()
     }
-    
-    // Snippet을 가져오기 위한 함수
-//    private func getSnippet() {
-//        let query: [String: String] = ["part": "snippet", "maxResults": "5", "q": "무한도전"]
-//        apiHandler.getSearchJson(query: query) { result in
-//            switch result {
-//            case .success(let searchDataList):
-//                self.searchItemList = searchDataList.items
-//                DispatchQueue.main.async {
-//                    self.myPageTableView.reloadData()
-//                }
-//            case .failure(let failure):
-//                print(failure.message)
-//            }
-//        }
-//    }
 }
 
 extension MyPageViewController {
@@ -147,8 +129,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
             recordTableViewCell.selectionStyle = .none
             recordTableViewCell.recordTableViewCellDelegate = self
-//            guard let searchItemList else { return recordTableViewCell }
-//            recordTableViewCell.updateUI(items: searchItemList)
             guard let viewHistoryList else { return recordTableViewCell }
             recordTableViewCell.updateUI(items: viewHistoryList)
             return recordTableViewCell
@@ -208,13 +188,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 extension MyPageViewController: RecordTableViewCellDelegate {
     
     func didTapRecordCollectionViewCell(at indexPath: IndexPath) {
-//        if let searchItemList = searchItemList, indexPath.row < searchItemList.count {
-//
-//            // 각 cell의 indexPath의 videoId를 전달
-//            let videoId = searchItemList[indexPath.row].id.videoId
-//            let videoDetailVC = VideoDetailViewController(videoId: videoId)
-//            navigationController?.pushViewController(videoDetailVC, animated: true)
-//        }
         if let viewHistoryList = viewHistoryList, indexPath.row < viewHistoryList.count {
             let videoId = viewHistoryList[indexPath.row].videoId
             let videoDetailVC = VideoDetailViewController(videoId: videoId)
