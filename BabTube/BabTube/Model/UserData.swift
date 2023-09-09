@@ -8,12 +8,14 @@
 import UIKit
 
 struct UserData: Codable {
+    typealias VideoID = String
+    typealias ThumbnailURL = String
     var name: String?
     var userID: String
     var password: String
     var nickname: String?
     var userImage: Data?
-    var likeVideo: [LikeVideo] = []
+    var likeVideo: [VideoID:ThumbnailURL] = [:]
     var viewHistory: [ViewHistory] = []
 }
 
