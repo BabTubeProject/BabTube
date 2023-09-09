@@ -42,6 +42,15 @@ class RecordTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let nonRecordLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "시청 기록이 없습니다."
+        label.font = .body
+        label.textColor = UIColor.mainColor
+        return label
+    }()
+    
     private let recordCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -71,6 +80,7 @@ extension RecordTableViewCell {
     private func addContentView() {
         contentView.addSubview(recordLabel)
         contentView.addSubview(recordCollectionView)
+        contentView.addSubview(nonRecordLabel)
     }
     
     private func autoLayout() {
@@ -78,6 +88,11 @@ extension RecordTableViewCell {
             recordLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             recordLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             recordLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            
+            nonRecordLabel.topAnchor.constraint(equalTo: recordLabel.bottomAnchor, constant: 8),
+            nonRecordLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            nonRecordLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
+            nonRecordLabel.heightAnchor.constraint(equalToConstant: 100),
             
             recordCollectionView.topAnchor.constraint(equalTo: recordLabel.bottomAnchor, constant: 8),
             recordCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -95,6 +110,14 @@ extension RecordTableViewCell {
 extension RecordTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if viewHistoryList?.count == 0 {
+            recordCollectionView.isHidden = true
+            nonRecordLabel.isHidden = false
+        }
+        else {
+            recordCollectionView.isHidden = false
+            nonRecordLabel.isHidden = true
+        }
         return viewHistoryList?.count ?? 0
     }
     
