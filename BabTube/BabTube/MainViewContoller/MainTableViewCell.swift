@@ -8,14 +8,14 @@
 import UIKit
 //cell delegate protocol
 protocol CollectionViewCellDelegate: AnyObject {
-    func collectionView(mainCVCell: MainCVCell?, index: Int, didTappedInTableViewCell: MainTVCell)
+    func collectionView(mainCVCell: MainCVCell?, index: Int,at indexPath: IndexPath, didTappedInTableViewCell: MainTVCell)
 }
 
 class MainTVCell: UITableViewCell {
     
     //위임자 (ViewController와 강한 참조 순환이 발생하기 때문에 weak로 선언)
     weak var cellDelegate: CollectionViewCellDelegate?
-    
+    private var searchItemList: [SearchItems]?
     //cell 식별자
     static let id = "MainTableViewCell"
     
@@ -79,6 +79,10 @@ extension MainTVCell {
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor)
         ])
     }
+    func updateUI(items: [SearchItems]) {
+        searchItemList = items
+        collectionView.reloadData()
+    }
 }
 
 extension MainTVCell: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -86,7 +90,7 @@ extension MainTVCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     //CollectionView 보여줄 셀의 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        6
+        return searchItemList?.count ?? 0
     }
     
     //CollectionView 셀에 보여줄 아이템
@@ -95,13 +99,16 @@ extension MainTVCell: UICollectionViewDataSource, UICollectionViewDelegate {
             return UICollectionViewCell()
         }
         cell.contentView.backgroundColor = UIColor.green
+        guard let searchItemList,
+              let snippet = searchItemList[indexPath.item].snippet else { return cell }
+        cell.updateCellImage(snippet: snippet)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView,  didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCVCell.id, for: indexPath) as! MainCVCell
         if let cellDelegate = cellDelegate {
-            cellDelegate.collectionView(mainCVCell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+            cellDelegate.collectionView(mainCVCell: cell, index: indexPath.item, at: indexPath, didTappedInTableViewCell: self)
         }
     }
 }
