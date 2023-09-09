@@ -12,6 +12,7 @@ final class CommentTableViewCell: UITableViewCell, Reuseable {
     private let profileImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "person"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
         return imageView
     }()
     

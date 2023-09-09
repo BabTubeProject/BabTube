@@ -35,7 +35,11 @@ final class VideoDetailViewController: UIViewController {
         return tableView
     }()
     private var tableViewheight: NSLayoutConstraint? = nil
-    private let scrollView: UIScrollView = UIScrollView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
     
     private let videoDecriptionStackView: VideoDescriptionVerticalStackView = VideoDescriptionVerticalStackView()
     private let addCommentStackView: AddCommentStackView = AddCommentStackView()
@@ -50,14 +54,13 @@ final class VideoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addViews()
         configureAutoLayout()
-        configureTableView()
+        configureView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         guard let tableViewheight else { return }
         tableViewheight.constant = commentTableView.contentSize.height + addCommentStackView.bounds.height + margin
     }
@@ -137,6 +140,9 @@ final class VideoDetailViewController: UIViewController {
             return
         }
         videoDecriptionStackView.updateArrangedSubviews(title: snippet.title, description: snippet.description, publishTime: snippet.publishedAt, statistics: statistics)
+        DispatchQueue.main.async {
+            self.view.setNeedsLayout()
+        }
     }
     
     private func removeAlert(index: Int) {
@@ -145,6 +151,7 @@ final class VideoDetailViewController: UIViewController {
             self.commentList.remove(at: index)
             CommentManager.shared.saveCommentList(videoId: self.videoId, commentList: self.commentList)
             self.commentTableView.reloadData()
+            self.view.setNeedsLayout()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
@@ -159,7 +166,7 @@ final class VideoDetailViewController: UIViewController {
 // MARK: 기본 UISetting
 extension VideoDetailViewController {
     
-    private func configureTableView() {
+    private func configureView() {
         
         view.backgroundColor = UIColor.white
         
@@ -175,8 +182,18 @@ extension VideoDetailViewController {
             let comment = Comment(userId: userData.userID, profileImage: userData.userImage, text: textComment)
             self.commentList.append(comment)
             CommentManager.shared.saveCommentList(videoId: videoId, commentList: commentList)
-            self.commentTableView.reloadData()
-            self.viewWillLayoutSubviews()
+            DispatchQueue.main.async {
+                self.commentTableView.reloadData()
+                self.view.setNeedsLayout()
+                self.scrollToBottom()
+            }
+        }
+        
+        guard let userData = UserDataManager.shared.loginUser,
+              let userImageData = userData.userImage else { return }
+        let myProfileImage = UIImage(data: userImageData)
+        DispatchQueue.main.async {
+            self.addCommentStackView.profileImageView.image = myProfileImage
         }
         
         addCommentStackView.layoutIfNeeded()
@@ -229,6 +246,14 @@ extension VideoDetailViewController {
             addCommentStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             addCommentStackView.bottomAnchor.constraint(equalTo: keyboardArea.topAnchor),
         ])
+
+    }
+    
+    func scrollToBottom(){
+        DispatchQueue.main.async {
+            let bottomOffset = CGPoint(x: 0, y: (self.scrollView.contentSize.height - self.scrollView.bounds.height + self.scrollView.contentInset.bottom) + self.addCommentStackView.bounds.height)
+            self.scrollView.setContentOffset(bottomOffset, animated: true)
+        }
     }
 }
 
@@ -269,6 +294,7 @@ extension VideoDetailViewController: UITableViewDataSource {
             guard let self else { return }
             self.removeAlert(index: indexPath.row)
         }
+        commentCell.selectionStyle = .none
         return commentCell
     }
 
