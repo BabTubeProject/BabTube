@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    private let sections: [String] = ["카테고리1", "카테고리2", "카테고리3", "카테고리4", "카테고리5", "카테고리6"]
+    private let sections: [String] = ["무한도전", "1박2일", "지구오락실"]
 
     var mainTableView: UITableView = {
         let mainTableView = UITableView()
@@ -24,7 +24,8 @@ class MainViewController: UIViewController {
     private let apiHandler: APIHandler = .init()
     private let imageLoader: ImageLoader = .init()
     private var searchItemList: [SearchItems]?
-
+    private var everysearchItemList: [[SearchItems]] = []
+    private var entertainmentTitle = ["무한도전", "1박2일", "지구오락실"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,16 +38,21 @@ class MainViewController: UIViewController {
     }
 
     private func getSnippet() {
-        let query: [String: String] = ["part": "snippet", "maxResults": "5", "q": "무한도전"]
-        apiHandler.getSearchJson(query: query) { result in
-            switch result {
-            case .success(let searchDataList):
-                self.searchItemList = searchDataList.items
-                DispatchQueue.main.async {
-                    self.mainTableView.reloadData()
+        for title in entertainmentTitle {
+            let query: [String: String] = ["part": "snippet", "maxResults": "5", "q": title]
+            apiHandler.getSearchJson(query: query) { result in
+                switch result {
+                case .success(let searchDataList):
+                    var searchs = searchDataList.items
+                    self.everysearchItemList.append(searchs)
+
+                    DispatchQueue.main.async {
+                        self.mainTableView.reloadData()
+                    }
+
+                case .failure(let failure):
+                    print(failure.message)
                 }
-            case .failure(let failure):
-                print(failure.message)
             }
         }
     }
@@ -100,13 +106,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return sections.count
     }
 
-    // header 폰트 속성
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.font = UIFont.title2
-        header.textLabel?.textColor = UIColor.black
-    }
-
     // section마다 표현될 title
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
@@ -123,8 +122,26 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.cellDelegate = self
         cell.selectionStyle = .none
-        guard let searchItemList else { return cell }
-        cell.updateUI(items: searchItemList)
+        if everysearchItemList.count == 3 {
+            if indexPath.section == 0 {
+                searchItemList = everysearchItemList[0]
+                guard let searchItemList = searchItemList else { return cell }
+                cell.updateUI(items: searchItemList)
+                return cell
+            }
+            else if indexPath.section == 1 {
+                searchItemList = everysearchItemList[1]
+                guard let searchItemList = searchItemList else { return cell }
+                cell.updateUI(items: searchItemList)
+                return cell
+            }
+            else if indexPath.section == 2 {
+                searchItemList = everysearchItemList[2]
+                guard let searchItemList = searchItemList else { return cell }
+                cell.updateUI(items: searchItemList)
+                return cell
+            }
+        }
         return cell
     }
 }
