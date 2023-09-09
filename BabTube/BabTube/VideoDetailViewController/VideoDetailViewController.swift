@@ -35,7 +35,11 @@ final class VideoDetailViewController: UIViewController {
         return tableView
     }()
     private var tableViewheight: NSLayoutConstraint? = nil
-    private let scrollView: UIScrollView = UIScrollView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
     
     private let videoDecriptionStackView: VideoDescriptionVerticalStackView = VideoDescriptionVerticalStackView()
     private let addCommentStackView: AddCommentStackView = AddCommentStackView()
@@ -50,7 +54,6 @@ final class VideoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addViews()
         configureAutoLayout()
         configureView()
@@ -100,7 +103,6 @@ final class VideoDetailViewController: UIViewController {
     
     private func loadComment() {
         commentList = CommentManager.shared.loadCommetList(videoId: videoId)
-        print(commentList)
     }
     
     // snippet이 없는 경우 사용, snippet과 Statistics를 같이 가져오도록 하는 함수
@@ -149,6 +151,7 @@ final class VideoDetailViewController: UIViewController {
             self.commentList.remove(at: index)
             CommentManager.shared.saveCommentList(videoId: self.videoId, commentList: self.commentList)
             self.commentTableView.reloadData()
+            self.view.setNeedsLayout()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
@@ -181,6 +184,8 @@ extension VideoDetailViewController {
             CommentManager.shared.saveCommentList(videoId: videoId, commentList: commentList)
             DispatchQueue.main.async {
                 self.commentTableView.reloadData()
+                self.view.setNeedsLayout()
+                self.scrollToBottom()
             }
         }
         
@@ -243,6 +248,13 @@ extension VideoDetailViewController {
         ])
 
     }
+    
+    func scrollToBottom(){
+        DispatchQueue.main.async {
+            let bottomOffset = CGPoint(x: 0, y: (self.scrollView.contentSize.height - self.scrollView.bounds.height + self.scrollView.contentInset.bottom) + self.addCommentStackView.bounds.height)
+            self.scrollView.setContentOffset(bottomOffset, animated: true)
+        }
+    }
 }
 
 extension VideoDetailViewController: UITableViewDelegate {
@@ -282,6 +294,7 @@ extension VideoDetailViewController: UITableViewDataSource {
             guard let self else { return }
             self.removeAlert(index: indexPath.row)
         }
+        commentCell.selectionStyle = .none
         return commentCell
     }
 

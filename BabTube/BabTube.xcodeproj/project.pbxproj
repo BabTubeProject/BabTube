@@ -12,6 +12,7 @@
 		109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109089D12AA5F87D001060A4 /* LogoutTableViewCell.swift */; };
 		10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */; };
 		10BDAD882AA751F400DC2F0D /* Margin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDAD872AA751F400DC2F0D /* Margin.swift */; };
+		18ADD9382AAB25E8007882FF /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADD9372AAB25E8007882FF /* UITextView.swift */; };
 		18B943AB2AAAC70B00E674F3 /* VideoComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AA2AAAC70B00E674F3 /* VideoComment.swift */; };
 		18B943AD2AAAC76C00E674F3 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AC2AAAC76C00E674F3 /* CommentManager.swift */; };
 		18D262392AA796E300652695 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D262382AA796E300652695 /* CommentTableViewCell.swift */; };
@@ -54,6 +55,7 @@
 		109089D12AA5F87D001060A4 /* LogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutTableViewCell.swift; sourceTree = "<group>"; };
 		10BDAD7F2AA6E3B500DC2F0D /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		10BDAD872AA751F400DC2F0D /* Margin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Margin.swift; sourceTree = "<group>"; };
+		18ADD9372AAB25E8007882FF /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		18B943AA2AAAC70B00E674F3 /* VideoComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComment.swift; sourceTree = "<group>"; };
 		18B943AC2AAAC76C00E674F3 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		18D262382AA796E300652695 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				18D6C3E22AA893F40036766F /* ImageLoader.swift */,
 				18D98F432AA9EFAD004816D0 /* Date.swift */,
 				18D98F452AA9F61D004816D0 /* String.swift */,
+				18ADD9372AAB25E8007882FF /* UITextView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				689BC58E2AA73E21005BA3A2 /* UserData.swift in Sources */,
 				18D659092AA5B5FA000468D9 /* AppDelegate.swift in Sources */,
 				18D98F442AA9EFAD004816D0 /* Date.swift in Sources */,
+				18ADD9382AAB25E8007882FF /* UITextView.swift in Sources */,
 				10BDAD882AA751F400DC2F0D /* Margin.swift in Sources */,
 				18D659382AA5BA9E000468D9 /* Color.swift in Sources */,
 				F0DE6E3B2AA6BB0D00DC03FE /* MainCollectionViewCell.swift in Sources */,

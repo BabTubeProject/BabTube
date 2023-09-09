@@ -24,10 +24,15 @@ final class AddCommentStackView: UIStackView {
     }()
     private let commentTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "댓글 추가"
+        textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         textView.font = .body
-        textView.backgroundColor = .systemGray4
+        textView.backgroundColor = .white
         textView.layer.cornerRadius = 5
+        textView.textColor = .systemGray4
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.systemGray4.cgColor
+        textView.showsVerticalScrollIndicator = false
+        textView.isScrollEnabled = false
         return textView
     }()
     private let sendButton: UIButton = {
@@ -36,6 +41,7 @@ final class AddCommentStackView: UIStackView {
         button.tintColor = .systemGray5
         return button
     }()
+    private let textViewPlaceHolder = "댓글을 입력해주세요"
     var commentAddHandler: ((String) -> Void)?
     
     private let margin: CGFloat = 12
@@ -75,12 +81,21 @@ extension AddCommentStackView {
     private func configureView() {
         profileImageView.layer.cornerRadius = imageSize / 2
         
+        commentTextView.delegate = self
+        commentTextView.text = textViewPlaceHolder
+        
         sendButton.addTarget(self, action: #selector(sendButtonClick), for: .touchUpInside)
     }
     
     @objc private func sendButtonClick() {
         guard let textComment = commentTextView.text else { return }
         commentAddHandler?(textComment)
+        commentTextView.text = ""
+        commentTextView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = imageSize
+            }
+        }
     }
     
     private func configureAutoLayout() {
@@ -90,11 +105,48 @@ extension AddCommentStackView {
             lineView.trailingAnchor.constraint(equalTo: trailingAnchor),
             lineView.heightAnchor.constraint(equalToConstant: 1),
             
-            commentTextView.topAnchor.constraint(equalTo: topAnchor, constant: margin),
-            commentTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -margin),
-                            
             profileImageView.heightAnchor.constraint(equalToConstant: imageSize),
             profileImageView.widthAnchor.constraint(equalToConstant: imageSize),
+            
+            commentTextView.topAnchor.constraint(equalTo: topAnchor, constant: margin),
+            commentTextView.heightAnchor.constraint(equalToConstant: imageSize),
+            commentTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -margin),
+                          
+            sendButton.heightAnchor.constraint(equalToConstant: imageSize),
+            sendButton.widthAnchor.constraint(equalToConstant: imageSize),
         ])
+    }
+}
+
+extension AddCommentStackView: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: textView.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        
+        textView.constraints.forEach { (constraint) in
+        
+            if estimatedSize.height < imageSize - 5 {
+                textView.isScrollEnabled = false
+            } else if textView.numLines > 4 {
+                textView.isScrollEnabled = true
+            } else {
+                if constraint.firstAttribute == .height {
+                    constraint.constant = estimatedSize.height
+                }
+            }
+        }
+    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == textViewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = textViewPlaceHolder
+            textView.textColor = .systemGray4
+        }
     }
 }
