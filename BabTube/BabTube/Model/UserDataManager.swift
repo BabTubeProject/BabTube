@@ -77,11 +77,9 @@ class UserDataManager {
     func addLikeVideo(userID: String, likeVideo: LikeVideo) {
         guard let userIndex = users.firstIndex(where: { $0.userID == userID }),
             var likeAddedLoginUser = loginUser else { return }
-//        likeAddedLoginUser.likeVideo.insert(likeVideo, at: 0)
-        likeAddedLoginUser.likeVideo[likeVideo.videoId] = likeVideo.videoThumbnail
+        likeAddedLoginUser.likeVideo[likeVideo.videoId] = likeVideo
         loginUser = likeAddedLoginUser
-        users[userIndex].likeVideo[likeVideo.videoId] = likeVideo.videoThumbnail
-//        users[userIndex].likeVideo.insert(likeVideo, at: 0)
+        users[userIndex].likeVideo[likeVideo.videoId] = likeVideo
         saveUsers()
     }
 
@@ -97,12 +95,9 @@ class UserDataManager {
     }
 
     // 좋아하는 동영상 목록 반환
-    func getLikeVideos(userIndex: Int) -> [String:String] {
-        guard userIndex >= 0, userIndex < users.count else {
-            return [:]
-        }
-
-        return users[userIndex].likeVideo
+    func getLikeVideos() -> [LikeVideo] {
+        guard let loginUser else { return [] }
+        return loginUser.likeVideo.values.sorted(by: { $0.likeTime < $1.likeTime })
     }
     
     func addViewHistory(userID: String,viewHistory: ViewHistory){

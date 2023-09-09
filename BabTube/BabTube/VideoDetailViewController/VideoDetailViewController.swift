@@ -165,7 +165,7 @@ final class VideoDetailViewController: UIViewController {
     private func addViewHistory(thumbnails: Thumbanils) {
         guard let loginUser = UserDataManager.shared.loginUser else { return }
         let viewHistory = ViewHistory(videoId: videoId, videoThumbnail: thumbnails.high.url)
-        UserDataManager.shared.addViewHistory(userId: loginUser.userID, viewHistory: viewHistory)
+        UserDataManager.shared.addViewHistory(userID: loginUser.userID, viewHistory: viewHistory)
     }
     
 }
@@ -200,7 +200,11 @@ extension VideoDetailViewController {
               let snippet else { return }
         videoDecriptionStackView.likeVideoAddHandelr = { [weak self] likeSelected in
             guard let self else { return }
-            UserDataManager.shared.addLikeVideo(userID: loginUserID, likeVideo: LikeVideo(videoId: self.videoId, videoThumbnail: snippet.thumbnails.default.url))
+            if likeSelected {
+                UserDataManager.shared.addLikeVideo(userID: loginUserID, likeVideo: LikeVideo(videoId: self.videoId, videoThumbnail: snippet.thumbnails.default.url))
+            } else {
+                UserDataManager.shared.removeLikeVideo(userID: loginUserID, likeVideoID: self.videoId)
+            }
         }
         
         guard let userData = UserDataManager.shared.loginUser,

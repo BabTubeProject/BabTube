@@ -15,11 +15,12 @@ struct UserData: Codable {
     var password: String
     var nickname: String?
     var userImage: Data?
-    var likeVideo: [VideoID:ThumbnailURL] = [:]
+    var likeVideo: [VideoID:LikeVideo] = [:]
     var viewHistory: [ViewHistory] = []
 }
 
 struct LikeVideo: Codable {
+    var likeTime: Date = Date()
     var videoId: String
     var snippet: Snippet?
     var videoThumbnail: String
