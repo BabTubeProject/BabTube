@@ -32,7 +32,6 @@ struct VideosItems: Codable {
 }
 
 struct VideoInfo: Codable {
-    let kind: String
     let videoId: String
 }
 
