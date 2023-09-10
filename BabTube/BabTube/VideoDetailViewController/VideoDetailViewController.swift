@@ -140,6 +140,7 @@ final class VideoDetailViewController: UIViewController {
             return
         }
         videoDecriptionStackView.updateArrangedSubviews(title: snippet.title, description: snippet.description, publishTime: snippet.publishedAt, statistics: statistics)
+        addViewHistory(thumbnails: snippet.thumbnails)
         DispatchQueue.main.async {
             self.view.setNeedsLayout()
         }
@@ -159,6 +160,12 @@ final class VideoDetailViewController: UIViewController {
         alertVC.addAction(removeAction)
         
         present(alertVC, animated: true)
+    }
+    
+    private func addViewHistory(thumbnails: Thumbanils) {
+        guard let loginUser = UserDataManager.shared.loginUser else { return }
+        let viewHistory = ViewHistory(videoId: videoId, videoThumbnail: thumbnails.high.url)
+        UserDataManager.shared.addViewHistory(userID: loginUser.userID, viewHistory: viewHistory)
     }
     
 }
@@ -186,6 +193,17 @@ extension VideoDetailViewController {
                 self.commentTableView.reloadData()
                 self.view.setNeedsLayout()
                 self.scrollToBottom()
+            }
+        }
+        
+        guard let loginUserID = UserDataManager.shared.loginUser?.userID,
+              let snippet else { return }
+        videoDecriptionStackView.likeVideoAddHandelr = { [weak self] likeSelected in
+            guard let self else { return }
+            if likeSelected {
+                UserDataManager.shared.addLikeVideo(userID: loginUserID, likeVideo: LikeVideo(videoId: self.videoId, videoThumbnail: snippet.thumbnails.default.url))
+            } else {
+                UserDataManager.shared.removeLikeVideo(userID: loginUserID, likeVideoID: self.videoId)
             }
         }
         

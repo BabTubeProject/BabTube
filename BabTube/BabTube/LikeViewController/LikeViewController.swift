@@ -19,7 +19,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //API 변수
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
-    private var likeVideoList = UserDataManager.shared.loginUser?.likeVideo
+    private var likeVideoList = UserDataManager.shared.getLikeVideos()
     
     // 테이블 뷰 생성
     private let likeViewTable: UITableView = {
@@ -82,7 +82,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // 셀의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if likeVideoList?.count == 0 {
+        if likeVideoList.count == 0 {
             likeViewTable.isHidden = true
             nonLikeVideoLabel.isHidden = false
         }
@@ -90,15 +90,14 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             likeViewTable.isHidden = false
             nonLikeVideoLabel.isHidden = true
         }
-        return likeVideoList?.count ?? 0
+        return likeVideoList.count
     }
 
     // 셀에 표시될 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCellIdentifier", for: indexPath) as! DetailLikeTableViewCell
         
-        guard let likeVideoList,
-                let snippet = likeVideoList[indexPath.row].snippet else {
+        guard let snippet = likeVideoList[indexPath.row].snippet else {
             return cell
         }
         cell.likeUpdateUI(snippet: snippet, items: likeVideoList)
@@ -110,7 +109,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          
         //VideoDetail 화면으로 이동 및 VideoID 넘겨주기
-        if let likeVideoList = likeVideoList, indexPath.row < likeVideoList.count {
+        if indexPath.row < likeVideoList.count {
             let videoId = likeVideoList[indexPath.row].videoId
             let videoDetail = VideoDetailViewController(videoId: videoId)
             navigationController?.pushViewController(videoDetail, animated: true)

@@ -23,6 +23,8 @@ class MyPageViewController: UIViewController {
         
         // 스크롤 없애기
         tableView.isScrollEnabled = false
+        
+        tableView.showsHorizontalScrollIndicator = false
         return tableView
     }()
     
@@ -176,11 +178,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             dismiss(animated: true)
         }
         else if indexPath.row == 3 {
-            UserDataManager.shared.clearUsers()
-            let loginVC = LoginViewController()
-            loginVC.modalPresentationStyle = .fullScreen
-            loginVC.modalTransitionStyle = .coverVertical
-            present(loginVC, animated: true)
+            guard let loginUser = UserDataManager.shared.loginUser else { return }
+            UserDataManager.shared.removeUser(userID: loginUser.userID)
+            dismiss(animated: true)
         }
     }
 }

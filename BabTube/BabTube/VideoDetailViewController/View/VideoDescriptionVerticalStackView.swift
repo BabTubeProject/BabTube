@@ -34,7 +34,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.spacing = 6
         return stackView
     }()
@@ -65,6 +65,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
         return label
     }()
     private var isMoreDescriptionHidden: Bool = true
+    var likeVideoAddHandelr: ((Bool)->Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -110,6 +111,7 @@ extension VideoDescriptionVerticalStackView {
     
     @objc private func likeButtonClick() {
         likeButton.isSelected.toggle()
+        likeVideoAddHandelr?(likeButton.isSelected)
     }
     
     @objc private func moreDescription() {
