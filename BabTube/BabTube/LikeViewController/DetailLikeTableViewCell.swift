@@ -47,10 +47,10 @@ class DetailLikeTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         // 셀에 추가
-        addSubview(likeImageView)
-        addSubview(titleLabel)
-        addSubview(subtitleLabel)
-        addSubview(contentLabel)
+        contentView.addSubview(likeImageView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(subtitleLabel)
+        contentView.addSubview(contentLabel)
 
         // 오토레이아웃
         NSLayoutConstraint.activate([

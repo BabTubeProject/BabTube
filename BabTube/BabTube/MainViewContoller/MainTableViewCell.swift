@@ -93,6 +93,7 @@ extension MainTVCell: UICollectionViewDataSource, UICollectionViewDelegate {
     //CollectionView 보여줄 셀의 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchItemList?.count ?? 0
+//        return 0
     }
     
     //CollectionView 셀에 보여줄 아이템
