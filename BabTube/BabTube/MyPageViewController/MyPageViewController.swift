@@ -31,7 +31,7 @@ class MyPageViewController: UIViewController {
     // API 활용을 위한 변수
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
-    private var viewHistoryList = UserDataManager.shared.loginUser?.viewHistory
+    private var viewHistoryList = UserDataManager.shared.getViewHistory()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +46,8 @@ class MyPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewHistoryList = UserDataManager.shared.loginUser?.viewHistory
-        print(viewHistoryList!.map { $0.videoId })
+        viewHistoryList = UserDataManager.shared.getViewHistory()
+        print(viewHistoryList.map { $0.videoId })
         myPageTableView.reloadData()
     }
 }
@@ -133,7 +133,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
             recordTableViewCell.selectionStyle = .none
             recordTableViewCell.recordTableViewCellDelegate = self
-            guard let viewHistoryList else { return recordTableViewCell }
             recordTableViewCell.updateUI(items: viewHistoryList)
             return recordTableViewCell
         }
@@ -191,7 +190,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 extension MyPageViewController: RecordTableViewCellDelegate {
     
     func didTapRecordCollectionViewCell(at indexPath: IndexPath) {
-        if let viewHistoryList = viewHistoryList, indexPath.row < viewHistoryList.count {
+        if indexPath.row < viewHistoryList.count {
             let videoId = viewHistoryList[indexPath.row].videoId
             let videoDetailVC = VideoDetailViewController(videoId: videoId)
             navigationController?.pushViewController(videoDetailVC, animated: true)

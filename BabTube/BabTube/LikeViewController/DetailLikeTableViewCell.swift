@@ -23,6 +23,7 @@ class DetailLikeTableViewCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         label.font = UIFont.title2
         return label
     }()
@@ -55,10 +56,9 @@ class DetailLikeTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             // thumbnailImageView
             likeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
-            likeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin),
+            likeImageView.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             likeImageView.widthAnchor.constraint(equalToConstant: 90), // 이미지 크기 조정
             likeImageView.heightAnchor.constraint(equalToConstant: 90),
-            likeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin),
             
 
             // titleLabel
