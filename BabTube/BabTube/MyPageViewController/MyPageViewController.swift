@@ -46,6 +46,8 @@ class MyPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewHistoryList = UserDataManager.shared.loginUser?.viewHistory
+        print(viewHistoryList!.map { $0.videoId })
         myPageTableView.reloadData()
     }
 }

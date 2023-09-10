@@ -25,6 +25,8 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private let likeViewTable: UITableView = {
         let likeViewTable = UITableView()
         likeViewTable.translatesAutoresizingMaskIntoConstraints = false
+        likeViewTable.estimatedRowHeight = 106
+        likeViewTable.rowHeight = UITableView.automaticDimension
         return likeViewTable
     }()
     

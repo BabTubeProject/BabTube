@@ -126,19 +126,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.section == 0 {
                 searchItemList = everysearchItemList[0]
                 guard let searchItemList = searchItemList else { return cell }
-                cell.updateUI(items: searchItemList)
+                cell.updateUI(items: searchItemList, section: indexPath.section)
                 return cell
             }
             else if indexPath.section == 1 {
                 searchItemList = everysearchItemList[1]
                 guard let searchItemList = searchItemList else { return cell }
-                cell.updateUI(items: searchItemList)
+                cell.updateUI(items: searchItemList, section: indexPath.section)
                 return cell
             }
             else if indexPath.section == 2 {
                 searchItemList = everysearchItemList[2]
                 guard let searchItemList = searchItemList else { return cell }
-                cell.updateUI(items: searchItemList)
+                cell.updateUI(items: searchItemList, section: indexPath.section)
                 return cell
             }
         }
@@ -148,12 +148,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 // cell 클릭시 VideoDetail 화면으로 이동
 extension MainViewController: CollectionViewCellDelegate {
-    func collectionView(mainCVCell: MainCVCell?, index: Int, at indexPath: IndexPath, didTappedInTableViewCell: MainTVCell) {
-        if let searchItemList = searchItemList, indexPath.row < searchItemList.count {
-            // 각 cell의 indexPath의 videoId를 전달
-            let videoId = searchItemList[indexPath.row].id.videoId
-            let detailVC = VideoDetailViewController(videoId: videoId)
-            navigationController?.pushViewController(detailVC, animated: true)
-        }
+    func collectionView(section: Int, index: Int) {
+        // 각 cell의 indexPath의 videoId를 전달
+        let videoId = everysearchItemList[section][index].id.videoId
+        let detailVC = VideoDetailViewController(videoId: videoId)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

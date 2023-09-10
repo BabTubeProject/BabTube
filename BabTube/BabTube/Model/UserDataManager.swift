@@ -97,13 +97,13 @@ class UserDataManager {
     // 좋아하는 동영상 목록 반환
     func getLikeVideos() -> [LikeVideo] {
         guard let loginUser else { return [] }
-        return loginUser.likeVideo.values.sorted(by: { $0.likeTime < $1.likeTime })
+        return loginUser.likeVideo.values.sorted(by: { $0.likeTime > $1.likeTime })
     }
     
     func addViewHistory(userID: String,viewHistory: ViewHistory){
         guard let userIndex = users.firstIndex(where: { $0.userID == userID }),
             var viewHistoryAddedLoginUser = loginUser else { return }
-        viewHistoryAddedLoginUser.viewHistory.removeAll(where: { $0.videoId == viewHistory.videoId })
+        viewHistoryAddedLoginUser.viewHistory = viewHistoryAddedLoginUser.viewHistory.filter { $0.videoId != viewHistory.videoId }
         if viewHistoryAddedLoginUser.viewHistory.count == 10 { viewHistoryAddedLoginUser.viewHistory.removeLast() }
         viewHistoryAddedLoginUser.viewHistory.insert(viewHistory, at: 0)
         loginUser = viewHistoryAddedLoginUser
