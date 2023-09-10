@@ -123,7 +123,6 @@ extension RecordTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCollectionViewCell.identifier, for: indexPath) as? RecordCollectionViewCell else { return UICollectionViewCell() }
-
         guard let viewHistoryList = viewHistoryList, indexPath.row < viewHistoryList.count else { return cell }
                 cell.updateCellImage(viewHistory: viewHistoryList[indexPath.row])
         return cell
