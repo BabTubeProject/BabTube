@@ -20,6 +20,14 @@ class MainViewController: UIViewController {
         mainTableView.register(MainTVCell.self, forCellReuseIdentifier: MainTVCell.id)
         return mainTableView
     }()
+    
+    private let sectionTitle: UILabel = {
+        let label = UILabel()
+        label.font = .title2
+        label.textColor = UIColor.black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     private let apiHandler: APIHandler = .init()
     private let imageLoader: ImageLoader = .init()
@@ -43,7 +51,7 @@ class MainViewController: UIViewController {
             apiHandler.getSearchJson(query: query) { result in
                 switch result {
                 case .success(let searchDataList):
-                    var searchs = searchDataList.items
+                    let searchs = searchDataList.items
                     self.everysearchItemList.append(searchs)
 
                     DispatchQueue.main.async {
@@ -100,15 +108,27 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MainTVCell.cellHeight
     }
-
-    // section의 개수
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
-    }
-
+    
     // section마다 표현될 title
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 30
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = UIView()
+//        sectionTitle.text = sections[section]
+//        headerView.addSubview(sectionTitle)
+//        return headerView
+//    }
+
+    // UITableViewDataSource
+    // section의 개수
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
     }
 
     // section마다 표현될 row의 개수
