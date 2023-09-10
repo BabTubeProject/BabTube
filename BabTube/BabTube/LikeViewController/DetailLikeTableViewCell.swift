@@ -47,37 +47,38 @@ class DetailLikeTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         // 셀에 추가
-        addSubview(likeImageView)
-        addSubview(titleLabel)
-        addSubview(subtitleLabel)
-        addSubview(contentLabel)
+        contentView.addSubview(likeImageView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(subtitleLabel)
+        contentView.addSubview(contentLabel)
 
+        let space: CGFloat = 8
         // 오토레이아웃
         NSLayoutConstraint.activate([
             // thumbnailImageView
-
             likeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
             likeImageView.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-            likeImageView.widthAnchor.constraint(equalToConstant: 160), // 이미지 크기 조정
-
-            likeImageView.heightAnchor.constraint(equalToConstant: 90),
-            
+            likeImageView.widthAnchor.constraint(equalToConstant: 157), // 이미지 크기 조정
+            likeImageView.heightAnchor.constraint(equalToConstant: 88),
 
             // titleLabel
-            titleLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: margin),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin),
+            titleLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: space),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: space),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
+            titleLabel.heightAnchor.constraint(equalToConstant: 44),
 
             // subtitleLabel
             subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: space),
             subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
+            subtitleLabel.heightAnchor.constraint(equalToConstant: 17),
 
             // contentLabel
-            contentLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: margin),
-            contentLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 8),
+            contentLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            contentLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 2),
             contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
-            contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin)
+            contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -space),
+            contentLabel.heightAnchor.constraint(equalToConstant: 17)
         ])
     }
     
