@@ -79,6 +79,12 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // 셀 사이 간격 줄 없앰
         likeViewTable.separatorStyle = .none
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        likeVideoList = UserDataManager.shared.getLikeVideos()
+        likeViewTable.reloadData()
+    }
 
     // 셀의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

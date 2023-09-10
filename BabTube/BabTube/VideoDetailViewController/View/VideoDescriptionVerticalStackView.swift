@@ -23,7 +23,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
         label.numberOfLines = 0
         return label
     }()
-    private let likeButton: UIButton = {
+    let likeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.setImage(UIImage(systemName: "heart.fill"), for: .selected)

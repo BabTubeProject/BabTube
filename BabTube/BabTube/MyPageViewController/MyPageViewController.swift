@@ -175,6 +175,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
+            UserDataManager.shared.logout()
             dismiss(animated: true)
         }
         else if indexPath.row == 3 {

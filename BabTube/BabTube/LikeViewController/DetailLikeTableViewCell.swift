@@ -81,9 +81,11 @@ class DetailLikeTableViewCell: UITableViewCell {
     //cell에 표시될 api 데이터
     func likeUpdateUI(snippet: Snippet, items: [LikeVideo]) {
         self.likeVideoList = items
-        titleLabel.text = snippet.title
-        subtitleLabel.text = snippet.channelTitle
-        contentLabel.text = snippet.description
+        DispatchQueue.main.async {
+            self.titleLabel.text = snippet.title
+            self.subtitleLabel.text = snippet.channelTitle
+            self.contentLabel.text = snippet.description
+        }
         let stringURL: String = snippet.thumbnails.medium.url
         guard let url = URL(string: stringURL) else { return }
         imageLoader.getImage(url: url) { result in

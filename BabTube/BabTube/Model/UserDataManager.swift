@@ -122,6 +122,9 @@ class UserDataManager {
         users.viewHistory.remove(at: viewHistoryIndex)
         saveUsers()
     }
+    func logout() {
+        loginUser = nil
+    }
     // 사용자 데이터 초기화
     func removeUser(userID: String) {
         users.removeAll()

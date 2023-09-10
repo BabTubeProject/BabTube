@@ -113,6 +113,7 @@ final class VideoDetailViewController: UIViewController {
             case .success(let videoDataList):
                 self.snippet = videoDataList.snippet
                 self.statistics = videoDataList.statistics
+                self.addEventHandler()
                 self.updateViews()
             case .failure(let failure):
                 print(failure)
@@ -127,6 +128,7 @@ final class VideoDetailViewController: UIViewController {
             switch result {
             case .success(let videoDataList):
                 self.statistics = videoDataList.statistics
+                self.addEventHandler()
                 self.updateViews()
             case .failure(let failure):
                 print(failure)
@@ -180,6 +182,20 @@ extension VideoDetailViewController {
         commentTableView.dataSource = self
         commentTableView.delegate = self
         
+        guard let userData = UserDataManager.shared.loginUser,
+              let userImageData = userData.userImage else { return }
+        let myProfileImage = UIImage(data: userImageData)
+        DispatchQueue.main.async {
+            self.addCommentStackView.profileImageView.image = myProfileImage
+        }
+        videoDecriptionStackView.likeButton.isSelected = userData.likeVideo[videoId] != nil
+        
+        addCommentStackView.layoutIfNeeded()
+        let bottomInset = addCommentStackView.frame.height
+        commentTableView.contentInset.bottom = bottomInset
+    }
+    
+    private func addEventHandler() {
         addCommentStackView.commentAddHandler = { [weak self] textComment in
             guard let self else { return }
             guard let userData = UserDataManager.shared.loginUser else {
@@ -201,22 +217,11 @@ extension VideoDetailViewController {
         videoDecriptionStackView.likeVideoAddHandelr = { [weak self] likeSelected in
             guard let self else { return }
             if likeSelected {
-                UserDataManager.shared.addLikeVideo(userID: loginUserID, likeVideo: LikeVideo(videoId: self.videoId, videoThumbnail: snippet.thumbnails.default.url))
+                UserDataManager.shared.addLikeVideo(userID: loginUserID, likeVideo: LikeVideo(videoId: self.videoId, snippet: snippet, videoThumbnail: snippet.thumbnails.default.url))
             } else {
                 UserDataManager.shared.removeLikeVideo(userID: loginUserID, likeVideoID: self.videoId)
             }
         }
-        
-        guard let userData = UserDataManager.shared.loginUser,
-              let userImageData = userData.userImage else { return }
-        let myProfileImage = UIImage(data: userImageData)
-        DispatchQueue.main.async {
-            self.addCommentStackView.profileImageView.image = myProfileImage
-        }
-        
-        addCommentStackView.layoutIfNeeded()
-        let bottomInset = addCommentStackView.frame.height
-        commentTableView.contentInset.bottom = bottomInset
     }
     private func addViews() {
         view.addSubview(videoWebView)
