@@ -91,6 +91,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // 셀 사이 간격 줄 없앰
         likeViewTable.separatorStyle = .none
+        likeViewTable.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,4 +129,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             navigationController?.pushViewController(videoDetail, animated: true)
         }
     }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 90
+//    }
 }

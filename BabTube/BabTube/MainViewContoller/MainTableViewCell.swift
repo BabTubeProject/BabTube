@@ -26,9 +26,13 @@ class MainTVCell: UITableViewCell {
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 8.0
+        layout.minimumLineSpacing = 16.0
         layout.minimumInteritemSpacing = 0
-        layout.itemSize = .init(width:200, height: cellHeight)
+        layout.sectionInset.top = 0
+        layout.sectionInset.left = 16
+        layout.sectionInset.bottom = 0
+        layout.sectionInset.right = 16
+        layout.itemSize = .init(width:267, height: cellHeight)
         return layout
     }()
     
