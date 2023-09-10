@@ -25,6 +25,8 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private let likeViewTable: UITableView = {
         let likeViewTable = UITableView()
         likeViewTable.translatesAutoresizingMaskIntoConstraints = false
+        likeViewTable.estimatedRowHeight = 106
+        likeViewTable.rowHeight = UITableView.automaticDimension
         return likeViewTable
     }()
     
@@ -78,6 +80,12 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // 셀 사이 간격 줄 없앰
         likeViewTable.separatorStyle = .none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        likeVideoList = UserDataManager.shared.getLikeVideos()
+        likeViewTable.reloadData()
     }
 
     // 셀의 갯수

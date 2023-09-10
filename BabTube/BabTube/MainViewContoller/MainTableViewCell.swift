@@ -8,7 +8,7 @@
 import UIKit
 //cell delegate protocol
 protocol CollectionViewCellDelegate: AnyObject {
-    func collectionView(mainCVCell: MainCVCell?, index: Int,at indexPath: IndexPath, didTappedInTableViewCell: MainTVCell)
+    func collectionView(section: Int, index: Int)
 }
 
 class MainTVCell: UITableViewCell {
@@ -16,6 +16,7 @@ class MainTVCell: UITableViewCell {
     //위임자 (ViewController와 강한 참조 순환이 발생하기 때문에 weak로 선언)
     weak var cellDelegate: CollectionViewCellDelegate?
     private var searchItemList: [SearchItems]?
+    private var section: Int?
     //cell 식별자
     static let id = "MainTableViewCell"
     
@@ -83,8 +84,9 @@ extension MainTVCell {
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor)
         ])
     }
-    func updateUI(items: [SearchItems]) {
+    func updateUI(items: [SearchItems], section: Int) {
         searchItemList = items
+        self.section = section
         collectionView.reloadData()
     }
 }
@@ -111,8 +113,9 @@ extension MainTVCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView,  didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCVCell.id, for: indexPath) as! MainCVCell
-        if let cellDelegate = cellDelegate {
-            cellDelegate.collectionView(mainCVCell: cell, index: indexPath.item, at: indexPath, didTappedInTableViewCell: self)
+        if let cellDelegate = cellDelegate,
+           let section {
+            cellDelegate.collectionView(section: section, index: indexPath.item)
         }
     }
 }

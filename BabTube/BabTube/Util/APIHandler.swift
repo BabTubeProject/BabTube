@@ -31,8 +31,8 @@ final class APIHandler {
     func getSearchJson(query: [String:String], completed: @escaping (Result<SearchDataList, NetworkError>) -> Void) {
         
         // baseUrl에 query를 string으로 변환하여 경로로 변환하는 작업
-        let fullPath: String = baseUrl + "search?" + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + "&key=\(APIKEY)"
-        
+        let fullPath: String = baseUrl + "search?" + "type=video&" + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + "&key=\(APIKEY)"
+        print(fullPath)
         //URL에 한글이 들어가면 nil이 반환되어 encoding해주는 작업을 해줌
         guard let encoded = fullPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: encoded) else {
@@ -135,12 +135,16 @@ final class APIHandler {
                         completed(.success(decodeData))
                         
                     } catch let DecodingError.dataCorrupted(context) {
+                        print(DecodingError.dataCorrupted(context))
                         completed(.failure(.decode(DecodingError.dataCorrupted(context))))
                     } catch let DecodingError.valueNotFound(value, context) {
+                        print(DecodingError.valueNotFound(value, context))
                         completed(.failure(.decode(DecodingError.valueNotFound(value, context))))
                     } catch let DecodingError.keyNotFound(key, context) {
+                        print(DecodingError.keyNotFound(key, context))
                         completed(.failure(.decode(DecodingError.keyNotFound(key, context))))
                     } catch let DecodingError.typeMismatch(type, context)  {
+                        print(DecodingError.typeMismatch(type, context))
                         completed(.failure(.decode(DecodingError.typeMismatch(type, context))))
                     } catch let error {
                         completed(.failure(.other(error)))

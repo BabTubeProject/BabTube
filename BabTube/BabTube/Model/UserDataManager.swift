@@ -75,21 +75,17 @@ class UserDataManager {
 
     // 좋아요 표시한 동영상 저장하기
     func addLikeVideo(userID: String, likeVideo: LikeVideo) {
-        guard let userIndex = users.firstIndex(where: { $0.userID == userID }),
-            var likeAddedLoginUser = loginUser else { return }
-        likeAddedLoginUser.likeVideo[likeVideo.videoId] = likeVideo
-        loginUser = likeAddedLoginUser
+        guard let userIndex = users.firstIndex(where: { $0.userID == userID }) else { return }
+        loginUser?.likeVideo[likeVideo.videoId] = likeVideo
         users[userIndex].likeVideo[likeVideo.videoId] = likeVideo
         saveUsers()
     }
 
     // 좋아요 표시한 동영상 제거
     func removeLikeVideo(userID: String, likeVideoID: String) {
-        guard let userIndex = users.firstIndex(where: { $0.userID == userID }),
-            var likeAddedLoginUser = loginUser else { return }
-        likeAddedLoginUser.likeVideo[likeVideoID] = nil
+        guard let userIndex = users.firstIndex(where: { $0.userID == userID }) else { return }
         
-        loginUser = likeAddedLoginUser
+        loginUser?.likeVideo[likeVideoID] = nil
         users[userIndex].likeVideo[likeVideoID] = nil
         saveUsers()
     }
@@ -97,30 +93,36 @@ class UserDataManager {
     // 좋아하는 동영상 목록 반환
     func getLikeVideos() -> [LikeVideo] {
         guard let loginUser else { return [] }
-        return loginUser.likeVideo.values.sorted(by: { $0.likeTime < $1.likeTime })
+        return loginUser.likeVideo.values.sorted(by: { $0.likeTime > $1.likeTime })
     }
     
     func addViewHistory(userID: String,viewHistory: ViewHistory){
-        guard let userIndex = users.firstIndex(where: { $0.userID == userID }),
-            var viewHistoryAddedLoginUser = loginUser else { return }
-        viewHistoryAddedLoginUser.viewHistory.removeAll(where: { $0.videoId == viewHistory.videoId })
-        if viewHistoryAddedLoginUser.viewHistory.count == 10 { viewHistoryAddedLoginUser.viewHistory.removeLast() }
-        viewHistoryAddedLoginUser.viewHistory.insert(viewHistory, at: 0)
-        loginUser = viewHistoryAddedLoginUser
-        users[userIndex].viewHistory.insert(viewHistory, at: 0)
+        guard let userIndex = users.firstIndex(where: { $0.userID == userID }) else { return }
+        loginUser?.viewHistory[viewHistory.videoId] = viewHistory
+        let loginViewHistory = getViewHistory()
+        if loginViewHistory.count >= 10 {
+            if let videoId = loginViewHistory.last?.videoId {
+                loginUser?.viewHistory[videoId] = nil
+            }
+        }
+        users[userIndex].viewHistory[viewHistory.videoId] = viewHistory
         saveUsers()
     }
     
-    func removeViewHistory(userIndex: Int, viewHistoryIndex: Int){
-        guard userIndex >= 0, userIndex < users.count else {
-            return // 유효하지 않은 인덱스일 경우 처리하지 않음
-        }
-        var users = users[userIndex]
-        guard viewHistoryIndex >= 0, viewHistoryIndex < users.viewHistory.count else {
-            return
-        }
-        users.viewHistory.remove(at: viewHistoryIndex)
+    func removeViewHistory(userID: String, viewHistoryID: String){
+        guard let userIndex = users.firstIndex(where: { $0.userID == userID }) else { return }
+        
+        loginUser?.viewHistory[viewHistoryID] = nil
+        users[userIndex].viewHistory[viewHistoryID] = nil
         saveUsers()
+    }
+    
+    func getViewHistory() -> [ViewHistory] {
+        guard let loginUser else { return [] }
+        return loginUser.viewHistory.values.sorted(by: { $0.viewTime > $1.viewTime })
+    }
+    func logout() {
+        loginUser = nil
     }
     // 사용자 데이터 초기화
     func removeUser(userID: String) {

@@ -23,6 +23,7 @@ class DetailLikeTableViewCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         label.font = UIFont.title2
         return label
     }()
@@ -54,36 +55,40 @@ class DetailLikeTableViewCell: UITableViewCell {
         // 오토레이아웃
         NSLayoutConstraint.activate([
             // thumbnailImageView
-            likeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            likeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+
+            likeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
+            likeImageView.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             likeImageView.widthAnchor.constraint(equalToConstant: 160), // 이미지 크기 조정
+
             likeImageView.heightAnchor.constraint(equalToConstant: 90),
             
 
             // titleLabel
-            titleLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: likeImageView.topAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            titleLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: margin),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
 
             // subtitleLabel
             subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            subtitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
 
             // contentLabel
-            contentLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: 16),
+            contentLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: margin),
             contentLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 8),
-            contentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            contentLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
+            contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin)
         ])
     }
     
     //cell에 표시될 api 데이터
     func likeUpdateUI(snippet: Snippet, items: [LikeVideo]) {
         self.likeVideoList = items
-        titleLabel.text = snippet.title
-        subtitleLabel.text = snippet.channelTitle
-        contentLabel.text = snippet.description
+        DispatchQueue.main.async {
+            self.titleLabel.text = snippet.title
+            self.subtitleLabel.text = snippet.channelTitle
+            self.contentLabel.text = snippet.description
+        }
         let stringURL: String = snippet.thumbnails.medium.url
         guard let url = URL(string: stringURL) else { return }
         imageLoader.getImage(url: url) { result in

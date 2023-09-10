@@ -16,17 +16,18 @@ struct UserData: Codable {
     var nickname: String?
     var userImage: Data?
     var likeVideo: [VideoID:LikeVideo] = [:]
-    var viewHistory: [ViewHistory] = []
+    var viewHistory: [VideoID:ViewHistory] = [:]
 }
 
 struct LikeVideo: Codable {
-    var likeTime: Date = Date()
+    let likeTime: Date = Date()
     var videoId: String
     var snippet: Snippet?
     var videoThumbnail: String
 }
 
 struct ViewHistory: Codable {
+    let viewTime: Date = Date()
     var videoId: String
     var videoThumbnail: String
 }
