@@ -19,7 +19,18 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //API 변수
     private let apiHandler: APIHandler = APIHandler()
     private let imageLoader: ImageLoader = ImageLoader()
-    private var likeVideoList = UserDataManager.shared.getLikeVideos()
+    private var likeVideoList = UserDataManager.shared.getLikeVideos() {
+        didSet {
+            if likeVideoList.count == 0 {
+                likeViewTable.isHidden = true
+                nonLikeVideoLabel.isHidden = false
+            }
+            else {
+                likeViewTable.isHidden = false
+                nonLikeVideoLabel.isHidden = true
+            }
+        }
+    }
     
     // 테이블 뷰 생성
     private let likeViewTable: UITableView = {
@@ -86,19 +97,13 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         likeVideoList = UserDataManager.shared.getLikeVideos()
-        likeViewTable.reloadData()
+        DispatchQueue.main.async {
+            self.likeViewTable.reloadData()
+        }
     }
 
     // 셀의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if likeVideoList.count == 0 {
-            likeViewTable.isHidden = true
-            nonLikeVideoLabel.isHidden = false
-        }
-        else {
-            likeViewTable.isHidden = false
-            nonLikeVideoLabel.isHidden = true
-        }
         return likeVideoList.count
     }
 
