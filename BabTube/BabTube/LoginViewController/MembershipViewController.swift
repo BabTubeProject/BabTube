@@ -114,7 +114,6 @@ class MembershipViewController: UIViewController {
         
         signUp.backgroundColor = .systemGray5
         
-        nameTextField.delegate = self
         emailAdressTextField.delegate = self
         passwordTextField.delegate = self
         passwordCheckTextField.delegate = self
@@ -213,17 +212,15 @@ class MembershipViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         makeUi()
     }
-    
 }
 
 extension MembershipViewController: UITextFieldDelegate {
     func textFieldDidChange(_ textField: UITextField) {
-        let isNameEmpty = nameTextField.text?.isEmpty ?? true
         let isEmailEmpty = emailAdressTextField.text?.isEmpty ?? true
         let isPasswordEmpty = passwordTextField.text?.isEmpty ?? true
         let isPasswordCheckEmpty = passwordCheckTextField.text?.isEmpty ?? true
         
-        if !isNameEmpty && !isEmailEmpty && !isPasswordEmpty && !isPasswordCheckEmpty {
+        if !isEmailEmpty && !isPasswordEmpty && !isPasswordCheckEmpty {
             signUp.backgroundColor = .mainColor
         } else {
             signUp.backgroundColor = .systemGray5
@@ -239,7 +236,6 @@ extension MembershipViewController: UITextFieldDelegate {
         return false
     }
 }
-
 
 extension MembershipViewController {
     func makeUi() {
