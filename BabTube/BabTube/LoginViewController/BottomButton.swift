@@ -13,6 +13,7 @@ class BottomButton: UIButton {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemGray5
+        view.isUserInteractionEnabled = false
         return view
     }()
     var bottomViewBackgroundColor: UIColor {
@@ -25,7 +26,7 @@ class BottomButton: UIButton {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(bottomView)
+        insertSubview(bottomView, at: 0)
         cofigureAutoLayout()
     }
     required init?(coder: NSCoder) {
