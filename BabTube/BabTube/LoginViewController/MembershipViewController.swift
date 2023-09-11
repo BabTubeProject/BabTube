@@ -118,7 +118,11 @@ class MembershipViewController: UIViewController {
         passwordTextField.delegate = self
         passwordCheckTextField.delegate = self
         
-        navigationController?.navigationBar.tintColor = UIColor.black
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
  
@@ -255,50 +259,47 @@ extension MembershipViewController {
         signUp.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            name.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: 5),
-            name.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            name.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            name.heightAnchor.constraint(equalToConstant: 30),
+            name.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            name.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            name.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            name.heightAnchor.constraint(equalToConstant: 20),
             
-            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            nameTextField.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 2),
+            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             nameTextField.heightAnchor.constraint(equalToConstant: 30),
             
-            emailAdress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            emailAdress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            emailAdress.bottomAnchor.constraint(equalTo: emailAdressTextField.topAnchor, constant: 5),
-            emailAdress.heightAnchor.constraint(equalToConstant: 30),
+            emailAdress.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 24),
+            emailAdress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            emailAdress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            emailAdress.heightAnchor.constraint(equalToConstant: 20),
             
-            emailAdressTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            emailAdressTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            emailAdressTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 50),
+            emailAdressTextField.topAnchor.constraint(equalTo: emailAdress.bottomAnchor, constant: 2),
+            emailAdressTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            emailAdressTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             emailAdressTextField.heightAnchor.constraint(equalToConstant: 30),
-            emailAdressTextField.heightAnchor.constraint(equalToConstant: 60),
             
-            password.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            password.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            password.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: 5),
-            password.heightAnchor.constraint(equalToConstant: 30),
+            password.topAnchor.constraint(equalTo: emailAdressTextField.bottomAnchor, constant: 24),
+            password.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            password.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            password.heightAnchor.constraint(equalToConstant: 20),
             
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            passwordTextField.topAnchor.constraint(equalTo: emailAdressTextField.bottomAnchor, constant: 50),
+            passwordTextField.topAnchor.constraint(equalTo: password.bottomAnchor, constant: 2),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             passwordTextField.heightAnchor.constraint(equalToConstant: 30),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 60),
             
-            passwordCheck.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            passwordCheck.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            passwordCheck.bottomAnchor.constraint(equalTo: passwordCheckTextField.topAnchor, constant: 5),
-            passwordCheck.heightAnchor.constraint(equalToConstant: 30),
+            passwordCheck.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 24),
+            passwordCheck.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            passwordCheck.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            passwordCheck.heightAnchor.constraint(equalToConstant: 20),
             
-            passwordCheckTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            passwordCheckTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            passwordCheckTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50),
+            passwordCheckTextField.topAnchor.constraint(equalTo: passwordCheck.bottomAnchor, constant: 2),
+            passwordCheckTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            passwordCheckTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             passwordCheckTextField.heightAnchor.constraint(equalToConstant: 30),
-            passwordCheckTextField.heightAnchor.constraint(equalToConstant: 60),
             
-            signUp.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            signUp.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: 0),
             signUp.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             signUp.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             signUp.heightAnchor.constraint(equalToConstant: 50)

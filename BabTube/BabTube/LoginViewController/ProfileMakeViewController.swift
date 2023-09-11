@@ -80,6 +80,10 @@ class ProfileMakeViewController: UIViewController {
         profileImageView.layoutIfNeeded()
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
     private func textFieldSetting() {
         nickNameTextField.autocapitalizationType = .none
@@ -135,7 +139,7 @@ extension ProfileMakeViewController {
             nickNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             nickNameTextField.heightAnchor.constraint(equalToConstant: 30),
 
-            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            startButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
             startButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             startButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             startButton.heightAnchor.constraint(equalToConstant: 50)
