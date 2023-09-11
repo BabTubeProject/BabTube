@@ -120,6 +120,7 @@ class MembershipViewController: UIViewController {
         
         navigationController?.navigationBar.tintColor = UIColor.black
     }
+    
  
     func textFieldSetting() {
         nameTextField.autocapitalizationType = .none
@@ -173,6 +174,10 @@ class MembershipViewController: UIViewController {
                 if let newUserIndex = UserDataManager.shared.users.firstIndex(where: { $0.userID == newEmail }) {
                     let vc = ProfileMakeViewController()
                     vc.newUserIndex = newUserIndex
+                    vc.compltedDismiss = { [weak self] in
+                        guard let self else { return }
+                        self.navigationController?.popViewController(animated: false)
+                    }
                     vc.modalPresentationStyle = .fullScreen
                     present(vc, animated: false)
                 }
