@@ -244,6 +244,11 @@ extension MembershipViewController: UITextFieldDelegate {
         
         return false
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        signUp.bottomViewBackgroundColor = .systemGray5
+        return true
+    }
 }
 
 extension MembershipViewController {

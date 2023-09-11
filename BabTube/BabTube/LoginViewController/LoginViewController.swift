@@ -182,6 +182,10 @@ extension LoginViewController: UITextFieldDelegate {
         }
         return false
     }
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        loginButton.bottomViewBackgroundColor = .systemGray5
+        return true
+    }
 }
 
 extension LoginViewController {
