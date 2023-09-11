@@ -10,7 +10,10 @@ import UIKit
 class ProfileMakeViewController: UIViewController {
     var newUserIndex: Int?
     var editUserIndex = UserDataManager.shared.users.firstIndex(where: { $0.userID == UserDataManager.shared.loginUser?.userID })
+
     private let picker = UIImagePickerController()
+    
+    var compltedDismiss: () -> Void = {}
 
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -148,9 +151,8 @@ extension ProfileMakeViewController {
             do {
                 try UserDataManager.shared.updateUserInfo(userIndex: newUserIndex, newNickname: newNickName, newImage: newProfileImage)
                 print(UserDataManager.shared.users[newUserIndex].nickname!)
-                let vc = LoginViewController()
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: false)
+                compltedDismiss()
+                dismiss(animated: true)
             } catch {
                 print("프로필 저장 실패")
             }
