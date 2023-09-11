@@ -90,6 +90,10 @@ class LoginViewController: UIViewController {
         makeUi()
         textFieldSetting()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
     func textFieldSetting() {
         emailTextField.autocapitalizationType = .none
@@ -198,39 +202,38 @@ extension LoginViewController {
         NSLayoutConstraint.activate([
             babtubeIcon.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
             babtubeIcon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            babtubeIcon.widthAnchor.constraint(equalToConstant: 200),
+            babtubeIcon.widthAnchor.constraint(equalToConstant: 223),
             babtubeIcon.heightAnchor.constraint(equalToConstant: 60),
             
-            emailText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            emailText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            emailText.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: 5),
-            emailText.heightAnchor.constraint(equalToConstant: 30),
+            emailText.topAnchor.constraint(equalTo: babtubeIcon.bottomAnchor, constant: 64),
+            emailText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            emailText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            emailText.heightAnchor.constraint(equalToConstant: 20),
             
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
+            emailTextField.topAnchor.constraint(equalTo: emailText.bottomAnchor, constant: 2),
+            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             emailTextField.heightAnchor.constraint(equalToConstant: 30),
             
-            passwordText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            passwordText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            passwordText.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: 5),
-            passwordText.heightAnchor.constraint(equalToConstant: 30),
+            passwordText.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
+            passwordText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            passwordText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            passwordText.heightAnchor.constraint(equalToConstant: 20),
             
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 50),
+            passwordTextField.topAnchor.constraint(equalTo: passwordText.bottomAnchor, constant: 2),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             passwordTextField.heightAnchor.constraint(equalToConstant: 30),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 60),
             
             newMembership.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            newMembership.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
+            newMembership.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
+            newMembership.widthAnchor.constraint(equalToConstant: 57),
             newMembership.heightAnchor.constraint(equalToConstant: 30),
 
-            loginButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0),
+            loginButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: 0),
             loginButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 0),
             loginButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 0),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
-            
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 }
