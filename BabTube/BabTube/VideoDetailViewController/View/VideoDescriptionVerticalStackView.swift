@@ -11,6 +11,7 @@ class VideoDescriptionVerticalStackView: UIStackView {
 
     private let firstLineHorizontalStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .top
         stackView.distribution = .equalSpacing
@@ -122,6 +123,8 @@ extension VideoDescriptionVerticalStackView {
     
     private func configureAutoLayout() {
         NSLayoutConstraint.activate([
+            firstLineHorizontalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
             likeButton.widthAnchor.constraint(equalToConstant: 20),
             likeButton.heightAnchor.constraint(equalToConstant: 20)
         ])

@@ -257,7 +257,7 @@ extension VideoDetailViewController {
             videoDecriptionStackView.topAnchor.constraint(equalTo: contentLayout.topAnchor, constant: 8),
             videoDecriptionStackView.leadingAnchor.constraint(equalTo: contentLayout.leadingAnchor),
             videoDecriptionStackView.trailingAnchor.constraint(equalTo: contentLayout.trailingAnchor),
-            videoDecriptionStackView.widthAnchor.constraint(equalTo: framLayout.widthAnchor),
+            videoDecriptionStackView.widthAnchor.constraint(equalTo: videoWebView.widthAnchor),
             
             commentTableView.topAnchor.constraint(equalTo: videoDecriptionStackView.bottomAnchor, constant: margin),
             commentTableView.leadingAnchor.constraint(equalTo: contentLayout.leadingAnchor),
