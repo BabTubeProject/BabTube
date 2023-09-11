@@ -8,10 +8,10 @@
 import UIKit
 
 class MembershipViewController: UIViewController {
-    private lazy var signUp: UIButton = {
-        let btn = UIButton()
+    private lazy var signUp: BottomButton = {
+        let btn = BottomButton()
         btn.setTitle("가입하기", for: .normal)
-        btn.backgroundColor = .mainColor
+        btn.bottomViewBackgroundColor = .mainColor
         btn.addTarget(self, action: #selector(membershipPressed), for: .touchUpInside)
         
         view.addSubview(btn)
@@ -112,7 +112,7 @@ class MembershipViewController: UIViewController {
         makeUi()
         textFieldSetting()
         
-        signUp.backgroundColor = .systemGray5
+        signUp.bottomViewBackgroundColor = .systemGray5
         
         emailAdressTextField.delegate = self
         passwordTextField.delegate = self
@@ -230,9 +230,9 @@ extension MembershipViewController: UITextFieldDelegate {
         let isPasswordCheckEmpty = passwordCheckTextField.text?.isEmpty ?? true
         
         if !isEmailEmpty && !isPasswordEmpty && !isPasswordCheckEmpty {
-            signUp.backgroundColor = .mainColor
+            signUp.bottomViewBackgroundColor = .mainColor
         } else {
-            signUp.backgroundColor = .systemGray5
+            signUp.bottomViewBackgroundColor = .systemGray5
         }
     }
     

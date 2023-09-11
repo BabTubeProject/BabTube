@@ -57,10 +57,10 @@ class ProfileMakeViewController: UIViewController {
         return tf
     }()
 
-    private lazy var startButton: UIButton = {
-        let btn = UIButton()
+    private lazy var startButton: BottomButton = {
+        let btn = BottomButton()
         btn.setTitle("로그인", for: .normal)
-        btn.backgroundColor = .mainColor
+        btn.bottomViewBackgroundColor = .mainColor
         btn.addTarget(self, action: #selector(startButtonClick), for: .touchUpInside)
 
         view.addSubview(btn)

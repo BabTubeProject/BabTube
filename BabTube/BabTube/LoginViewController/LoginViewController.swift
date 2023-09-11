@@ -8,8 +8,8 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    lazy var loginButton: UIButton = {
-        let btn = UIButton()
+    lazy var loginButton: BottomButton = {
+        let btn = BottomButton()
         btn.setTitle("로그인", for: .normal)
         btn.backgroundColor = .systemGray5
         btn.addTarget(self, action: #selector(loginButtonClick), for: .touchUpInside)
@@ -176,9 +176,9 @@ extension LoginViewController: UITextFieldDelegate {
         textField.text = currentText
 
         if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty {
-            loginButton.backgroundColor = .mainColor
+            loginButton.bottomViewBackgroundColor = .mainColor
         } else {
-            loginButton.backgroundColor = .systemGray5
+            loginButton.bottomViewBackgroundColor = .systemGray5
         }
         return false
     }

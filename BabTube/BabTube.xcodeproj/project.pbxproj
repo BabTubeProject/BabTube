@@ -16,6 +16,7 @@
 		18ADD9382AAB25E8007882FF /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADD9372AAB25E8007882FF /* UITextView.swift */; };
 		18B943AB2AAAC70B00E674F3 /* VideoComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AA2AAAC70B00E674F3 /* VideoComment.swift */; };
 		18B943AD2AAAC76C00E674F3 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B943AC2AAAC76C00E674F3 /* CommentManager.swift */; };
+		18D24E712AAEC56B001D2CE2 /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D24E702AAEC56B001D2CE2 /* BottomButton.swift */; };
 		18D262392AA796E300652695 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D262382AA796E300652695 /* CommentTableViewCell.swift */; };
 		18D2623B2AA7980D00652695 /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2623A2AA7980D00652695 /* Reuseable.swift */; };
 		18D262402AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2623F2AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift */; };
@@ -60,6 +61,7 @@
 		18ADD9372AAB25E8007882FF /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		18B943AA2AAAC70B00E674F3 /* VideoComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComment.swift; sourceTree = "<group>"; };
 		18B943AC2AAAC76C00E674F3 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
+		18D24E702AAEC56B001D2CE2 /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		18D262382AA796E300652695 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		18D2623A2AA7980D00652695 /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
 		18D2623F2AA7AB8800652695 /* VideoDescriptionVerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDescriptionVerticalStackView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				18D6592C2AA5B920000468D9 /* LoginViewController.swift */,
 				689BC5872AA5D516005BA3A2 /* MembershipViewController.swift */,
 				689BC58B2AA611A4005BA3A2 /* ProfileMakeViewController.swift */,
+				18D24E702AAEC56B001D2CE2 /* BottomButton.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				10BDAD802AA6E3B500DC2F0D /* RecordCollectionViewCell.swift in Sources */,
 				10BD6EB82AAABBB60054DD30 /* QuitTableViewCell.swift in Sources */,
 				109089D22AA5F87D001060A4 /* LogoutTableViewCell.swift in Sources */,
+				18D24E712AAEC56B001D2CE2 /* BottomButton.swift in Sources */,
 				18D659362AA5B9A9000468D9 /* Font.swift in Sources */,
 				18B943AD2AAAC76C00E674F3 /* CommentManager.swift in Sources */,
 				18D6C3DD2AA8136F0036766F /* NetworkError.swift in Sources */,
