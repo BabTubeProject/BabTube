@@ -57,7 +57,7 @@ class LikeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //네비게이션바 이미지 
         let likeTitleImageView = UIImageView()
         likeTitleImageView.translatesAutoresizingMaskIntoConstraints = false
-        likeTitleImageView.image = UIImage(named: "BabTube_Logo")
+        likeTitleImageView.image = UIImage(named: "MainLogo")
         likeTitleImageView.contentMode = .scaleAspectFill
         likeTitleImageView.layer.masksToBounds = true
         likeTitleImageView.widthAnchor.constraint(equalToConstant: 95).isActive = true

@@ -34,6 +34,7 @@ class ProfileTableViewCell: UITableViewCell {
             imageView.image = UIImage(data: userImage)
         } else {
             imageView.image = UIImage(systemName: "person.circle.fill")
+            imageView.tintColor = UIColor(red: 235/255, green: 141/255, blue: 142/255, alpha: 1)
         }
 
         return imageView

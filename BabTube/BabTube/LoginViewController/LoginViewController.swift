@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     }()
 
     lazy var babtubeIcon: UIImageView = {
-        let icon = UIImageView(image: UIImage(named: "BabTube_Logo"))
+        let icon = UIImageView(image: UIImage(named: "MainLogo"))
         view.addSubview(icon)
         return icon
     }()

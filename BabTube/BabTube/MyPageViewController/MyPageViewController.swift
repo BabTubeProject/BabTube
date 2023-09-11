@@ -63,7 +63,7 @@ extension MyPageViewController {
         // 네비게이션 바
         let navigationLogoImageView = UIImageView()
         navigationLogoImageView.translatesAutoresizingMaskIntoConstraints = false
-        navigationLogoImageView.image = UIImage(named: "BabTube_Logo")
+        navigationLogoImageView.image = UIImage(named: "MainLogo")
         navigationLogoImageView.contentMode = .scaleAspectFill
         navigationLogoImageView.layer.masksToBounds = true
         navigationLogoImageView.widthAnchor.constraint(equalToConstant: 95).isActive = true
