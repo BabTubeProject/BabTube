@@ -32,7 +32,7 @@ class MainViewController: UIViewController {
     private let apiHandler: APIHandler = .init()
     private let imageLoader: ImageLoader = .init()
     private var searchItemList: [SearchItems]?
-    private var everysearchItemList: [[SearchItems]] = []
+    private var everysearchItemList: [String: [SearchItems]] = [:]
     private var entertainmentTitle = ["무한도전", "1박2일", "지구오락실"]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +51,8 @@ class MainViewController: UIViewController {
             apiHandler.getSearchJson(query: query) { result in
                 switch result {
                 case .success(let searchDataList):
-                    let searchs = searchDataList.items
-                    self.everysearchItemList.append(searchs)
-
+                    guard let items = searchDataList[title]?.items else { return }
+                    self.everysearchItemList[title] = items
                     DispatchQueue.main.async {
                         self.mainTableView.reloadData()
                     }
@@ -144,20 +143,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         if everysearchItemList.count == 3 {
             if indexPath.section == 0 {
-                searchItemList = everysearchItemList[0]
-                guard let searchItemList = searchItemList else { return cell }
+                guard let searchItemList = everysearchItemList[sections[indexPath.section]] else { return cell }
                 cell.updateUI(items: searchItemList, section: indexPath.section)
                 return cell
             }
             else if indexPath.section == 1 {
-                searchItemList = everysearchItemList[1]
-                guard let searchItemList = searchItemList else { return cell }
+                guard let searchItemList = everysearchItemList[sections[indexPath.section]] else { return cell }
                 cell.updateUI(items: searchItemList, section: indexPath.section)
                 return cell
             }
             else if indexPath.section == 2 {
-                searchItemList = everysearchItemList[2]
-                guard let searchItemList = searchItemList else { return cell }
+                guard let searchItemList = everysearchItemList[sections[indexPath.section]] else { return cell }
                 cell.updateUI(items: searchItemList, section: indexPath.section)
                 return cell
             }
@@ -170,7 +166,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainViewController: CollectionViewCellDelegate {
     func collectionView(section: Int, index: Int) {
         // 각 cell의 indexPath의 videoId를 전달
-        let videoId = everysearchItemList[section][index].id.videoId
+        guard let videoId = everysearchItemList[sections[section]]?[index].id.videoId else { return }
         let detailVC = VideoDetailViewController(videoId: videoId)
         navigationController?.pushViewController(detailVC, animated: true)
     }

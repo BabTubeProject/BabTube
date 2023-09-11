@@ -192,8 +192,11 @@ extension LoginViewController {
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordText.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
         NSLayoutConstraint.activate([
-            babtubeIcon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            babtubeIcon.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
             babtubeIcon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             babtubeIcon.widthAnchor.constraint(equalToConstant: 200),
             babtubeIcon.heightAnchor.constraint(equalToConstant: 60),
@@ -223,9 +226,9 @@ extension LoginViewController {
             newMembership.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
             newMembership.heightAnchor.constraint(equalToConstant: 30),
 
-            loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            loginButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0),
+            loginButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 0),
+            loginButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 0),
             loginButton.heightAnchor.constraint(equalToConstant: 50)
             
         ])

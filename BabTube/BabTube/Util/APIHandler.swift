@@ -28,7 +28,7 @@ final class APIHandler {
          }
      ```
      */
-    func getSearchJson(query: [String:String], completed: @escaping (Result<SearchDataList, NetworkError>) -> Void) {
+    func getSearchJson(query: [String:String], completed: @escaping (Result<[String:SearchDataList], NetworkError>) -> Void) {
         
         // baseUrl에 query를 string으로 변환하여 경로로 변환하는 작업
         let fullPath: String = baseUrl + "search?" + "type=video&" + query.map{ k, v in "\(k)=\(v)" }.joined(separator: "&") + "&key=\(APIKEY)"
@@ -43,7 +43,8 @@ final class APIHandler {
         dataTask(type: SearchDataList.self, url: url) { result in
             switch result {
             case .success(let object):
-                completed(.success(object))
+                guard let search = query["q"] else { return }
+                completed(.success([search:object]))
             case .failure(let error):
                 completed(.failure(error))
             }

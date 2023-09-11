@@ -12,4 +12,10 @@ extension UIFont {
     static let title2 = UIFont.systemFont(ofSize: 18, weight: .bold)
     static let title3 = UIFont.systemFont(ofSize: 14, weight: .regular)
     static let body = UIFont.systemFont(ofSize: 12, weight: .light)
+    
+    func dynamicFontSize(_ FontSize: CGFloat) -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.size.width
+        let calculatedFontSize = screenWidth / 375 * FontSize
+        return calculatedFontSize
+    }
 }
