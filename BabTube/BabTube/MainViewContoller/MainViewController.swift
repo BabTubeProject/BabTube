@@ -85,7 +85,7 @@ extension MainViewController {
     func mainConfigureUI() {
         let mainLogoImage = UIImageView()
         mainLogoImage.translatesAutoresizingMaskIntoConstraints = false
-        mainLogoImage.image = UIImage(named: "BabTube_Logo")
+        mainLogoImage.image = UIImage(named: "MainLogo")
         mainLogoImage.contentMode = .scaleAspectFit
         mainLogoImage.layer.masksToBounds = true
         mainLogoImage.widthAnchor.constraint(equalToConstant: 95).isActive = true
